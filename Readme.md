@@ -1,6 +1,9 @@
 Run
 
 `npm install angular`
+
+then
+
 `npm install bootstrap`
 
-to have it initialized
+to have required libraries initialized.
