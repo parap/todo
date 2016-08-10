@@ -5,16 +5,14 @@
     <title>My HTML File</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" />
     <script src="/node_modules/angular/angular.js"></script>
-    <script src="/app/app.js"></script>
-</head>
-<body ng-controller="listController">
 
-<ul>
-    <li ng-repeat="todo in todos">
-        <span>{{todo.name}}</span>
-        <p>{{todo.done}}</p>
-    </li>
-</ul>
+    <script src="app/app.module.js"></script>
+    <script src="app/todo-list/todo-list.module.js"></script>
+    <script src="app/todo-list/todo-list.component.js"></script>
+</head>
+<body>
+
+<todo-list></todo-list>
 
 </body>
 </html>
