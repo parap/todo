@@ -2,3 +2,11 @@
     text-decoration: line-through;
     color: #ddd;
 }
+
+#todo-list li button {
+    margin-left: 40px;
+}
+
+.container-list {
+    padding-top: 40px;
+}

@@ -1,5 +1,8 @@
-<ul>
-    <li ng-repeat="todo in todos">
-        <input type="checkbox" ng-model="todo.done"> <span class="done-{{todo.done}}" ng-bind="todo.name"></span>
-    </li>
-</ul>
+<div class="container-list">
+    <ul id="todo-list">
+        <li ng-repeat="todo in todos">
+            <input type="checkbox" ng-model="todo.done"> <span class="done-{{todo.done}}" ng-bind="todo.name"></span>
+            <button class="glyphicon glyphicon-remove" aria-hidden="true"></button>
+        </li>
+    </ul>
+</div>
