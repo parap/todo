@@ -3,6 +3,10 @@
     <fieldset>
         <legend>Daily</legend>
 
+        <form id="todo-form" ng-submit="add(newTodo)">
+            <input id="new-todo" placeholder="Enter Todo List" ng-model="newTodo" ng-disabled="saving" autofocus>
+        </form>
+
         <ul id="todo-list">
             <li ng-repeat="todo in todos">
                 <input type="checkbox" ng-model="todo.done">

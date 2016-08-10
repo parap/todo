@@ -21,6 +21,11 @@ angular.
 
             $scope.remove = function (todo) {
                 $scope.todos.splice(this.$index, 1);
-            }
+            };
+
+            $scope.add = function(todo) {
+                $scope.todos.push({name: todo, done: false});
+                $scope.newTodo = '';
+            };
         }
     });
