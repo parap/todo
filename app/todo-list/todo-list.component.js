@@ -18,5 +18,9 @@ angular.
                     done: false
                 }
             ];
+
+            $scope.remove = function (todo) {
+                $scope.todos.splice(this.$index, 1);
+            }
         }
     });
