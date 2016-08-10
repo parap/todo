@@ -1,5 +1,5 @@
 <ul>
     <li ng-repeat="todo in todos">
-        <input type="checkbox" ng-model="todo.done"> <span ng-bind="todo.name"></span>
+        <input type="checkbox" ng-model="todo.done"> <span class="done-{{todo.done}}" ng-bind="todo.name"></span>
     </li>
 </ul>
