@@ -5,7 +5,7 @@ angular.
     module('todoList').
     component('todoList', {
         templateUrl: 'app/todo-list/todo-list.template.html',
-        controller: function ListController($scope) {
+        controller: function ListController($scope, $http) {
             $scope.todos = [
                 {
                     name: 'Nexus S',
@@ -18,6 +18,11 @@ angular.
                     done: false
                 }
             ];
+
+            $http.get("today.php")
+                .then(function(response) {
+                    $scope.todos = response.data;
+                });
 
             $scope.remove = function (todo) {
                 $scope.todos.splice(this.$index, 1);
