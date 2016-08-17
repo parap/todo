@@ -4,14 +4,18 @@
         <legend>Daily</legend>
 
         <form id="todo-form" ng-submit="add(newTodo)">
-            <input id="new-todo" placeholder="Enter Todo List" ng-model="newTodo" ng-disabled="saving" autofocus>
+            <input id="new-todo" placeholder="Enter Todo Item" ng-model="newTodo" ng-disabled="saving" autofocus required>
         </form>
 
         <ul id="todo-list">
             <li ng-repeat="todo in todos">
-                <input type="checkbox" ng-model="todo.done">
-                <label class="done-{{todo.done}}" ng-bind="todo.name"></label>
-                <button class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="remove(todo)"></button>
+                <input ng-hide="editing" type="checkbox" ng-model="todo.done">
+                <label ng-hide="editing" class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label>
+                <button ng-hide="editing" class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="remove(todo)"></button>
+                <form ng-show="editing" ng-submit="editing = false">
+                    <input type="text" ng-model="todo.name" placeholder="todo.name" ng-required/>
+                    <button class="btn" type="submit">Save</button>
+                </form>
             </li>
         </ul>
 
