@@ -1,5 +1,13 @@
 {
+    "name": "todo/manager",
+    "description": "manage todo tasks",
+    "license": "OPL-1.0",
     "require": {
         "symfony/yaml": "^3.1"
+    },
+    "autoload": {
+        "psr-0": {
+            "Classes": "app/"
+        }
     }
 }
