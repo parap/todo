@@ -1,5 +1,5 @@
 <?php
 
-echo '[{"name": "a1", "done": false},
-{"name": "a2", "done": true}
+echo '[{"name": "Do one thing", "done": false},
+{"name": "Do second thing", "done": true}
 ]';

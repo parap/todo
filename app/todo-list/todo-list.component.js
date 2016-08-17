@@ -8,13 +8,13 @@ angular.
         controller: function ListController($scope, $http) {
             $scope.todos = [
                 {
-                    name: 'Nexus S',
+                    name: 'For some reason server failed to load data, please reload page',
                     done: false
                 }, {
-                    name: 'Motorola XOOM™ with Wi-Fi',
+                    name: 'Sample two',
                     done: true
                 }, {
-                    name: 'MOTOROLA XOOM™',
+                    name: 'Sample three',
                     done: false
                 }
             ];
