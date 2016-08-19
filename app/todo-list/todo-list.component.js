@@ -10,12 +10,6 @@ angular.
                 {
                     name: 'For some reason server failed to load data, please reload page',
                     done: false
-                }, {
-                    name: 'Sample two',
-                    done: true
-                }, {
-                    name: 'Sample three',
-                    done: false
                 }
             ];
 
