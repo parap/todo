@@ -13,10 +13,14 @@ angular.
                 }
             ];
 
-            $http.get("today.php")
-                .then(function(response) {
-                    $scope.todos = response.data;
-                });
+                $http.get("/fetch")
+                        .then(function (response) {
+                            $scope.todos = response.data;
+
+                            for (var i = 0; i < $scope.todos.length; i++) {
+                                $scope.todos[i].done = ($scope.todos[i].done === "1");
+                            }
+                        });
 
             $scope.remove = function (todo) {
                 $scope.todos.splice(this.$index, 1);
