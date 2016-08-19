@@ -3,3 +3,4 @@ sample/
 config.php
 /nbproject
 /css/bootstrap*
+composer.phar
