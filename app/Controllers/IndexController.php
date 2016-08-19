@@ -26,6 +26,7 @@ class IndexController
     {
         $results = $this->repo->fetch();
         $json = json_encode($results);
+        
         return $json;
     }
     
