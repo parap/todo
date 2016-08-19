@@ -4,15 +4,9 @@ namespace Classes;
 
 class ItemRepo extends DbAssist
 {
-    public function fetch($approved = false)
+    public function fetch()
     {
-        $query = 'select * from message';
-
-        if ($approved) {
-            $query.=' where approved = 1';
-        }
-
-        $query.= ' ORDER BY added DESC';
+        $query = 'select * from item';
 
         return $this->query($query);
     }
