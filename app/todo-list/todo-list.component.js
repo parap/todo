@@ -24,11 +24,13 @@ angular.
 
             $scope.remove = function (todo) {
                 $scope.todos.splice(this.$index, 1);
+                // AJAX request to remove
             };
 
             $scope.add = function(todo) {
                 $scope.todos.push({name: todo, done: false});
                 $scope.newTodo = '';
+                // AJAX request to add
             };
         }
     });
