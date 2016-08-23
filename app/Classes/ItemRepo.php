@@ -6,19 +6,20 @@ class ItemRepo extends DbAssist
 {
     public function fetch()
     {
-        $query = 'select * from item';
+        $query = 'SELECT * FROM item';
 
         return $this->query($query);
     }
 
-    public function create($name, $email, $text, $picture)
+    public function create($name, $userId, $parentId, $type)
     {
         $query = sprintf(
-            'INSERT INTO message (name, email, text, picture, added) values ("%s", "%s", "%s", "%s", NOW())',
+            'INSERT INTO item (name, user_id, done, parent_id, type, created_at, todo_at, completed_at) '
+                . 'VALUES ("%s", "%s", "0", "%s", "%s", NOW(), NOW(), NOW())',
             $this->safe($name),
-            $this->safe($email),
-            $this->safe($text),
-            $picture
+            $userId,
+            $parentId,
+            $type
         );
 
         return $this->query($query);
@@ -28,7 +29,7 @@ class ItemRepo extends DbAssist
     {
         $id = $this->safe($id);
         $text = $this->safe($text);
-        $query = "UPDATE message SET text='$text', modified='1' WHERE id='$id'";
+        $query = "UPDATE item SET name='$name' WHERE id='$id'";
 
         return $this->query($query);
     }
@@ -36,7 +37,7 @@ class ItemRepo extends DbAssist
     public function complete($id)
     {
         $id = $this->safe($id);
-        $query = "UPDATE message SET approved='1' WHERE id='$id'";
+        $query = "UPDATE item SET done='1' WHERE id='$id'";
 
         return $this->query($query);
     }
@@ -44,7 +45,7 @@ class ItemRepo extends DbAssist
     public function uncomplete($id)
     {
         $id = $this->safe($id);
-        $query = "UPDATE message SET approved='2' WHERE id='$id'";
+        $query = "UPDATE item SET done='0' WHERE id='$id'";
 
         return $this->query($query);
     }
@@ -52,7 +53,7 @@ class ItemRepo extends DbAssist
     public function remove($id)
     {
         $id = $this->safe($id);
-        $query = "SELECT 1 from message where id='$id'";
+        $query = "DELETE from message where id='$id'";
 
         return $this->query($query);
     }
