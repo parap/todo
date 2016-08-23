@@ -32,5 +32,9 @@ angular.
                 $scope.newTodo = '';
                 // AJAX request to add
             };
+            
+            $scope.switch = function(todo) {
+                //AJAX request to complete/uncomplete
+            }
         }
     });

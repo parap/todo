@@ -9,7 +9,7 @@
 
         <ul id="todo-list">
             <li ng-repeat="todo in todos">
-                <input ng-hide="editing" type="checkbox" ng-model="todo.done">
+                <input ng-hide="editing" type="checkbox" ng-model="todo.done"  ng-click="switch(todo)">
                 <label ng-hide="editing" class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label>
                 <button ng-hide="editing" class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="remove(todo)"></button>
                 <form ng-show="editing" ng-submit="editing = false">
