@@ -14,7 +14,7 @@
                 <button ng-hide="editing" class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="remove(todo)"></button>
                 <form ng-show="editing" ng-submit="editing = false">
                     <input type="text" ng-model="todo.name" placeholder="todo.name" ng-required/>
-                    <button class="btn" type="submit">Save</button>
+                    <button class="btn" type="submit" ng-click="update(todo)">Save</button>
                 </form>
             </li>
         </ul>

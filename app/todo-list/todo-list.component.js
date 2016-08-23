@@ -36,5 +36,9 @@ angular.
             $scope.switch = function(todo) {
                 //AJAX request to complete/uncomplete
             }
+            
+            $scope.update = function(todo) {
+                // AJAX request to update item
+            }
         }
     });
