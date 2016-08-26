@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Classes\ItemRepo;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Description of IndexController
@@ -17,12 +18,12 @@ class IndexController
         $this->repo = new ItemRepo();
     }
     
-    public function render()
+    public function render(Request $request)
     {
         echo 'render';
     }
     
-    public function fetch()
+    public function fetch(Request $request)
     {
         $results = $this->repo->fetch();
         $json = json_encode($results);
@@ -30,8 +31,28 @@ class IndexController
         return $json;
     }
     
-    public function remove()
+    public function remove(Request $request)
     {
         echo 'remove';
+    }
+    
+    public function create(Request $request)
+    {
+        
+    }
+    
+    public function update(Request $request)
+    {
+        
+    }
+    
+    public function complete(Request $request)
+    {
+        
+    }
+    
+    public function uncomplete(Request $request)
+    {
+        
     }
 }
