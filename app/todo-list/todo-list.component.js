@@ -30,7 +30,8 @@ angular.
             $scope.add = function(todo) {
                 $scope.todos.push({name: todo, done: false});
                 $scope.newTodo = '';
-                // AJAX request to add
+                
+                $http.put("/create", {"name": todo, "done": false});
             };
             
             $scope.switch = function(todo) {
