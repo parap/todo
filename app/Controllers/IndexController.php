@@ -38,14 +38,21 @@ class IndexController
     
     public function create(Request $request)
     {
+        $params = json_decode(file_get_contents('php://input'),true);
+        $name = $params['name'];
+
+        if (!empty($name)) {
+            $this->repo->create($name, 1, 1, 0);
+        }
         
+        return '';
     }
-    
+
     public function update(Request $request)
     {
-        
+
     }
-    
+
     public function complete(Request $request)
     {
         
