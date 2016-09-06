@@ -1,17 +1,21 @@
 
 'use strict';
 
+
+
 angular.
-    module('todoList').
-    component('todoList', {
-        templateUrl: 'app/todo-list/todo-list.template.html',
-        controller: function ListController($scope, $http) {
-            $scope.todos = [
-                {
-                    name: 'For some reason server failed to load data, please reload page',
-                    done: false
-                }
-            ];
+        module('todoList').
+        component('todoList', {
+            templateUrl: 'app/todo-list/todo-list.template.html',
+            controller: function ListController($scope, $http) {
+
+                $scope.todos = [
+                    {
+                        name: 'For some reason server failed to load data, please reload page',
+                        done: false
+                    }
+                ];
+
 
                 $http.get("/fetch")
                         .then(function (response) {
@@ -22,24 +26,25 @@ angular.
                             }
                         });
 
-            $scope.remove = function (todo) {
-                $scope.todos.splice(this.$index, 1);
-                // AJAX request to remove
-            };
+                $scope.remove = function (todo) {
+                    $scope.todos.splice(this.$index, 1);
+                    // AJAX request to remove
+                };
 
-            $scope.add = function(todo) {
-                $scope.todos.push({name: todo, done: false});
-                $scope.newTodo = '';
-                
-                $http.put("/create", {"name": todo, "done": false});
-            };
-            
-            $scope.switch = function(todo) {
-                //AJAX request to complete/uncomplete
+                $scope.add = function (todo) {
+                    $scope.todos.push({name: todo, done: false});
+                    $scope.newTodo = '';
+
+                    $http.post("/index.php?route=create", {"name": todo});
+
+                };
+
+                $scope.switch = function (todo) {
+                    //AJAX request to complete/uncomplete
+                }
+
+                $scope.update = function (todo) {
+                    // AJAX request to update item
+                }
             }
-            
-            $scope.update = function(todo) {
-                // AJAX request to update item
-            }
-        }
-    });
+        });
