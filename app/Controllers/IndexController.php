@@ -13,11 +13,15 @@ use Symfony\Component\HttpFoundation\Request;
 class IndexController 
 {
     protected $repo;
+    protected $post;
+    
     public function __construct()
     {
         $this->repo = new ItemRepo();
+        $this->post = json_decode(file_get_contents('php://input'),true);
     }
     
+
     public function render(Request $request)
     {
         echo 'render';
@@ -38,8 +42,7 @@ class IndexController
     
     public function create(Request $request)
     {
-        $params = json_decode(file_get_contents('php://input'),true);
-        $name = $params['name'];
+        $name = $this->post['name'];
 
         if (!empty($name)) {
             $this->repo->create($name, 1, 1, 0);
