@@ -30,7 +30,7 @@ angular.
                 };
 
                 $scope.add = function (text, type) {
-                    $scope.todos.push({name: text, done: false});
+                    $scope.todos.push({name: text, done: false, type: type});
                     $scope.newTodo = '';
 
                     $http.post("/index.php?route=create", {"name": text, "type": type});
