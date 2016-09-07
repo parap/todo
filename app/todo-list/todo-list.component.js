@@ -34,15 +34,14 @@ angular.
                     $scope.newTodo = '';
 
                     $http.post("/index.php?route=create", {"name": text, "type": type});
-
                 };
 
                 $scope.switch = function (item) {
-                    $http.post("/index.php?route=complete", {"done": item.done, "id": item.id});
+                    $http.post("/index.php?route=complete", {"done": item.done, "id": item.id, "type": item.type});
                 }
 
                 $scope.update = function (item) {
-                    $http.post("/index.php?route=update", {"name": item.name, "id": item.id});
+                    $http.post("/index.php?route=update", {"name": item.name, "id": item.id, "type": item.type});
                 }
             }
         });
