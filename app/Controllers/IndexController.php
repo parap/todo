@@ -58,7 +58,9 @@ class IndexController
     public function complete(Request $request)
     {
         $id = $this->post['id'];
-        $this->post['done'] ? $this->repo->complete($id) : $this->repo->uncomplete($id);
+        $type = $this->post['type'];
+        
+        $this->post['done'] ? $this->repo->complete($id, $type) : $this->repo->uncomplete($id, $type);
     }
 
 }
