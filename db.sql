@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS `item` (
   `type` tinyint(4) NOT NULL DEFAULT '1' COMMENT '0 - normal, 1 - daily, 2 - weekly, 3 - monthly, 4 - revolver',
   `created_at` datetime NOT NULL,
   `todo_at` datetime NOT NULL,
-  `completed_at` datetime NOT NULL,
+  `completed_at` date NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
