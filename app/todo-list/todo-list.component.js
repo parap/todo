@@ -43,8 +43,8 @@ angular.
                     $http.post("/index.php?route=complete", {"done": item.done, "id": item.id});
                 }
 
-                $scope.update = function (todo) {
-                    // AJAX request to update item
+                $scope.update = function (item) {
+                    $http.post("/index.php?route=update", {"name": item.name, "id": item.id});
                 }
             }
         });
