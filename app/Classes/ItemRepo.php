@@ -29,7 +29,7 @@ class ItemRepo extends DbAssist
     {
         $id = $this->safe($id);
         $text = $this->safe($text);
-        $query = "UPDATE item SET name='$name' WHERE id='$id'";
+        $query = "UPDATE item SET name='$text' WHERE id='$id'";
 
         return $this->query($query);
     }
