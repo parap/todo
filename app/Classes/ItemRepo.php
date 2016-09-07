@@ -41,12 +41,32 @@ class ItemRepo extends DbAssist
 
         return $this->query($query);
     }
+    
+    public function completeDaily($id) {
+        $query = sprintf(
+                "INSERT INTO daily (item_id, completed_at) VALUES ('%s', NOW())", 
+                $this->safe($id)
+        );
+
+        return $this->query($query);
+    }
 
     public function uncomplete($id)
     {
         $id = $this->safe($id);
         $query = "UPDATE item SET done='0' WHERE id='$id'";
 
+        return $this->query($query);
+    }
+    
+    public function uncompleteDaily($id)
+    {
+        $query = sprintf(
+                "DELETE FROM daily WHERE item_id='%s' AND completed_at = '%s'", 
+                $this->safe($id),
+                (new \DateTime)->format('Y-m-d')
+                );
+        
         return $this->query($query);
     }
 
