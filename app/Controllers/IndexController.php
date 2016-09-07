@@ -21,12 +21,6 @@ class IndexController
         $this->post = json_decode(file_get_contents('php://input'),true);
     }
     
-
-    public function render(Request $request)
-    {
-        echo 'render';
-    }
-    
     public function fetch(Request $request)
     {
         $results = $this->repo->fetch();
