@@ -52,7 +52,9 @@ class IndexController
 
     public function update(Request $request)
     {
-
+        $name = $this->post['name'];
+        $id = $this->post['id'];
+        $this->repo->update($id, $name);
     }
 
     public function complete(Request $request)
