@@ -4,6 +4,7 @@ namespace Controllers;
 
 use Classes\ItemRepo;
 use Symfony\Component\HttpFoundation\Request;
+use Classes\ItemType;
 
 /**
  * Description of IndexController
@@ -40,7 +41,7 @@ class IndexController
         $name = $this->post['name'];
 
         if (!empty($name)) {
-            $this->repo->create($name, 1, 1, 0);
+            $this->repo->create($name, 1, 1, ItemType::Normal);
         }
     }
 
