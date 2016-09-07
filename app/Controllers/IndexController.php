@@ -19,6 +19,8 @@ class IndexController
     public function __construct()
     {
         $this->repo = new ItemRepo();
+        
+        // json_decode($request->getContent()) can be used alternately
         $this->post = json_decode(file_get_contents('php://input'),true);
     }
     
@@ -54,7 +56,6 @@ class IndexController
 
     public function complete(Request $request)
     {
-        $done = $this->post['done'];
         $id = $this->post['id'];
         $this->post['done'] ? $this->repo->complete($id) : $this->repo->uncomplete($id);
     }
