@@ -37,7 +37,8 @@ class IndexController
     
     public function remove(Request $request)
     {
-        echo 'remove';
+        $id = $this->post['id'];
+        $this->repo->remove($id);
     }
     
     public function create(Request $request)
@@ -47,8 +48,6 @@ class IndexController
         if (!empty($name)) {
             $this->repo->create($name, 1, 1, 0);
         }
-        
-        return '';
     }
 
     public function update(Request $request)
