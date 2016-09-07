@@ -2,13 +2,32 @@
 
 namespace Classes;
 
+use Classes\ItemType;
+
 class ItemRepo extends DbAssist
 {
     public function fetch()
     {
         $query = 'SELECT * FROM item';
 
-        return $this->query($query);
+        $results = $this->query($query);
+        $doneDailys = $this->fetchCompletedDaily();
+        
+        foreach($results as $key => $one) {
+            if(in_array($one['id'], $doneDailys)) {
+                $results[$key]['done'] = '1';
+            }
+        }
+        
+        return $results;
+    }
+    
+    public function fetchCompletedDaily()
+    {
+        $template = 'SELECT item_id FROM daily WHERE completed_at = "%s"';
+        $query = sprintf($template, (new \DateTime)->format('Y-m-d'));
+        
+        return array_map(function($x){return $x['item_id'];}, $this->query($query));
     }
 
     public function create($name, $userId, $parentId, $type)
@@ -34,8 +53,12 @@ class ItemRepo extends DbAssist
         return $this->query($query);
     }
 
-    public function complete($id)
+    public function complete($id, $type)
     {
+        if ($type === ItemType::Daily) {
+            return $this->completeDaily($id);
+        }
+        
         $id = $this->safe($id);
         $query = "UPDATE item SET done='1' WHERE id='$id'";
 
@@ -51,8 +74,12 @@ class ItemRepo extends DbAssist
         return $this->query($query);
     }
 
-    public function uncomplete($id)
+    public function uncomplete($id, $type)
     {
+        if ($type === ItemType::Daily) {
+            return $this->uncompleteDaily($id);
+        }
+        
         $id = $this->safe($id);
         $query = "UPDATE item SET done='0' WHERE id='$id'";
 
