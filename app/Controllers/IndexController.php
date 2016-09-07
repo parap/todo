@@ -41,9 +41,10 @@ class IndexController
     public function create(Request $request)
     {
         $name = $this->post['name'];
+        $type = $this->post['type'];
 
         if (!empty($name)) {
-            $this->repo->create($name, 1, 1, ItemType::Normal);
+            $this->repo->create($name, 1, 1, $type ? ItemType::Daily : ItemType::Normal);
         }
     }
 
