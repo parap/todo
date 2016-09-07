@@ -1,8 +1,6 @@
 
 'use strict';
 
-
-
 angular.
         module('todoList').
         component('todoList', {
