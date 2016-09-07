@@ -35,12 +35,12 @@ angular.
                     $scope.todos.push({name: text, done: false});
                     $scope.newTodo = '';
 
-                    $http.post("/index.php?route=create", {"name": todo});
+                    $http.post("/index.php?route=create", {"name": text});
 
                 };
 
-                $scope.switch = function (todo) {
-                    //AJAX request to complete/uncomplete
+                $scope.switch = function (item) {
+                    $http.post("/index.php?route=complete", {"done": item.done, "id": item.id});
                 }
 
                 $scope.update = function (todo) {
