@@ -26,13 +26,13 @@ angular.
                             }
                         });
 
-                $scope.remove = function (todo) {
+                $scope.remove = function (item) {
                     $scope.todos.splice(this.$index, 1);
-                    // AJAX request to remove
+                    $http.post("/index.php?route=remove", {"id": item.id});
                 };
 
-                $scope.add = function (todo) {
-                    $scope.todos.push({name: todo, done: false});
+                $scope.add = function (text) {
+                    $scope.todos.push({name: text, done: false});
                     $scope.newTodo = '';
 
                     $http.post("/index.php?route=create", {"name": todo});
