@@ -29,11 +29,11 @@ angular.
                     $http.post("/index.php?route=remove", {"id": item.id});
                 };
 
-                $scope.add = function (text) {
+                $scope.add = function (text, type) {
                     $scope.todos.push({name: text, done: false});
                     $scope.newTodo = '';
 
-                    $http.post("/index.php?route=create", {"name": text});
+                    $http.post("/index.php?route=create", {"name": text, "type": type});
 
                 };
 
