@@ -1,9 +1,9 @@
 <div class="container-list">
 
     <fieldset>
-        <legend>Daily</legend>
+        <legend>Normal</legend>
 
-        <form id="todo-form" ng-submit="add(newTodo)">
+        <form id="todo-form" ng-submit="add(newTodo, 0)">
             <input id="new-todo" placeholder="Enter Todo Item" ng-model="newTodo" ng-disabled="saving" autofocus required>
         </form>
 
