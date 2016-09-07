@@ -53,7 +53,7 @@ class ItemRepo extends DbAssist
     public function remove($id)
     {
         $id = $this->safe($id);
-        $query = "DELETE from message where id='$id'";
+        $query = "DELETE from item where id='$id'";
 
         return $this->query($query);
     }
