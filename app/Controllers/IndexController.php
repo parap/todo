@@ -62,8 +62,11 @@ class IndexController
     {
         $id = $this->post['id'];
         $type = $this->post['type'];
+        $day = $this->post['day'];
+        $date = (new \DateTime($day.' day'))->format('Y-m-d');
         
-        $this->post['done'] ? $this->repo->complete($id, $type) : $this->repo->uncomplete($id, $type);
+        $method = $this->post['done'] ? 'complete' : 'uncomplete';
+        $this->repo->$method($id, $type, $date);
     }
 
 }

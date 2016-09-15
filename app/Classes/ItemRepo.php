@@ -53,10 +53,10 @@ class ItemRepo extends DbAssist
         return $this->query($query);
     }
 
-    public function complete($id, $type)
+    public function complete($id, $type, $date)
     {
         if ($type === ItemType::Daily) {
-            return $this->completeDaily($id);
+            return $this->completeDaily($id, $date);
         }
         
         $id = $this->safe($id);
@@ -65,19 +65,20 @@ class ItemRepo extends DbAssist
         return $this->query($query);
     }
     
-    public function completeDaily($id) {
+    public function completeDaily($id, $date) {
         $query = sprintf(
-                "INSERT INTO daily (item_id, completed_at) VALUES ('%s', NOW())", 
-                $this->safe($id)
+                "INSERT INTO daily (item_id, completed_at) VALUES ('%s', '%s')", 
+                $this->safe($id),
+                $date
         );
 
         return $this->query($query);
     }
 
-    public function uncomplete($id, $type)
+    public function uncomplete($id, $type, $date)
     {
         if ($type === ItemType::Daily) {
-            return $this->uncompleteDaily($id);
+            return $this->uncompleteDaily($id, $date);
         }
         
         $id = $this->safe($id);
@@ -86,12 +87,12 @@ class ItemRepo extends DbAssist
         return $this->query($query);
     }
     
-    public function uncompleteDaily($id)
+    public function uncompleteDaily($id, $date)
     {
         $query = sprintf(
                 "DELETE FROM daily WHERE item_id='%s' AND completed_at = '%s'", 
                 $this->safe($id),
-                (new \DateTime)->format('Y-m-d')
+                $date
                 );
         
         return $this->query($query);
