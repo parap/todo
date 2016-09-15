@@ -13,8 +13,9 @@ angular.
                         done: false
                     }
                 ];
-
-
+                
+                $scope.day = 0;
+                
                 $http.get("/fetch")
                         .then(function (response) {
                             $scope.todos = response.data;
