@@ -4,7 +4,7 @@
         <legend>Normal</legend>
 
         <form id="todo-form" ng-submit="add(newTodo, 0)">
-            <input id="new-todo" placeholder="Enter Todo Item" ng-model="newTodo" ng-disabled="saving" autofocus required>
+            <input id="new-todo" class="" type="text" placeholder="Enter Todo Item" ng-model="newTodo" ng-disabled="saving" autofocus required>
         </form>
 
         <ul id="todo-list">
@@ -25,7 +25,7 @@
     <fieldset>
         <legend>Daily</legend>
         <form id="daily-form" ng-submit="add(newDaily, 1)">
-            <input id="new-daily" placeholder="Enter Daily Item" ng-model="newDaily" ng-disabled="saving" autofocus required>
+            <input id="new-daily" class="" type="text" placeholder="Enter Daily Item" ng-model="newDaily" ng-disabled="saving" autofocus required>
         </form>
         
         <ul id="daily-list">
@@ -35,7 +35,7 @@
                 <label ng-hide="editing" class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label>
                 <button ng-hide="editing" class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="remove(todo)"></button>
                 <form ng-show="editing" ng-submit="editing = false">
-                    <input type="text" ng-model="todo.name" placeholder="todo.name" ng-required/>
+                    <input type="text" class="" ng-model="todo.name" placeholder="todo.name" ng-required/>
                     <button class="btn" type="submit" ng-click="update(todo)">Save</button>
                 </form>
                 </div>
