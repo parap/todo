@@ -14,7 +14,7 @@ angular.
                     }
                 ];
                 
-                $scope.day = 1;
+                $scope.day = 0;
 
                 $scope.fetch = function () {
                     $http.get("/fetch?day=" + $scope.day)
