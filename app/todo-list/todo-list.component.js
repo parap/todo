@@ -48,6 +48,16 @@ angular.
                     $http.post("/index.php?route=update", {"name": item.name, "id": item.id, "type": item.type});
                 }
                 
+                $scope.increaseDay = function () {
+                    $scope.day++;
+                    $scope.fetch();
+                }
+                
+                $scope.decreaseDay = function () {
+                    $scope.day--;
+                    $scope.fetch();
+                }
+                
                 $scope.fetch();
             }
         });
