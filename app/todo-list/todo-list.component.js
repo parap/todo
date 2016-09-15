@@ -57,6 +57,11 @@ angular.
                     $scope.day--;
                     $scope.fetch();
                 }
+
+                $scope.today = function () {
+                    $scope.day = 0;
+                    $scope.fetch();
+                }
                 
                 $scope.fetch();
             }
