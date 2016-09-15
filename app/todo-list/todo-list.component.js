@@ -15,6 +15,15 @@ angular.
                 ];
                 
                 $scope.day = 0;
+                var date = new Date();
+                $scope.date = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate()
+                
+                $scope.updateDate = function () {
+                    var date = new Date();
+                    date.setDate(date.getDate() + $scope.day);
+                    $scope.date = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
+                }
+
 
                 $scope.fetch = function () {
                     $http.get("/fetch?day=" + $scope.day)
@@ -51,16 +60,19 @@ angular.
                 $scope.increaseDay = function () {
                     $scope.day++;
                     $scope.fetch();
+                    $scope.updateDate();
                 }
                 
                 $scope.decreaseDay = function () {
                     $scope.day--;
                     $scope.fetch();
+                    $scope.updateDate();
                 }
 
                 $scope.today = function () {
                     $scope.day = 0;
                     $scope.fetch();
+                    $scope.updateDate();
                 }
                 
                 $scope.fetch();
