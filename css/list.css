@@ -31,8 +31,19 @@
 
 .container-list span.date {
     margin-left: 40px;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+}
+
+.container-list div.controls {
+    margin-left: 20px;
 }
 
 ul {
     list-style-type: none;
+}
+
+form input {
+    width: 400px;
 }
