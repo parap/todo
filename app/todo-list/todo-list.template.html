@@ -44,6 +44,6 @@
     </fieldset>
     
     <button ng-click="decreaseDay()">Yesterday</button>
-    <button ng-click="today()">Today</button>
+    <span ng-hide="0 == day"><button ng-click="today()">Today</button></span>
     <button ng-click="increaseDay()">Tomorrow</button>
 </div>
