@@ -42,8 +42,9 @@
             </li>
         </ul>
     </fieldset>
-    
-    <button ng-click="decreaseDay()">Yesterday</button>
-    <span ng-hide="0 == day"><button ng-click="today()">Today</button></span>
-    <button ng-click="increaseDay()">Tomorrow</button>
+    <div class="controls">
+    <button ng-click="decreaseDay()" >Yesterday</button>
+    <button ng-click="increaseDay()" >Tomorrow</button>
+    <span ng-hide="0 == day"><button ng-click="today()" >Today</button></span>
+    </div>
 </div>
