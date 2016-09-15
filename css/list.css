@@ -25,7 +25,11 @@
     margin-left: 20px;
 }
 
-.container-list fieldset form {
+#todo-form {
+    margin-left: 40px;
+}
+
+#new-daily {
     margin-left: 40px;
 }
 
