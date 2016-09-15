@@ -26,7 +26,10 @@ class IndexController
     
     public function fetch(Request $request)
     {
-        $results = $this->repo->fetch();
+        // FIXME - remove ugly REQUEST_URI thing
+        $day = (int)explode('=', $_SERVER['REQUEST_URI'])[1];
+        $date = (new \DateTime($day.' day'))->format('Y-m-d');
+        $results = $this->repo->fetch($date);
         $json = json_encode($results);
         
         return $json;
