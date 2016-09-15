@@ -21,7 +21,7 @@
             </li>
         </ul>
     </fieldset>
-    <span>{{date}}</span>
+    <span class="date">{{ date|date }}</span>
     <fieldset>
         <legend>Daily</legend>
         <form id="daily-form" ng-submit="add(newDaily, 1)">
