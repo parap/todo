@@ -41,7 +41,7 @@ angular.
                 };
 
                 $scope.switch = function (item) {
-                    $http.post("/index.php?route=complete", {"done": item.done, "id": item.id, "type": item.type});
+                    $http.post("/index.php?route=complete", {"done": item.done, "id": item.id, "type": item.type, "day": $scope.day});
                 }
 
                 $scope.update = function (item) {
