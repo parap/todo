@@ -6,26 +6,26 @@ use Classes\ItemType;
 
 class ItemRepo extends DbAssist
 {
-    public function fetch()
+    public function fetch($date)
     {
         $query = 'SELECT * FROM item';
 
         $results = $this->query($query);
-        $doneDailys = $this->fetchCompletedDaily();
+        $doneDailys = $this->fetchCompletedDaily($date);
         
         foreach($results as $key => $one) {
-            if(in_array($one['id'], $doneDailys)) {
+            if (in_array($one['id'], $doneDailys)) {
                 $results[$key]['done'] = '1';
-            }
+            } 
         }
         
         return $results;
     }
     
-    public function fetchCompletedDaily()
+    public function fetchCompletedDaily($date)
     {
         $template = 'SELECT item_id FROM daily WHERE completed_at = "%s"';
-        $query = sprintf($template, (new \DateTime)->format('Y-m-d'));
+        $query = sprintf($template, $date);
         
         return array_map(function($x){return $x['item_id'];}, $this->query($query));
     }
