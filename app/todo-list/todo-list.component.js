@@ -14,9 +14,10 @@ angular.
                     }
                 ];
                 
-                $scope.day = 0;
-                
-                $http.get("/fetch")
+                $scope.day = 1;
+
+                $scope.fetch = function () {
+                    $http.get("/fetch?day=" + $scope.day)
                         .then(function (response) {
                             $scope.todos = response.data;
 
@@ -24,6 +25,7 @@ angular.
                                 $scope.todos[i].done = ($scope.todos[i].done === "1");
                             }
                         });
+                }
 
                 $scope.remove = function (item) {
                     $scope.todos.splice(this.$index, 1);
@@ -45,5 +47,7 @@ angular.
                 $scope.update = function (item) {
                     $http.post("/index.php?route=update", {"name": item.name, "id": item.id, "type": item.type});
                 }
+                
+                $scope.fetch();
             }
         });
