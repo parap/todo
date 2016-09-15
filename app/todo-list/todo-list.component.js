@@ -22,7 +22,7 @@ angular.
                             $scope.todos = response.data;
 
                             for (var i = 0; i < $scope.todos.length; i++) {
-                                $scope.todos[i].done = ($scope.todos[i].done === "1");
+                                $scope.todos[i].done = ("1" === $scope.todos[i].done );
                             }
                         });
                 }
