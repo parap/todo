@@ -8,7 +8,7 @@ class ItemRepo extends DbAssist
 {
     public function fetch($date)
     {
-        $query = 'SELECT * FROM item';
+        $query = 'SELECT *, DATEDIFF(NOW(), completed_at) as delay FROM item';
 
         $results = $this->query($query);
         $doneDailys = $this->fetchCompletedDaily($date);
@@ -34,7 +34,7 @@ class ItemRepo extends DbAssist
     {
         $query = sprintf(
             'INSERT INTO item (name, user_id, done, parent_id, type, created_at, todo_at, completed_at) '
-                . 'VALUES ("%s", "%s", "0", "%s", "%s", NOW(), NOW(), NOW())',
+                . 'VALUES ("%s", "%s", "0", "%s", "%s", NOW(), NOW(), "0000-00-00")',
             $this->safe($name),
             $userId,
             $parentId,
@@ -56,11 +56,11 @@ class ItemRepo extends DbAssist
     public function complete($id, $type, $date)
     {
         if ($type === ItemType::Daily) {
-            return $this->completeDaily($id, $date);
+            $this->completeDaily($id, $date);
         }
         
         $id = $this->safe($id);
-        $query = "UPDATE item SET done='1' WHERE id='$id'";
+        $query = "UPDATE item SET done='1', completed_at=NOW() WHERE id='$id'";
 
         return $this->query($query);
     }
@@ -74,15 +74,32 @@ class ItemRepo extends DbAssist
 
         return $this->query($query);
     }
+    
+    public function findLatestCompletedAt($id)
+    {
+        $query = "SELECT completed_at "
+                . "FROM daily "
+                . "WHERE item_id='$id' "
+                . "ORDER BY completed_at DESC "
+                . "LIMIT 1";
+        $result = $this->query($query);
+        
+        return isset($result[0]['completed_at']) ? $result[0]['completed_at'] : '';
+    }
 
     public function uncomplete($id, $type, $date)
     {
+        $latest = '';
+        $id = $this->safe($id);
+        
         if ($type === ItemType::Daily) {
-            return $this->uncompleteDaily($id, $date);
+            $this->uncompleteDaily($id, $date);
+            $latest = $this->findLatestCompletedAt($id);
         }
         
-        $id = $this->safe($id);
-        $query = "UPDATE item SET done='0' WHERE id='$id'";
+        $completedAt = $latest ?: '0000-00-00';
+        
+        $query = "UPDATE item SET done='0', completed_at='$completedAt' WHERE id='$id'";
 
         return $this->query($query);
     }
