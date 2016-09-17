@@ -51,3 +51,59 @@ ul {
 form input {
     width: 400px;
 }
+
+.color0 {
+    background-color: #00C90D;
+}
+
+.color1 {
+    background-color: #67E300;
+}
+
+.color2 {
+    background-color: #A2EE00;
+}
+
+.color3 {
+    background-color: #D2F700;
+}
+
+.color4 {
+    background-color: #FFFC00;
+}
+
+.color5 {
+    background-color: #FFE800;
+}
+
+.color6 {
+    background-color: #FFD500;
+}
+
+.color7 {
+    background-color: #FFBF00;
+}
+
+.color8 {
+    background-color: #FFAB00;
+}
+
+/*
+FF0000
+FF4900
+FF7400
+FF9200
+FFAB00
+FFBF00
+
+FFD500
+FFE800
+FFFC00
+D2F700
+
+A2EE00
+
+
+67E300
+00C90D
+*/
