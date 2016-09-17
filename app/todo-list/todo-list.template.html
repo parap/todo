@@ -29,10 +29,11 @@
         </form>
         
         <ul id="daily-list">
-            <li ng-repeat="todo in todos">
+            <li ng-repeat="todo in todos" ng-init="todo.delay = todo.delay > 8 ? 8 : todo.delay">
                 <div ng-if="todo.type == 1">
                 <input ng-hide="editing" type="checkbox" ng-model="todo.done"  ng-click="switch(todo)">
                 <label ng-hide="editing" class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label>
+                <span class="color{{todo.delay}}">{{todo.delay ? (todo.delay == '0' ? 'did today' : todo.delay + ' days passed') : 'never did'}}</span>
                 <button ng-hide="editing" class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="remove(todo)"></button>
                 <form ng-show="editing" ng-submit="editing = false">
                     <input type="text" class="" ng-model="todo.name" placeholder="todo.name" ng-required/>
