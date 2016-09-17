@@ -51,7 +51,10 @@ angular.
                 };
 
                 $scope.switch = function (item) {
-                    $http.post("/index.php?route=complete", {"done": item.done, "id": item.id, "type": item.type, "day": $scope.day});
+                    $http.post("/index.php?route=complete", {"done": item.done, "id": item.id, "type": item.type, "day": $scope.day})
+                            .then(function (response) {
+                                item.delay = response.data;
+                            });
                 }
 
                 $scope.update = function (item) {
