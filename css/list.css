@@ -52,6 +52,10 @@ form input {
     width: 400px;
 }
 
+.color {
+    background-color: #00BFFF;
+}
+
 .color0 {
     background-color: #00C90D;
 }
