@@ -75,6 +75,15 @@ class ItemRepo extends DbAssist
         return $this->query($query);
     }
     
+    public function findDelay($id)
+    {
+        $id = $this->safe($id);
+        $query = "SELECT DATEDIFF(NOW(), completed_at) as delay "
+                . "FROM item WHERE id='$id'";
+
+        return $this->query($query);
+    }
+
     public function findLatestCompletedAt($id)
     {
         $query = "SELECT completed_at "
