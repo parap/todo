@@ -15,8 +15,7 @@ angular.
                 ];
                 
                 $scope.day = 0;
-                var date = new Date();
-                $scope.date = date;
+                $scope.date = new Date();
                 
                 $scope.updateDate = function () {
                     var date = new Date();
