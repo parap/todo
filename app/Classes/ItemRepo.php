@@ -15,8 +15,8 @@ class ItemRepo extends DbAssist
         $doneDailys = $this->fetchCompletedDaily($date);
         
         foreach($results as $key => $one) {
-            if (in_array($one['id'], $doneDailys)) {
-                $results[$key]['done'] = '1';
+            if ('1' === $one['type']) {
+                $results[$key]['done'] = in_array($one['id'], $doneDailys) ? '1' : '0';
             } 
         }
         
