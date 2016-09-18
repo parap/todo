@@ -16,13 +16,11 @@ angular.
                 
                 $scope.day = 0;
                 var date = new Date();
-//                $scope.date = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
                 $scope.date = date;
                 
                 $scope.updateDate = function () {
                     var date = new Date();
                     date.setDate(date.getDate() + $scope.day);
-//                    $scope.date = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
                     $scope.date = date;
                 }
 
