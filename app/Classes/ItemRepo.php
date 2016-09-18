@@ -61,7 +61,7 @@ class ItemRepo extends DbAssist
         }
         
         $id = $this->safe($id);
-        $query = "UPDATE item SET done='1', completed_at=NOW() WHERE id='$id'";
+        $query = "UPDATE item SET done='1', completed_at='$date' WHERE id='$id'";
 
         return $this->query($query);
     }
