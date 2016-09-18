@@ -8,7 +8,8 @@ class ItemRepo extends DbAssist
 {
     public function fetch($date)
     {
-        $query = 'SELECT *, DATEDIFF(NOW(), completed_at) as delay FROM item';
+        $query = "SELECT *, DATEDIFF(NOW(), completed_at) as delay "
+                . "FROM item WHERE created_at <= '$date'";
 
         $results = $this->query($query);
         $doneDailys = $this->fetchCompletedDaily($date);
