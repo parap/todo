@@ -58,6 +58,12 @@ class IndexController
         $this->repo->archive($id);
     }
     
+    public function unarchive(Request $request)
+    {
+        $id = $this->post['id'];
+        $this->repo->unarchive($id);
+    }
+    
     public function create(Request $request)
     {
         $name = $this->post['name'];

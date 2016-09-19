@@ -26,11 +26,6 @@ angular.
                         });
                 }
 
-                $scope.archive = function (item) {
-                    $scope.todos.splice(this.$index, 1);
-                    $http.post("/index.php?route=archive", {"id": item.id});
-                };
-
                 $scope.remove = function (item) {
                     if (confirm('It is irreversible action! Please confirm you are going to delete the item')) {
                         $scope.todos.splice(this.$index, 1);
@@ -40,7 +35,7 @@ angular.
 
                 $scope.unarchive = function (item) {
                     $scope.todos.splice(this.$index, 1);
-                    $http.post("/index.php?route=archive", {"id": item.id});
+                    $http.post("/index.php?route=unarchive", {"id": item.id});
                 };
                
                 $scope.fetch();

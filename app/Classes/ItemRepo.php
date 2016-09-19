@@ -150,9 +150,15 @@ class ItemRepo extends DbAssist
     {
         $id = $this->safe($id);
         $query = "UPDATE item SET archived_at=NOW() WHERE id='$id'";
-        $queryDaily = "DELETE from daily WHERE item_id='$id'";
 
-        $this->query($queryDaily);
+        return $this->query($query);
+    }
+    
+    public function unarchive($id)
+    {
+        $id = $this->safe($id);
+        $query = "UPDATE item SET archived_at='0000-00-00' WHERE id='$id'";
+
         return $this->query($query);
     }
     
