@@ -8,10 +8,9 @@ app.config(function($routeProvider) {
     $routeProvider
     .when("/statistic", {
         template: "<statistic></statistic>"
-//        controller: "StatisticController"
     })
     .when("/test", {
-        template: "it is test, test-test-test"
+        template: "<br/>it is future Archive page"
     }).otherwise({
         template: "<todo-list></todo-list>"
     });
