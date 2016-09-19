@@ -1,0 +1,31 @@
+<div class="container-list">
+
+    <fieldset>
+        <legend>Normal</legend>
+        <ul id="todo-list">
+            <li ng-repeat="todo in todos">
+                <div ng-if="todo.type == 0">
+                <label  class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label>
+                <button  class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="archive(todo)"></button>
+                </div>
+            </li>
+        </ul>
+    </fieldset>
+    <span class="date">{{ date|date }}</span>
+    <fieldset>
+        <legend>Daily</legend>
+        <form id="daily-form" ng-submit="add(newDaily, 1)">
+            <input id="new-daily" class="" type="text" placeholder="Enter Daily Item" ng-model="newDaily" ng-disabled="saving" autofocus required>
+        </form>
+        
+        <ul id="daily-list">
+            <li ng-repeat="todo in todos">
+                <div ng-if="todo.type == 1">
+                <label  class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label>
+                <span  class="color{{todo.delay}}">{{todo.delay ? (todo.delay == '0' ? 'did today' : todo.delay + ' days passed') : 'never did'}}</span>
+                <button  class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="archive(todo)"></button>
+                </div>
+            </li>
+        </ul>
+    </fieldset>
+</div>

@@ -1,7 +1,7 @@
 'use strict';
 
 var app = angular.module("todoApp", [
-    "ngRoute", "todoList", "statistic"
+    "ngRoute", "todoList", "statistic", "archive"
 ]);
 
 app.config(function($routeProvider) {
@@ -9,8 +9,8 @@ app.config(function($routeProvider) {
     .when("/statistic", {
         template: "<statistic></statistic>"
     })
-    .when("/test", {
-        template: "<br/>it is future Archive page"
+    .when("/archive", {
+        template: "<archive></archive>"
     }).otherwise({
         template: "<todo-list></todo-list>"
     });
