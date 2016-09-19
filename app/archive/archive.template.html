@@ -21,6 +21,11 @@
     <span class="date">{{ date|date }}</span>
     <fieldset>
         <legend>Daily</legend>
+        <div class="row" style="display: table; margin-left:20px">
+            <div class="span8">Name:</div>
+            <div class="span4">Restore</div>
+            <div class="span4">Delete</div>
+        </div>
         <ul id="daily-list">
             <li ng-repeat="todo in todos">
 
