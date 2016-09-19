@@ -7,6 +7,7 @@ $routes = [
 'complete' => 'IndexController::complete',
 'remove' => 'IndexController::remove',
 'archive' => 'IndexController::archive',
+'fetch-archived' => 'IndexController::fetchArchived',
 'statistic' => 'StatisticController::index',
 '' => 'IndexController::fetch',
 ];

@@ -17,7 +17,7 @@ angular.
                 $scope.date = new Date();
                 
                 $scope.fetch = function () {
-                    $http.get("/fetch?day=" + $scope.day)
+                    $http.get("/fetch-archived?day=" + $scope.day)
                         .then(function (response) {
                             $scope.todos = response.data;
 

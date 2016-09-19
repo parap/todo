@@ -35,6 +35,17 @@ class IndexController
         return $json;
     }
     
+    public function fetchArchived(Request $request)
+    {
+        // FIXME - remove ugly REQUEST_URI thing
+        $day = (isset($_SERVER['REQUEST_URI']) && count(explode('=', $_SERVER['REQUEST_URI'])) > 1) ? (int)explode('=', $_SERVER['REQUEST_URI'])[1] : 0;
+        $date = (new \DateTime($day.' day'))->format('Y-m-d');
+        $results = $this->repo->fetchArchived($date);
+        $json = json_encode($results);
+        
+        return $json;
+    }
+    
     public function remove(Request $request)
     {
         $id = $this->post['id'];

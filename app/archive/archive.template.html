@@ -1,12 +1,19 @@
-<div class="container-list">
-
+<div class="container-list"> 
     <fieldset>
         <legend>Normal</legend>
+        <div class="row" style="display: table; margin-left:60px">
+                        <div class="span8">Name:</div>
+                        <div class="span5">Restore</div>
+                        <div class="span4">Delete</div>
+                    </div>
         <ul id="todo-list">
             <li ng-repeat="todo in todos">
                 <div ng-if="todo.type == 0">
-                <label  class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label>
-                <button  class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="archive(todo)"></button>
+                    <div class="row" style="display: table">
+                        <div class="span8"><label  class="done-{{todo.done}}" ng-bind="todo.name"></label></div>
+                        <div class="span4"><button  class="glyphicon glyphicon-home" aria-hidden="true" ng-click="archive(todo)" alt="hello"></button></div>
+                        <div class="span4"><button  class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="archive(todo)"></button></div>
+                    </div>
                 </div>
             </li>
         </ul>
@@ -14,17 +21,16 @@
     <span class="date">{{ date|date }}</span>
     <fieldset>
         <legend>Daily</legend>
-        <form id="daily-form" ng-submit="add(newDaily, 1)">
-            <input id="new-daily" class="" type="text" placeholder="Enter Daily Item" ng-model="newDaily" ng-disabled="saving" autofocus required>
-        </form>
-        
         <ul id="daily-list">
             <li ng-repeat="todo in todos">
+                
                 <div ng-if="todo.type == 1">
-                <label  class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label>
-                <span  class="color{{todo.delay}}">{{todo.delay ? (todo.delay == '0' ? 'did today' : todo.delay + ' days passed') : 'never did'}}</span>
-                <button  class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="archive(todo)"></button>
+                    <div class="row" style="display: table">
+                        <div class="span8"><label  class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label></div>
+                <div class="span4"><button  class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="archive(todo)"></button></div>
+                <div class="span4"><button  class="glyphicon glyphicon-home" aria-hidden="true" ng-click="archive(todo)"></button></div>
                 </div>
+                    </div>
             </li>
         </ul>
     </fieldset>

@@ -9,7 +9,8 @@ class ItemRepo extends DbAssist
     public function fetch($date)
     {
         $query = "SELECT *, DATEDIFF(NOW(), completed_at) as delay "
-                . "FROM item WHERE created_at <= '$date' AND archived = '0'";
+                . "FROM item "
+                . "WHERE created_at <= '$date' AND (archived_at = '0000-00-00' OR archived_at >= '$date')";
 
         $results = $this->query($query);
         $doneDailys = $this->fetchCompletedDaily($date);
@@ -22,6 +23,26 @@ class ItemRepo extends DbAssist
         
         return $results;
     }
+    
+    public function fetchArchived($date)
+    {
+        $query = "SELECT *"
+                . "FROM item "
+                . "WHERE created_at <= '$date' AND archived_at > '0000-00-00' AND archived_at <= '$date'";
+
+        $results = $this->query($query);
+        $doneDailys = $this->fetchCompletedDaily($date);
+        
+        foreach($results as $key => $one) {
+            if ('1' === $one['type']) {
+                $results[$key]['done'] = in_array($one['id'], $doneDailys) ? '1' : '0';
+            } 
+        }
+        
+        return $results;
+    }
+    
+    
     
     public function fetchCompletedDaily($date)
     {
@@ -89,7 +110,7 @@ class ItemRepo extends DbAssist
     {
         $query = "SELECT completed_at "
                 . "FROM daily "
-                . "WHERE item_id='$id'  AND archived = '0'"
+                . "WHERE item_id='$id'"
                 . "ORDER BY completed_at DESC "
                 . "LIMIT 1";
         $result = $this->query($query);
@@ -128,7 +149,7 @@ class ItemRepo extends DbAssist
     public function archive($id)
     {
         $id = $this->safe($id);
-        $query = "UPDATE item SET archived='1' WHERE id='$id'";
+        $query = "UPDATE item SET archived_at=NOW() WHERE id='$id'";
         $queryDaily = "DELETE from daily WHERE item_id='$id'";
 
         $this->query($queryDaily);
@@ -187,7 +208,7 @@ class ItemRepo extends DbAssist
         $query = "SELECT i.name , COUNT( d.completed_at ) AS number_completion, DATEDIFF(NOW(), i.created_at)+1 AS life_length
 FROM item i
 LEFT JOIN daily d ON ( i.id = d.item_id ) 
-WHERE d.completed_at >=  '$date' AND i.type = '1' AND i.archived = '0'
+WHERE d.completed_at >=  '$date' AND i.type = '1' AND (i.archived_at = '0000-00-00' OR i.archived_at >= '$date')
 GROUP BY i.id";
         
         $got = $this->query($query);

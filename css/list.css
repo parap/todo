@@ -17,6 +17,11 @@
     width: 50px;
 }
 
+.span5 {
+    display: inline-table;
+    width: 80px;
+}
+
 .span8 {
     display: inline-table;
     width: 350px;
