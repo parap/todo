@@ -10,7 +10,7 @@ class ItemRepo extends DbAssist
     {
         $query = "SELECT *, DATEDIFF(NOW(), completed_at) as delay "
                 . "FROM item "
-                . "WHERE created_at <= '$date' AND (archived_at = '0000-00-00' OR archived_at >= '$date')";
+                . "WHERE created_at <= '$date' AND (archived_at = '0000-00-00' OR archived_at > '$date')";
 
         $results = $this->query($query);
         $doneDailys = $this->fetchCompletedDaily($date);
