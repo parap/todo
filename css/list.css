@@ -11,12 +11,16 @@
     padding-top: 40px;
 }
 
-.container-list legend {
+legend {
     color: black;
-    width: 4%;
+    width: 8%;
     margin-left: 100px;
     margin-bottom: 0;
     border-width: 0;
+}
+
+.statistic {
+    width: 14%;
 }
 
 .container-list fieldset {
