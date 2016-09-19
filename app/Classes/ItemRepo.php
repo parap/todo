@@ -189,7 +189,7 @@ class ItemRepo extends DbAssist {
         $query = "SELECT i.name , COUNT( d.completed_at ) AS number_completion, DATEDIFF(NOW(), i.created_at)+1 AS life_length
 FROM item i
 LEFT JOIN daily d ON ( i.id = d.item_id ) 
-WHERE (d.completed_at >=  '$date') AND i.type = '1' AND (i.archived_at = '0000-00-00' OR i.archived_at >= '$date')
+WHERE (d.completed_at >=  '$date' OR d.completed_at IS NULL) AND i.type = '1' AND (i.archived_at = '0000-00-00' OR i.archived_at >= '$date')
 GROUP BY i.id";
 
         $got = $this->query($query);
