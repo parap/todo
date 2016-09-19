@@ -6,9 +6,10 @@ angular.
         component('statistic', {
             templateUrl: 'app/statistic/statistic.template.html',
             controller: function StatisticController($scope, $http) {
-                var x = new Date();
-                $scope.weekLength = x.getDay();
-                $scope.monthLength = x.getDate();
+                var date = new Date();
+                $scope.weekLength = date.getDay();
+                $scope.monthLength = date.getDate();
+                $scope.date = date;
                 
                 $scope.fetch = function () {
                     $http.get("/statistic")
