@@ -21,15 +21,31 @@
                 </div>
             </li>
         </ul>
-        <div class="standard">
-            <div>
-                Total percentage: <span class="color{{9 - 12.5 * items.total.all.done / items.total.all.time | number:0 }}">{{100 * items.total.all.done / items.total.all.time | number:0 }}%</span>
-                </div>
-            <div>
-            Month percentage: <span class="color{{9 - 12.5 * items.total.month.done / items.total.month.time | number:0 }}">{{100 * items.total.month.done / items.total.month.time | number:0 }}%</span>
+        <div class="row" style="display: table;margin-left: 25px">
+            <div class="span8">
+                Percentage:
             </div>
-            <div>
-            Week percentage: <span class="color{{9 - 12.5 * items.total.week.done / items.total.week.time | number:0 }}">{{100 * items.total.week.done / items.total.week.time | number:0 }}%</span>
+            <div class="span4">
+            Total:
+            </div>
+            <div class="span4">
+            Month: 
+            </div>
+            <div class="span4">
+            Week: 
+            </div>
+        </div>
+        <div class="row" style="display: table; margin-left: 25px">
+            <div class="span8">
+            </div>
+            <div class="span4">
+                <span class="color{{9 - 12.5 * items.total.all.done / items.total.all.time | number:0 }}">{{100 * items.total.all.done / items.total.all.time | number:0 }}%</span>
+            </div>
+            <div class="span4">
+            <span class="color{{9 - 12.5 * items.total.month.done / items.total.month.time | number:0 }}">{{100 * items.total.month.done / items.total.month.time | number:0 }}%</span>
+            </div>
+            <div class="span4">
+            <span class="color{{9 - 12.5 * items.total.week.done / items.total.week.time | number:0 }}">{{100 * items.total.week.done / items.total.week.time | number:0 }}%</span>
             </div>
         </div>
     </fieldset>
