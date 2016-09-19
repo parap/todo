@@ -7,7 +7,8 @@ var app = angular.module("todoApp", [
 app.config(function($routeProvider) {
     $routeProvider
     .when("/statistic", {
-        template: "it is statistic"
+        template: "<statistic></statistic>"
+//        controller: "StatisticController"
     })
     .when("/test", {
         template: "it is test, test-test-test"
