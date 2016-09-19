@@ -27,7 +27,7 @@ class IndexController
     public function fetch(Request $request)
     {
         // FIXME - remove ugly REQUEST_URI thing
-        $day = (int)explode('=', $_SERVER['REQUEST_URI'])[1];
+        $day = (isset($_SERVER['REQUEST_URI']) && count(explode('=', $_SERVER['REQUEST_URI'])) > 1) ? (int)explode('=', $_SERVER['REQUEST_URI'])[1] : 0;
         $date = (new \DateTime($day.' day'))->format('Y-m-d');
         $results = $this->repo->fetch($date);
         $json = json_encode($results);
