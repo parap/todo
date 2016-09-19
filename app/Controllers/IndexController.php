@@ -38,7 +38,7 @@ class IndexController
     public function remove(Request $request)
     {
         $id = $this->post['id'];
-        $this->repo->remove($id);
+        $this->repo->archive($id);
     }
     
     public function create(Request $request)
@@ -72,5 +72,4 @@ class IndexController
         
         return isset($results[0]['delay']) ? $results[0]['delay'] : '';
     }
-    
 }

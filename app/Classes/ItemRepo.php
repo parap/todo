@@ -9,7 +9,7 @@ class ItemRepo extends DbAssist
     public function fetch($date)
     {
         $query = "SELECT *, DATEDIFF(NOW(), completed_at) as delay "
-                . "FROM item WHERE created_at <= '$date'";
+                . "FROM item WHERE created_at <= '$date' AND archived = '0'";
 
         $results = $this->query($query);
         $doneDailys = $this->fetchCompletedDaily($date);
@@ -34,8 +34,8 @@ class ItemRepo extends DbAssist
     public function create($name, $userId, $parentId, $type)
     {
         $query = sprintf(
-            'INSERT INTO item (name, user_id, done, parent_id, type, created_at, todo_at, completed_at) '
-                . 'VALUES ("%s", "%s", "0", "%s", "%s", NOW(), NOW(), "0000-00-00")',
+            'INSERT INTO item (name, user_id, done, parent_id, type, created_at, todo_at, completed_at, archived) '
+                . 'VALUES ("%s", "%s", "0", "%s", "%s", NOW(), NOW(), "0000-00-00", "0")',
             $this->safe($name),
             $userId,
             $parentId,
@@ -89,7 +89,7 @@ class ItemRepo extends DbAssist
     {
         $query = "SELECT completed_at "
                 . "FROM daily "
-                . "WHERE item_id='$id' "
+                . "WHERE item_id='$id'  AND archived = '0'"
                 . "ORDER BY completed_at DESC "
                 . "LIMIT 1";
         $result = $this->query($query);
@@ -124,7 +124,17 @@ class ItemRepo extends DbAssist
         
         return $this->query($query);
     }
+    
+    public function archive($id)
+    {
+        $id = $this->safe($id);
+        $query = "UPDATE item SET archived='1' WHERE id='$id'";
+        $queryDaily = "DELETE from daily WHERE item_id='$id'";
 
+        $this->query($queryDaily);
+        return $this->query($query);
+    }
+    
     public function remove($id)
     {
         $id = $this->safe($id);
@@ -177,7 +187,7 @@ class ItemRepo extends DbAssist
         $query = "SELECT i.name , COUNT( d.completed_at ) AS number_completion, DATEDIFF(NOW(), i.created_at)+1 AS life_length
 FROM item i
 LEFT JOIN daily d ON ( i.id = d.item_id ) 
-WHERE d.completed_at >=  '$date' AND i.type = '1'
+WHERE d.completed_at >=  '$date' AND i.type = '1' AND i.archived = '0'
 GROUP BY i.id";
         
         $got = $this->query($query);
