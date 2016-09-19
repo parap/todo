@@ -27,6 +27,10 @@
     width: 350px;
 }
 
+.span8 label {
+    display: inline;
+}
+
 legend {
     color: black;
     width: 8%;
