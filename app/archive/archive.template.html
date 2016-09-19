@@ -31,8 +31,8 @@
                 <div ng-if="todo.type == 1">
                     <div class="row" style="display: table">
                         <div class="span8"><label  class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label></div>
-                        <div class="span4"><button  class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="archive(todo)"></button></div>
-                        <div class="span4"><button  class="glyphicon glyphicon-home" aria-hidden="true" ng-click="archive(todo)"></button></div>
+                        <div class="span4"><button  class="glyphicon glyphicon-home" aria-hidden="true" ng-click="unarchive(todo)"></button></div>
+                        <div class="span4"><button  class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="remove(todo)"></button></div>
                     </div>
                 </div>
             </li>
