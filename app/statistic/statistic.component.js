@@ -3,8 +3,8 @@
 
 angular.
         module('statistic').
-        component('statitic', {
-            templateUrl: 'app/statitic/statitic.template.html',
+        component('statistic', {
+            templateUrl: 'app/statistic/statistic.template.html',
             controller: function StatisticController($scope, $http) {
 
             }
