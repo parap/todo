@@ -2,10 +2,10 @@
     <fieldset>
         <legend>Normal</legend>
         <div class="row" style="display: table; margin-left:60px">
-                        <div class="span8">Name:</div>
-                        <div class="span5">Restore</div>
-                        <div class="span4">Delete</div>
-                    </div>
+            <div class="span8">Name:</div>
+            <div class="span5">Restore</div>
+            <div class="span4">Delete</div>
+        </div>
         <ul id="todo-list">
             <li ng-repeat="todo in todos">
                 <div ng-if="todo.type == 0">
@@ -23,14 +23,14 @@
         <legend>Daily</legend>
         <ul id="daily-list">
             <li ng-repeat="todo in todos">
-                
+
                 <div ng-if="todo.type == 1">
                     <div class="row" style="display: table">
                         <div class="span8"><label  class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label></div>
-                <div class="span4"><button  class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="archive(todo)"></button></div>
-                <div class="span4"><button  class="glyphicon glyphicon-home" aria-hidden="true" ng-click="archive(todo)"></button></div>
-                </div>
+                        <div class="span4"><button  class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="archive(todo)"></button></div>
+                        <div class="span4"><button  class="glyphicon glyphicon-home" aria-hidden="true" ng-click="archive(todo)"></button></div>
                     </div>
+                </div>
             </li>
         </ul>
     </fieldset>
