@@ -44,7 +44,10 @@ angular.
                     $scope.newTodo = '';
                     $scope.newDaily = '';
 
-                    $http.post("/index.php?route=create", {"name": text, "type": type});
+                    $http.post("/index.php?route=create", {"name": text, "type": type})
+                            .then(function(response) {
+                                $scope.fetch();
+                    });
                 };
 
                 $scope.switch = function (item) {
