@@ -134,4 +134,70 @@ class ItemRepo extends DbAssist
         $this->query($queryDaily);
         return $this->query($query);
     }
+    
+    /**
+     * @TODO: move it to other class - Datetime?
+     * 
+     * @param type $format
+     * @return type
+     */
+    public function getLastMondayDate($format = 'Y-m-d')
+    {
+        $timestamp = mktime(date('H'), date('i'), date('s'), date('m'), date('d') - date('w') + 1, date('Y'));
+        
+        return date($format, $timestamp);
+    }
+
+        public function fetchStatistic()
+    {
+        // 
+// total & monthly & weekly completion % of every daily task separately;
+// total & monthly & weekly completion % of all daily/normal tasks;
+    }
+    
+    public function dailySingleStatistic()
+    {
+        $res = array_merge_recursive($this->dailySingleFor('2015-01-01', 'all'),
+                $this->dailySingleFor($this->getLastMondayDate(), 'week'),
+                $this->dailySingleFor(date('Y-m' . '-01'), 'month')
+                );
+        
+        return $res;
+                
+    }
+    
+    public function dailySingleFor($date, $index)
+    {
+        $query = "SELECT i.name , COUNT( d.completed_at ) AS number_completion, DATEDIFF(NOW(), i.created_at) AS life_length
+FROM item i
+LEFT JOIN daily d ON ( i.id = d.item_id ) 
+WHERE d.completed_at >=  '$date' AND i.type = '1'
+GROUP BY i.id";
+        
+        $got = $this->query($query);
+        $results = [];
+        foreach($got as $one) {
+            $results[$one['name']][$index] = $one;
+            
+            // all - no need, month - date('d'), week - date('w')
+            
+//            $results[$index]['duration'] = 
+        }
+        
+        return $results;
+    }
+
+        public function totalStatistic()
+    {
+        // for all DAILY items
+        // - count number of days passed since begin/last month/last week started;
+        // - count number of the task completions;
+        // divide one for another, get answer
+        
+        
+        // for all NORMAL items
+        // - count number of days passed since begin/last month/last week started;
+        // - count number of the task completions;
+        // divide one for another, get answer
+    }
 }
