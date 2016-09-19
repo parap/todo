@@ -4,3 +4,5 @@ config.php
 /nbproject
 /css/bootstrap*
 composer.phar
+node_modules/
+vendor/
