@@ -38,6 +38,12 @@ class IndexController
     public function remove(Request $request)
     {
         $id = $this->post['id'];
+        $this->repo->remove($id);
+    }
+    
+    public function archive(Request $request)
+    {
+        $id = $this->post['id'];
         $this->repo->archive($id);
     }
     

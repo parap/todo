@@ -12,7 +12,7 @@
                 <div ng-if="todo.type == 0">
                 <input ng-hide="editing" type="checkbox" ng-model="todo.done"  ng-click="switch(todo)">
                 <label ng-hide="editing" class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label>
-                <button ng-hide="editing" class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="remove(todo)"></button>
+                <button ng-hide="editing" class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="archive(todo)"></button>
                 <form ng-show="editing" ng-submit="editing = false">
                     <input type="text" ng-model="todo.name" placeholder="todo.name" ng-required/>
                     <button class="btn" type="submit" ng-click="update(todo)">Save</button>
@@ -34,7 +34,7 @@
                 <input ng-hide="editing" type="checkbox" ng-model="todo.done"  ng-click="switch(todo)">
                 <label ng-hide="editing" class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label>
                 <span ng-hide="editing" class="color{{todo.delay}}">{{todo.delay ? (todo.delay == '0' ? 'did today' : todo.delay + ' days passed') : 'never did'}}</span>
-                <button ng-hide="editing" class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="remove(todo)"></button>
+                <button ng-hide="editing" class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="archive(todo)"></button>
                 <form ng-show="editing" ng-submit="editing = false">
                     <input type="text" class="" ng-model="todo.name" placeholder="todo.name" ng-required/>
                     <button class="btn" type="submit" ng-click="update(todo)">Save</button>

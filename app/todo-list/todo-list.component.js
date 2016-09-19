@@ -39,6 +39,11 @@ angular.
                     $http.post("/index.php?route=remove", {"id": item.id});
                 };
 
+                $scope.archive = function (item) {
+                    $scope.todos.splice(this.$index, 1);
+                    $http.post("/index.php?route=archive", {"id": item.id});
+                };
+
                 $scope.add = function (text, type) {
                     $scope.todos.push({name: text, done: false, type: type});
                     $scope.newTodo = '';
