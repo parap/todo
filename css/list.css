@@ -27,6 +27,16 @@
     width: 350px;
 }
 
+.span9 {
+    display: inline-table;
+    width: 380px;
+}
+
+.span10 {
+    display: inline-table;
+    width: 430px;
+}
+
 .span8 label {
     display: inline;
 }
