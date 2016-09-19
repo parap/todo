@@ -22,9 +22,15 @@
             </li>
         </ul>
         <div class="standard">
-            Total percentage: {{100 * items.total.all.done / items.total.all.time | number:0 }}%
-            Month percentage: {{100 * items.total.month.done / items.total.month.time | number:0 }}%
-            Week percentage: {{100 * items.total.week.done / items.total.week.time | number:0 }}%
+            <div>
+                Total percentage: <span class="color{{9 - 12.5 * items.total.all.done / items.total.all.time | number:0 }}">{{100 * items.total.all.done / items.total.all.time | number:0 }}%</span>
+                </div>
+            <div>
+            Month percentage: <span class="color{{9 - 12.5 * items.total.month.done / items.total.month.time | number:0 }}">{{100 * items.total.month.done / items.total.month.time | number:0 }}%</span>
+            </div>
+            <div>
+            Week percentage: <span class="color{{9 - 12.5 * items.total.week.done / items.total.week.time | number:0 }}">{{100 * items.total.week.done / items.total.week.time | number:0 }}%</span>
+            </div>
         </div>
     </fieldset>
 </div>
