@@ -143,13 +143,19 @@ class ItemRepo extends DbAssist
      */
     public function getLastMondayDate($format = 'Y-m-d')
     {
-        $timestamp = mktime(date('H'), date('i'), date('s'), date('m'), date('d') - date('w') + 1, date('Y'));
+        $timestamp = mktime(date('H'), date('i'), date('s'), date('m'), date('d') - date('w') +1, date('Y'));
         
         return date($format, $timestamp);
     }
 
         public function fetchStatistic()
-    {
+    {        
+            $res = array_merge_recursive($this->totalStatistic('2015-01-01', 'all'),
+                $this->totalStatistic($this->getLastMondayDate(), 'week'),
+                $this->totalStatistic(date('Y-m' . '-01'), 'month')
+                );
+        
+        return $res;
         // 
 // total & monthly & weekly completion % of every daily task separately;
 // total & monthly & weekly completion % of all daily/normal tasks;
@@ -178,22 +184,32 @@ GROUP BY i.id";
         $results = [];
         foreach($got as $one) {
             $results[$one['name']][$index] = $one;
-            
-            // all - no need, month - date('d'), week - date('w')
-            
-//            $results[$index]['duration'] = 
         }
         
         return $results;
     }
 
-        public function totalStatistic()
+    public function totalStatistic($date, $index)
     {
-        // for all DAILY items
-        // - count number of days passed since begin/last month/last week started;
-        // - count number of the task completions;
-        // divide one for another, get answer
+        $query = "SELECT COUNT(completed_at) as total_done FROM daily WHERE completed_at >= '$date'";
+        $totalCompleted = $this->query($query)[0]['total_done'];
         
+        $query = "SELECT SUM(DATEDIFF(NOW(), i.created_at)) AS life_length_after
+FROM item i
+LEFT JOIN daily d ON ( i.id = d.item_id ) 
+WHERE i.created_at >=  '$date' AND i.type = '1'";    
+        $totalCreatedAfter = $this->query($query)[0]['life_length_after'];
+        
+        $query = "SELECT SUM(DATEDIFF(NOW(), '$date')) AS life_length_before
+FROM item i
+LEFT JOIN daily d ON ( i.id = d.item_id ) 
+WHERE i.created_at <  '$date' AND i.type = '1'";
+        
+//        echo $query;
+
+        $totalCreatedBefore = $this->query($query)[0]['life_length_before'];
+        
+        return [$index => ['done' => (int)$totalCompleted, 'time' => (int)$totalCreatedAfter + (int)$totalCreatedBefore]];
         
         // for all NORMAL items
         // - count number of days passed since begin/last month/last week started;

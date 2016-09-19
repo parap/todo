@@ -25,7 +25,10 @@ class StatisticController
     
     public function index(Request $request)
     {
-        $results = $this->repo->dailySingleStatistic();
+        $daily = $this->repo->dailySingleStatistic();
+        $total = $this->repo->fetchStatistic();
+        $results = ['daily' => $daily, 'total' => $total];
+        
         return json_encode($results);
     }
 }

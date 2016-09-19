@@ -12,9 +12,7 @@
                 <div class="span4">Week: </div>
                 </div>
             </li>
-            <li ng-repeat="item in items" >
-                
-
+            <li ng-repeat="item in items.daily" >
                 <div class="row" style="display: table">
                     <div class="span8">{{item.all.name}}</div>
                     <div class="span4">{{100 * item.all.number_completion /  item.all.life_length | number: 0 }}%</div>
@@ -22,6 +20,11 @@
                 <div class="span4">{{ (item.week ? (100 * item.week.number_completion / (item.week.life_length > weekLength ? weekLength : item.week.life_length)) : '0')|number:0 }}%</div>
                 </div>
             </li>
+            <br/>
+            
+            Total percentage: {{100 * items.total.all.done / items.total.all.time | number:0 }}%
+            Month percentage: {{100 * items.total.month.done / items.total.month.time | number:0 }}%
+            Week percentage: {{100 * items.total.week.done / items.total.week.time | number:0 }}%
         </ul>
     </fieldset>
 </div>
