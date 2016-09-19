@@ -32,6 +32,18 @@ angular.
                     $http.post("/index.php?route=archive", {"id": item.id});
                 };
 
+                $scope.remove = function (item) {
+                    if (confirm('It is irreversible action! Please confirm you are going to delete the item')) {
+                        $scope.todos.splice(this.$index, 1);
+                        $http.post("/index.php?route=remove", {"id": item.id});
+                    }
+                };
+
+                $scope.unarchive = function (item) {
+                    $scope.todos.splice(this.$index, 1);
+                    $http.post("/index.php?route=archive", {"id": item.id});
+                };
+
                 $scope.increaseDay = function () {
                     $scope.day++;
                     $scope.fetch();
