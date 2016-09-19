@@ -7,7 +7,7 @@
             <input id="new-todo" class="" type="text" placeholder="Enter Todo Item" ng-model="newTodo" ng-disabled="saving" autofocus required>
         </form>
 
-        <div class="row" style="display: table; margin-left:25px">
+        <div class="row marg">
             <div class="span9">Name:</div>
             <div class="span5">Archive</div>
         </div>
@@ -15,7 +15,7 @@
         <ul id="todo-list">
             <li ng-repeat="todo in todos">
                 <div ng-if="todo.type == 0">
-                    <div class="row" style="display: table">
+                    <div class="row">
                         <div class="span8">
                             <input ng-hide="editing" type="checkbox" ng-model="todo.done"  ng-click="switch (todo)">
                             <label ng-hide="editing" class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label>
@@ -40,7 +40,7 @@
             <input id="new-daily" class="" type="text" placeholder="Enter Daily Item" ng-model="newDaily" ng-disabled="saving" autofocus required>
         </form>
 
-        <div class="row" style="display: table; margin-left:25px">
+        <div class="row marg">
             <div class="span10">Name:</div>
             <div class="span4">Archive</div>
         </div>
@@ -48,7 +48,7 @@
         <ul id="daily-list">
             <li ng-repeat="todo in todos" ng-init="todo.delay = todo.delay > 8 ? 8 : todo.delay">
                 <div ng-if="todo.type == 1">
-                    <div class="row" style="display: table">    
+                    <div class="row">    
                         <div class="span8">
                             <input ng-hide="editing" type="checkbox" ng-model="todo.done"  ng-click="switch (todo)">
                             <label ng-hide="editing" class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label>

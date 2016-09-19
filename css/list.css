@@ -37,6 +37,14 @@
     width: 430px;
 }
 
+div.marg {
+   margin-left: 25px; 
+}
+
+div.row {
+    display:table;
+}
+
 .span8 label {
     display: inline;
 }
