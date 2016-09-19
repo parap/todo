@@ -45,6 +45,10 @@ div.row {
     display:table;
 }
 
+.row label {
+    margin-left: 5px;
+}
+
 .span8 label {
     display: inline;
 }
