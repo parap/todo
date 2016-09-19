@@ -72,5 +72,5 @@ class IndexController
         
         return isset($results[0]['delay']) ? $results[0]['delay'] : '';
     }
-
+    
 }

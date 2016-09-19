@@ -6,14 +6,23 @@
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="css/list.css" />
     <script src="/node_modules/angular/angular.js"></script>
+    <script src="/node_modules/angular/angular-route.js"></script>
 
     <script src="app/app.module.js"></script>
     <script src="app/todo-list/todo-list.module.js"></script>
     <script src="app/todo-list/todo-list.component.js"></script>
+    <script src="app/statistic/statistic.module.js"></script>
+    <script src="app/statistic/statistic.component.js"></script>
 </head>
 <body>
 
-<todo-list></todo-list>
+    <div style="margin-left: 50px">
+    <a href="#/">Main</a>
+    <a href="#statistic">Statistic</a>
+    <a href="#test">Test</a>
+    </div>
+    
+    <div ng-view></div>
 
 </body>
 </html>
