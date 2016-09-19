@@ -200,20 +200,16 @@ LEFT JOIN daily d ON ( i.id = d.item_id )
 WHERE i.created_at >=  '$date' AND i.type = '1'";    
         $totalCreatedAfter = $this->query($query)[0]['life_length_after'];
         
-        $query = "SELECT SUM(DATEDIFF(NOW(), '$date')) AS life_length_before
+        $query = "SELECT COUNT(i.id) as total
 FROM item i
-LEFT JOIN daily d ON ( i.id = d.item_id ) 
-WHERE i.created_at <  '$date' AND i.type = '1'";
+WHERE i.created_at < '$date' AND i.type = '1'";
+        $items = $this->query($query)[0]['total'];
         
-//        echo $query;
-
-        $totalCreatedBefore = $this->query($query)[0]['life_length_before'];
+        $query = "SELECT DATEDIFF(NOW(), '$date') + 1 as diff";
+        $days = $this->query($query)[0]['diff'];
+        
+        $totalCreatedBefore = $items * $days;
         
         return [$index => ['done' => (int)$totalCompleted, 'time' => (int)$totalCreatedAfter + (int)$totalCreatedBefore]];
-        
-        // for all NORMAL items
-        // - count number of days passed since begin/last month/last week started;
-        // - count number of the task completions;
-        // divide one for another, get answer
     }
 }
