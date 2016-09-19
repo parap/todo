@@ -95,4 +95,9 @@ class IndexController
         
         return isset($results[0]['delay']) ? $results[0]['delay'] : '';
     }
+    
+    public function render()
+    {
+        return file_get_contents('index.html');
+    }
 }
