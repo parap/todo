@@ -8,7 +8,7 @@ Also it allows to create revolver tasks.
 - move active button (Main/Statistic/Archive)
 
 - add weekly and monthly tasks;
-- add different users, authentication system;
+- add authentication system. Update app to interact with different users. Security.
 - add calendar to set required date;
 
 - allow items drag&n&drop;
@@ -18,6 +18,8 @@ Also it allows to create revolver tasks.
 - allow to hide/display every panel;
 - force completed normal items to be auto-archived in one day after completion???
 - add translations, in particular to Russian.
+
+- on edit click - focus edit field, select it's content. On 'escape' click close it without save.
 
 =============== DONE ====================
 
