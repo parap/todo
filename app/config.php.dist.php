@@ -6,6 +6,7 @@ $routes = [
 'update' => 'IndexController::update',
 'complete' => 'IndexController::complete',
 'remove' => 'IndexController::remove',
+'statistic' => 'StatisticController::index',
 '' => 'IndexController::fetch',
 ];
 
