@@ -10,11 +10,11 @@ To do:
  * monthly & weekly completion % of all daily/normal tasks;
 
 
-- weekly and montly tasks;
+- weekly and monthly tasks;
 - different users, authentication system;
 - calendar to set required date;
-- make completed items disappear (be archived) in one day
+- make completed items disappear (be archived) in one day;
 - add history (access to archive) for 'normal' tasks;
-- make drag&n&drop of points;
-- add amount of completed points per day.
-- revolver tasks;
+- make drag&n&drop for items;
+- add amount of completed points per day, progress bar;
+- revolver tasks.
