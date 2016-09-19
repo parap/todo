@@ -11,13 +11,13 @@
             <div class="span8">Name:</div>
             <div class="span5">Archive</div>
         </div>
-        
+
         <ul id="todo-list">
             <li ng-repeat="todo in todos">
                 <div ng-if="todo.type == 0">
                     <div class="row" style="display: table">
                         <div class="span8">
-                            <input ng-hide="editing" type="checkbox" ng-model="todo.done"  ng-click="switch(todo)">
+                            <input ng-hide="editing" type="checkbox" ng-model="todo.done"  ng-click="switch (todo)">
                             <label ng-hide="editing" class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label>
                         </div>
                         <div class="span4">
@@ -39,36 +39,36 @@
         <form id="daily-form" ng-submit="add(newDaily, 1)">
             <input id="new-daily" class="" type="text" placeholder="Enter Daily Item" ng-model="newDaily" ng-disabled="saving" autofocus required>
         </form>
-        
+
         <div class="row" style="display: table; margin-left:25px">
             <div class="span8">Name:</div>
             <div class="span5">Archive</div>
         </div>
-        
+
         <ul id="daily-list">
             <li ng-repeat="todo in todos" ng-init="todo.delay = todo.delay > 8 ? 8 : todo.delay">
                 <div ng-if="todo.type == 1">
                     <div class="row" style="display: table">    
                         <div class="span8">
-                <input ng-hide="editing" type="checkbox" ng-model="todo.done"  ng-click="switch(todo)">
-                <label ng-hide="editing" class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label>
-                </div>
+                            <input ng-hide="editing" type="checkbox" ng-model="todo.done"  ng-click="switch (todo)">
+                            <label ng-hide="editing" class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label>
+                        </div>
                         <div class="span5">
-                <span ng-hide="editing" class="color{{todo.delay}}">{{todo.delay ? (todo.delay == '0' ? 'did today' : todo.delay + ' days passed') : 'never did'}}</span>
-                </div>
-                <button ng-hide="editing" class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="archive(todo)"></button>
-                <form ng-show="editing" ng-submit="editing = false">
-                    <input type="text" class="" ng-model="todo.name" placeholder="todo.name" ng-required/>
-                    <button class="btn" type="submit" ng-click="update(todo)">Save</button>
-                </form>
-                </div>
+                            <span ng-hide="editing" class="color{{todo.delay}}">{{todo.delay ? (todo.delay == '0' ? 'did today' : todo.delay + ' days passed') : 'never did'}}</span>
+                        </div>
+                        <button ng-hide="editing" class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="archive(todo)"></button>
+                        <form ng-show="editing" ng-submit="editing = false">
+                            <input type="text" class="" ng-model="todo.name" placeholder="todo.name" ng-required/>
+                            <button class="btn" type="submit" ng-click="update(todo)">Save</button>
+                        </form>
+                    </div>
                 </div>
             </li>
         </ul>
     </fieldset>
     <div class="controls">
-    <button ng-click="decreaseDay()" >Yesterday</button>
-    <button ng-click="increaseDay()" >Tomorrow</button>
-    <span ng-hide="0 == day"><button ng-click="today()" >Today</button></span>
+        <button ng-click="decreaseDay()" >Yesterday</button>
+        <button ng-click="increaseDay()" >Tomorrow</button>
+        <span ng-hide="0 == day"><button ng-click="today()" >Today</button></span>
     </div>
 </div>
