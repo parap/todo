@@ -1,7 +1,7 @@
 <div class="container-list"> 
     <fieldset>
         <legend>Normal</legend>
-        <div class="row" style="display: table; margin-left:60px">
+        <div class="row" style="margin-left:60px">
             <div class="span8">Name:</div>
             <div class="span5">Restore</div>
             <div class="span4">Delete</div>
@@ -9,7 +9,7 @@
         <ul id="todo-list">
             <li ng-repeat="todo in todos">
                 <div ng-if="todo.type == 0">
-                    <div class="row" style="display: table">
+                    <div class="row">
                         <div class="span8"><label  class="done-{{todo.done}}" ng-bind="todo.name"></label></div>
                         <div class="span4"><button  class="glyphicon glyphicon-home" aria-hidden="true" ng-click="unarchive(todo)" alt="hello"></button></div>
                         <div class="span4"><button  class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="remove(todo)"></button></div>
@@ -20,7 +20,8 @@
     </fieldset>
     <fieldset>
         <legend>Daily</legend>
-        <div class="row" style="display: table; margin-left:20px">
+        
+        <div class="row marg" >
             <div class="span8">Name:</div>
             <div class="span4">Restore</div>
             <div class="span4">Delete</div>
