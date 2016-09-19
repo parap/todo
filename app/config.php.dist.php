@@ -1,15 +1,12 @@
 <?php
 
 $routes = [
-    '/add' => 'AddController',
-    '/login' => 'LoginController',
-    '/admin' => 'AdminController',
-    '/logout' => 'LogoutController',
-    '/update' => 'UpdateController',
-    '/approve' => 'ApproveController',
-    '/messages' => 'MessagesController',
-    '/messages-all' => 'MessagesAllController',
-    '/' => 'ShowController',
+'fetch' => 'IndexController::fetch',
+'create' => 'IndexController::create',
+'update' => 'IndexController::update',
+'complete' => 'IndexController::complete',
+'remove' => 'IndexController::remove',
+'' => 'IndexController::fetch',
 ];
 
 $user = 'user';
