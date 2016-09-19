@@ -213,7 +213,7 @@ WHERE i.created_at >=  '$date' AND i.type = '1'";
 
         $query = "SELECT COUNT(i.id) as total
 FROM item i
-WHERE i.created_at < '$date' AND i.type = '1'";
+WHERE i.created_at <= '$date' AND i.type = '1'";
         $items = $this->query($query)[0]['total'];
 
         $query = "SELECT DATEDIFF(NOW(), '$date') + 1 as diff";
