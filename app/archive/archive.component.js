@@ -27,7 +27,7 @@ angular.
                 }
 
                 $scope.remove = function (item) {
-                    if (confirm('It is irreversible action! Please confirm you are going to delete the item')) {
+                    if (confirm('It is irreversible action. Please confirm you are going to delete the item forever')) {
                         $scope.todos.splice(this.$index, 1);
                         $http.post("/index.php?route=remove", {"id": item.id});
                     }
