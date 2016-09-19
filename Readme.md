@@ -1,9 +1,1 @@
-Run
-
-`npm install angular`
-
-then
-
-`npm install bootstrap`
-
-to have required libraries initialized.
+It is project to learn Angular and to create convenient to-do list.
