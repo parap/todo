@@ -14,7 +14,6 @@ angular.
                 ];
                 
                 $scope.day = 0;
-                $scope.date = new Date();
                 
                 $scope.fetch = function () {
                     $http.get("/fetch-archived?day=" + $scope.day)
@@ -43,25 +42,7 @@ angular.
                     $scope.todos.splice(this.$index, 1);
                     $http.post("/index.php?route=archive", {"id": item.id});
                 };
-
-                $scope.increaseDay = function () {
-                    $scope.day++;
-                    $scope.fetch();
-                    $scope.updateDate();
-                }
-                
-                $scope.decreaseDay = function () {
-                    $scope.day--;
-                    $scope.fetch();
-                    $scope.updateDate();
-                }
-
-                $scope.today = function () {
-                    $scope.day = 0;
-                    $scope.fetch();
-                    $scope.updateDate();
-                }
-                
+               
                 $scope.fetch();
             }
         });
