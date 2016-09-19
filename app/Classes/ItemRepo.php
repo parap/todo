@@ -174,7 +174,7 @@ class ItemRepo extends DbAssist
     
     public function dailySingleFor($date, $index)
     {
-        $query = "SELECT i.name , COUNT( d.completed_at ) AS number_completion, DATEDIFF(NOW(), i.created_at) AS life_length
+        $query = "SELECT i.name , COUNT( d.completed_at ) AS number_completion, DATEDIFF(NOW(), i.created_at)+1 AS life_length
 FROM item i
 LEFT JOIN daily d ON ( i.id = d.item_id ) 
 WHERE d.completed_at >=  '$date' AND i.type = '1'
