@@ -20,11 +20,11 @@
                 <div class="span4">{{ (item.week ? (100 * item.week.number_completion / (item.week.life_length > weekLength ? weekLength : item.week.life_length)) : '0')|number:0 }}%</div>
                 </div>
             </li>
-            <br/>
-            
+        </ul>
+        <div class="standard">
             Total percentage: {{100 * items.total.all.done / items.total.all.time | number:0 }}%
             Month percentage: {{100 * items.total.month.done / items.total.month.time | number:0 }}%
             Week percentage: {{100 * items.total.week.done / items.total.week.time | number:0 }}%
-        </ul>
+        </div>
     </fieldset>
 </div>
