@@ -11,6 +11,16 @@
     padding-top: 40px;
 }
 
+.span4 {
+    display: inline-table;
+    width: 50px;
+}
+
+.span8 {
+    display: inline-table;
+    width: 350px;
+}
+
 legend {
     color: black;
     width: 8%;
