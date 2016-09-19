@@ -10,7 +10,7 @@ $routes = [
 'unarchive' => 'IndexController::unarchive',
 'fetch-archived' => 'IndexController::fetchArchived',
 'statistic' => 'StatisticController::index',
-'' => 'IndexController::fetch',
+'' => 'IndexController::render',
 ];
 
 $user = 'user';
