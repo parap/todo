@@ -5,8 +5,6 @@ Also it allows to create revolver tasks.
 
 ============== TO DO =====================
 
-- move active button (Main/Statistic/Archive)
-
 - add weekly and monthly tasks;
 - add authentication system. Update app to interact with different users. Security.
 - add calendar to set required date;
@@ -23,6 +21,7 @@ Also it allows to create revolver tasks.
 
 =============== DONE ====================
 
+- move active button (Main/Statistic/Archive)
 - add history (access to archive) for 'normal' tasks;
 - allow to recover or to irreversibly delete archived tasks;
 
