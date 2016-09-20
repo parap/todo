@@ -25,3 +25,16 @@ CREATE TABLE IF NOT EXISTS `item` (
   `archived_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=77 ;
+
+CREATE TABLE IF NOT EXISTS `repeat` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `item_id` int(11) NOT NULL,
+  `number1` smallint(3) DEFAULT NULL,
+  `interval_type1` varchar(1) DEFAULT NULL COMMENT 'w - day of week, m - day of month, y - month of year',
+  `number2` smallint(3) DEFAULT NULL,
+  `interval_type2` varchar(1) DEFAULT NULL COMMENT 'w - day of week, m - day of month, y - month of year',
+  `user_id` int(11) NOT NULL,
+  `created_at` date NOT NULL DEFAULT '0000-00-00',
+  `archived_at` date NOT NULL DEFAULT '0000-00-00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
