@@ -7,9 +7,7 @@ angular.
             templateUrl: 'app/todo-list/todo-list.template.html',
             controller: function ListController($scope, $http) {
 
-                document.getElementById('menu-button1').className = "btn btn-primary";
-                document.getElementById('menu-button2').className = "btn";
-                document.getElementById('menu-button3').className = "btn";
+                highlightButton('1');
 
                 $scope.todos = [
                     {

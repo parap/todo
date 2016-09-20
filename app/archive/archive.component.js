@@ -6,9 +6,7 @@ angular.
             templateUrl: 'app/archive/archive.template.html',
             controller: function ArchiveController($scope, $http) {
 
-                document.getElementById('menu-button1').className = "btn";
-                document.getElementById('menu-button2').className = "btn";
-                document.getElementById('menu-button3').className = "btn btn-primary";
+                highlightButton('3');
 
                 $scope.todos = [
                     {
