@@ -8,8 +8,9 @@ Also it allows to create revolver tasks.
 - add weekly and monthly tasks;
 - add authentication system. Update app to interact with different users. Security.
 - add calendar to set required date;
+- allow to set tasks for particular date.
 
-- allow items drag&n&drop;
+- allow items drag & n & drop;
 - add amount of completed points per day, progress bar.
 - add revolver tasks;
 
