@@ -36,5 +36,6 @@ CREATE TABLE IF NOT EXISTS `repeat` (
   `user_id` int(11) NOT NULL,
   `created_at` date NOT NULL DEFAULT '0000-00-00',
   `archived_at` date NOT NULL DEFAULT '0000-00-00',
+  `repeat` tinyint(1) NOT NULL DEFAULT  '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
