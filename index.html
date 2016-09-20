@@ -1,30 +1,27 @@
 <!doctype html>
 <html lang="en" ng-app="todoApp">
-<head>
-    <meta charset="utf-8">
-    <title>Todo list</title>
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="css/list.css" />
-    <script src="/node_modules/angular/angular.js"></script>
-    <script src="/node_modules/angular/angular-route.js"></script>
+    <head>
+        <meta charset="utf-8">
+        <title>Todo list</title>
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="css/list.css" />
+        <script src="/node_modules/angular/angular.js"></script>
+        <script src="/node_modules/angular/angular-route.js"></script>
 
-    <script src="app/app.module.js"></script>
-    <script src="app/todo-list/todo-list.module.js"></script>
-    <script src="app/todo-list/todo-list.component.js"></script>
-    <script src="app/statistic/statistic.module.js"></script>
-    <script src="app/statistic/statistic.component.js"></script>
-    <script src="app/archive/archive.module.js"></script>
-    <script src="app/archive/archive.component.js"></script>
-</head>
-<body>
-
-    <div style="margin-left: 50px">
-        <a href="#/" ><button class="btn btn-primary" id="menu-button1">Main</button></a>
-        <a href="#statistic"><button class="btn" id="menu-button2">Statistic</button></a>
-        <a href="#archive"><button class="btn" id="menu-button3">Archive</button></a>
-    </div>
-    
-    <div ng-view></div>
-
-</body>
+        <script src="app/app.module.js"></script>
+        <script src="app/todo-list/todo-list.module.js"></script>
+        <script src="app/todo-list/todo-list.component.js"></script>
+        <script src="app/statistic/statistic.module.js"></script>
+        <script src="app/statistic/statistic.component.js"></script>
+        <script src="app/archive/archive.module.js"></script>
+        <script src="app/archive/archive.component.js"></script>
+    </head>
+    <body>
+        <div style="margin-left: 50px">
+            <a href="#/" ><button class="btn btn-primary" id="menu-button1">Main</button></a>
+            <a href="#statistic"><button class="btn" id="menu-button2">Statistic</button></a>
+            <a href="#archive"><button class="btn" id="menu-button3">Archive</button></a>
+        </div>
+        <div ng-view></div>
+    </body>
 </html>
