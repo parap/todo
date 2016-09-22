@@ -5,10 +5,16 @@ Also it allows to create revolver tasks.
 
 ============== TO DO =====================
 
-- add weekly and monthly tasks;
+- switch to Symfony3. It allows FOSUserBundle, RESTbundles, better dealing with DB (Doctrine).
+
 - add authentication system. Update app to interact with different users. Security.
+- allow Google Accounts login
+
+- add weekly and monthly tasks;
+- add graphs. Like weight site.
 - add calendar to set required date;
 - allow to set tasks for particular date.
+
 
 - allow items drag & n & drop;
 - add amount of completed points per day, progress bar.
