@@ -5,8 +5,6 @@ Also it allows to create revolver tasks.
 
 ============== TO DO =====================
 
-- switch to Symfony3. It allows FOSUserBundle, RESTbundles, better dealing with DB (Doctrine).
-
 - add authentication system. Update app to interact with different users. Security.
 - allow Google Accounts login
 
