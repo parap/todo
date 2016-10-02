@@ -175,8 +175,6 @@ class ItemRepo extends DbAssist {
                 $this->totalStatistic($this->getLastMondayDate(), 'week'), 
                 $this->totalStatistic(date('Y-m' . '-01'), 'month')
         );
-
-//        var_dump($this->getLastMondayDate());
         
         return $res;
         // 
@@ -185,7 +183,10 @@ class ItemRepo extends DbAssist {
     }
 
     public function dailySingleStatistic() {
-        $res = array_merge_recursive($this->dailySingleFor('2015-01-01', 'all'), $this->dailySingleFor($this->getLastMondayDate(), 'week'), $this->dailySingleFor(date('Y-m' . '-01'), 'month')
+        $res = array_merge_recursive(
+                $this->dailySingleFor('2015-01-01', 'all'), 
+                $this->dailySingleFor($this->getLastMondayDate(), 'week'), 
+                $this->dailySingleFor(date('Y-m' . '-01'), 'month')
         );
 
         return $res;
