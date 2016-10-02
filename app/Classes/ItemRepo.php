@@ -158,7 +158,8 @@ class ItemRepo extends DbAssist {
      * @return type
      */
     public function getLastMondayDate($format = 'Y-m-d') {
-        $timestamp = mktime(date('H'), date('i'), date('s'), date('m'), date('d') - date('w') + 1, date('Y'));
+        $days = date('w') ? date('d') - date('w') + 1 : date('d') - date('w') - 6;
+        $timestamp = mktime(date('H'), date('i'), date('s'), date('m'), $days, date('Y'));
 
         return date($format, $timestamp);
     }
@@ -169,9 +170,14 @@ class ItemRepo extends DbAssist {
      * @return array
      */
     public function fetchStatistic() {
-        $res = array_merge_recursive($this->totalStatistic('2015-01-01', 'all'), $this->totalStatistic($this->getLastMondayDate(), 'week'), $this->totalStatistic(date('Y-m' . '-01'), 'month')
+        $res = array_merge_recursive(
+                $this->totalStatistic('2015-01-01', 'all'), 
+                $this->totalStatistic($this->getLastMondayDate(), 'week'), 
+                $this->totalStatistic(date('Y-m' . '-01'), 'month')
         );
 
+//        var_dump($this->getLastMondayDate());
+        
         return $res;
         // 
 // total & monthly & weekly completion % of every daily task separately;
