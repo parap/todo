@@ -12,11 +12,11 @@
                 <div class="span4">Week: </div>
                 </div>
             </li>
-            <li ng-repeat="item in items.daily" >
+            <li ng-repeat="item in items.daily" ng-init="item.month.number_completion = item.month.number_completion ? item.month.number_completion : '0'; item.month.life_length = item.month.life_length?item.month.life_length:'0'">
                 <div class="row" style="display: table">
                     <div class="span8">{{item.all.name}}</div>
                     <div class="span4">{{100 * item.all.number_completion /  item.all.life_length | number: 0 }}%</div>
-                <div class="span4">{{100 * item.month.number_completion / (item.month.life_length > monthLength ? monthLength : item.month.life_length) | number: 0 }}%</div>
+                <div class="span4">{{ 100 * item.month.number_completion / (item.month.life_length > monthLength ? monthLength : (item.month.life_length == '0' ? '1' : item.month.life_length))|number:0 }}%</div>
                 <div class="span4">{{ (item.week ? (100 * item.week.number_completion / (item.week.life_length > weekLength ? weekLength : item.week.life_length)) : '0')|number:0 }}%</div>
                 </div>
             </li>
