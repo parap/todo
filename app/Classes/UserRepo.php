@@ -23,7 +23,19 @@ class UserRepo extends DbAssist {
     
     public function register($name, $password)
     {
+        $name = $this->safe($name);
+        $password = $this->safe($password);
+        $salt = 'nams' . rand(0, 10000);
+        $pswd = hash('sha512', sprintf('%s%s', $password, $salt));
         
+        if ($this->nameExists($name)) {
+            return false;
+        }
+        
+        $query = sprintf("INSERT INTO user (email, password, salt, created_at) "
+                . " VALUES ('%s', '%s', '%s', NOW());", $name, $pswd, $salt);
+        
+        $this->query($query);
     }
     
     public function nameExists($name)
