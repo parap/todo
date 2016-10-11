@@ -18,7 +18,16 @@ class UserController
 
     public function login(Request $request)
     {
+        $x = $this->repo->register('hello1', 'kitty');
+        
         $result = $this->repo->login('nams', 'pswd');
+        
+        return $result;
+    }
+    
+    public function register(Request $request)
+    {
+        $result = $this->repo->register($this->post('email'), $this->post('ps'));
         
         return $result;
     }
