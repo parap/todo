@@ -3,16 +3,6 @@ It is project to learn Angular and to create convenient to-do list.
 The list includes daily, weekly, normal tasks.
 Also it allows to create revolver tasks.
 
-- check https://github.com/johnpapa/angular-styleguide#style-y030
-
-- check https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#style-y030
-
-- https://auth0.com/blog/2014/01/07/angularjs-authentication-with-cookies-vs-token/
-
-- http://jasonwatmore.com/post/2015/12/09/MEAN-Stack-User-Registration-and-Login-Example.aspx
-
-- html5mode ?
-
 - add authentication system. Update app to interact with different users. Security.
 
 - allow Google Accounts login?
