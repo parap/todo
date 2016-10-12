@@ -6,3 +6,4 @@ config.php
 composer.phar
 node_modules/
 vendor/
+*.zip
