@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('registerx', []);
+angular.module('register', []);

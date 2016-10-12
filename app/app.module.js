@@ -9,7 +9,7 @@ function highlightButton(number)
 }
 
 var app = angular.module("todoApp", [
-    "ngRoute", "ngCookies", "todoList", "statistic", "archive", "login", 
+    "ngRoute", "ngCookies", "todoList", "statistic", "archive", "login", "register" 
 //    "AuthenticationService"
 ]);
 
@@ -29,6 +29,9 @@ function config($routeProvider) {
             .when('/login', {
                 template: "<login></login>"
             })
+            .when('/register', {
+                template: "<register></register>"
+            })
             .otherwise({
                 template: "<todo-list></todo-list>"
             });
@@ -45,7 +48,7 @@ function run($rootScope, $location, $cookieStore, $http) {
 
     $rootScope.$on('$locationChangeStart', function (event, next, current) {
         
-        var allowedPage = $location.path() === '/login' || $location.path() === '/register';
+        var allowedPage = ($location.path() === '/login' || $location.path() === '/register');
         var loggedIn = $rootScope.globals.currentUser;
         
         if (!allowedPage && !loggedIn) {
