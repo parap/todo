@@ -27,7 +27,7 @@
                                         $scope.todos[i].done = ("1" === $scope.todos[i].done);
                                     }
                                 });
-                    }
+                    };
 
                     $scope.remove = function (item) {
                         if (confirm('It is irreversible action. Please confirm you are going to delete the item forever')) {
