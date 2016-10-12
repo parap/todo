@@ -20,14 +20,16 @@ class UserController
     {
         $result = $this->repo->login($this->post['email'], $this->post['ps']);
         
-        return $result ? json_encode(['success'=> true]) : json_encode(['success'=> false, 'message'=> 'wrong login']);
+        $params = ['success'=> false, 'message'=> 'wrong login'];
+        return $result ? json_encode(['success'=> true]) : json_encode($params);
     }
     
     public function register(Request $request)
     {
-        $result = $this->repo->register($this->post['email'], $this->post['ps']);
-//        $result = $this->repo->register('hello', 'kitty');
+        $result = $this->repo->register($this->post['email'], $this->post['password']);
         
-        return $result;
+        
+        $params = ['success'=> false, 'message'=> 'User exists or other error'];
+        return $result ? json_encode(['success'=> true]) : json_encode($params);
     }
 }
