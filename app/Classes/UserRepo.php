@@ -35,7 +35,7 @@ class UserRepo extends DbAssist {
         $query = sprintf("INSERT INTO user (email, password, salt, created_at) "
                 . " VALUES ('%s', '%s', '%s', NOW());", $name, $pswd, $salt);
         
-        $this->query($query);
+        return $this->query($query);
     }
     
     public function nameExists($name)

@@ -13,7 +13,7 @@ class DbAssist
         }
 
         if (true === $res) {
-            return [];
+            return true;
         }
 
         $result = [];
