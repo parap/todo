@@ -1,14 +1,6 @@
 (function () {
     'use strict';
 
-    angular
-            .module('login')
-            .component('login', {
-                $inject: ['$scope', '$location', 'AuthenticationService'],
-                templateUrl: 'app/auth/login.template.html',
-                controller: login
-            });
-
     var login = function ($scope, $location, AuthenticationService) {
         var vm = $scope;
 
@@ -30,7 +22,15 @@
                     vm.dataLoading = false;
                 }
             });
-        }
-        ;
+        };
     };
+
+    angular
+            .module('login')
+            .component('login', {
+                $inject: ['$scope', '$location', 'AuthenticationService'],
+                templateUrl: 'app/auth/login.template.html',
+                controller: login
+            });
+
 })();
