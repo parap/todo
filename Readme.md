@@ -3,9 +3,6 @@ It is project to learn Angular and to create convenient to-do list.
 The list includes daily, weekly, normal tasks.
 Also it allows to create revolver tasks.
 
-
-- what is $dirty thing in forms?
-
 - check https://github.com/johnpapa/angular-styleguide#style-y030
 
 - check https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#style-y030
@@ -16,13 +13,9 @@ Also it allows to create revolver tasks.
 
 - html5mode ?
 
-- FlashService!! I want flash
-
-
-- 
- 
 - add authentication system. Update app to interact with different users. Security.
-- allow Google Accounts login
+
+- allow Google Accounts login?
 
 - add weekly and monthly tasks;
 - add graphs. Like weight site.
