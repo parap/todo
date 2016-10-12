@@ -1,9 +1,15 @@
-'use strict';
+(function () {
+    'use strict';
 
-var login = {
-    $inject: ['$scope', '$location', 'AuthenticationService'],
-    templateUrl: 'app/auth/login.template.html',
-    controller: function login($scope, $location, AuthenticationService) {
+    angular
+            .module('login')
+            .component('login', {
+                $inject: ['$scope', '$location', 'AuthenticationService'],
+                templateUrl: 'app/auth/login.template.html',
+                controller: login
+            });
+
+    var login = function ($scope, $location, AuthenticationService) {
         var vm = $scope;
 
         (function initController() {
@@ -11,10 +17,10 @@ var login = {
             AuthenticationService.ClearCredentials();
         })();
 
-        vm.login = function() {
-            
+        vm.login = function () {
+
             vm.dataLoading = true;
-            
+
             AuthenticationService.Login(vm.username, vm.password, function (response) {
                 if (response.success) {
                     AuthenticationService.SetCredentials(vm.username, vm.password);
@@ -26,11 +32,5 @@ var login = {
             });
         }
         ;
-    }
-}
-;
-
-
-angular
-        .module('login')
-        .component('login', login);
+    };
+})();
