@@ -15,7 +15,7 @@ function AuthenticationService($http, $cookieStore, $rootScope) {
     return service;
 
     function Login(username, password, callback) {
-        $http.post('/api/authenticate', {username: username, password: password})
+        $http.post('/user/login', {email: username, ps: password})
                 .success(function (response) {
                     callback(response);
                 });
