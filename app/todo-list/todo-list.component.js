@@ -38,12 +38,6 @@
                                 });
                     };
 
-                    $scope.remove = function (item) {
-                        $scope.todos.splice(this.$index, 1);
-                        params = {"id": item.id, "username": username};
-                        $http.post("/index.php?route=remove", params);
-                    };
-
                     $scope.archive = function (item) {
                         $scope.todos.splice(this.$index, 1);
                         params = {"id": item.id, "username": username};
