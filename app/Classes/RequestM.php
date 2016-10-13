@@ -27,7 +27,7 @@ class RequestM extends Request
             return [];
         }
 
-        $params = explode('fetch?', $this->server->get('REQUEST_URI'));
+        $params = explode('?', $this->server->get('REQUEST_URI'));
         
         if(empty($params[1])) {
             return [];
