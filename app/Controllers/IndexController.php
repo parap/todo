@@ -25,22 +25,21 @@ class IndexController
         $this->post = json_decode(file_get_contents('php://input'), true);
     }
 
-    private function getDay()
+    private function getDay($request)
     {
         // FIXME - remove ugly REQUEST_URI thing
-        if (!isset($_SERVER['REQUEST_URI'])) {
+        if (!$request->server->get('REQUEST_URI')) {
             return 0;
         }
 
-        $params = explode('=', $_SERVER['REQUEST_URI']);
+        $params = explode('=', $request->server->get('REQUEST_URI'));
         $day    = count($params) > 1 ? (int) $params[1] : 0;
         return $day;
     }
 
     public function fetch(Request $request)
     {
-
-        $day     = $this->getDay();
+        $day     = $this->getDay($request);
         $date    = (new \DateTime($day . ' day'))->format('Y-m-d');
         $results = $this->repo->fetch($date);
         $json    = json_encode($results);
@@ -50,7 +49,7 @@ class IndexController
 
     public function fetchArchived(Request $request)
     {
-        $day     = $this->getDay();
+        $day     = $this->getDay($request);
         $date    = (new \DateTime($day . ' day'))->format('Y-m-d');
         $results = $this->repo->fetchArchived($date);
         $json    = json_encode($results);
