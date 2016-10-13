@@ -11,12 +11,12 @@
             $http.post('/user/register', vm.user)
                     .success(function (response) {
                         if (response.success) {
-//                            alert('Registration successful');
+                            console.log('Registration successful');
                             $timeout(function() {
                                 $location.path('/login')
                             });
                         } else {
-//                            alert(response.message);
+                            console.log(response.message);
                             vm.dataLoading = false;
                         }
                     });
