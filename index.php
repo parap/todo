@@ -11,8 +11,8 @@ session_start();
 
 new Db($user, $password, $host, $db);
 
-$routing = new Routing($routes);
+$request = RequestM::createFromGlobals();
+$routing = new Routing($request, $routes);
 $controller = $routing->getControllerName();
 $action = $routing->getActionName();
-$request = RequestM::createFromGlobals();
 echo (new $controller)->$action($request);

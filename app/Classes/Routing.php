@@ -6,7 +6,7 @@ use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Routing\Route;
-use Symfony\Component\HttpFoundation\Request;
+use Classes\RequestM;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 /**
@@ -18,7 +18,7 @@ class Routing {
 
     protected $params;
 
-    public function __construct($routes) {
+    public function __construct(RequestM $request, $routes) {
         $routeCollection = new RouteCollection();
 
         foreach ($routes as $path => $controller) {
@@ -26,9 +26,7 @@ class Routing {
             $routeCollection->add($path, $currentRoute);
         }
 
-        $context = new RequestContext();
-        $request = Request::createFromGlobals();
-        $context->fromRequest($request);
+        $context = (new RequestContext())->fromRequest($request);
 
         $matcher = new UrlMatcher($routeCollection, $context);
 
