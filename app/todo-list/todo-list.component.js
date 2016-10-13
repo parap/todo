@@ -25,7 +25,7 @@ angular.
                     var date = new Date();
                     date.setDate(date.getDate() + $scope.day);
                     $scope.date = date;
-                }
+                };
 
                 $scope.fetch = function () {
                     $http.get("/fetch?day=" + $scope.day +"&name="+username)
@@ -64,29 +64,29 @@ angular.
                             .then(function (response) {
                                 item.delay = response.data;
                             });
-                }
+                };
 
                 $scope.update = function (item) {
                     $http.post("/index.php?route=update", {"name": item.name, "id": item.id, "type": item.type, "username": username});
-                }
+                };
                 
                 $scope.increaseDay = function () {
                     $scope.day++;
                     $scope.fetch();
                     $scope.updateDate();
-                }
+                };
                 
                 $scope.decreaseDay = function () {
                     $scope.day--;
                     $scope.fetch();
                     $scope.updateDate();
-                }
+                };
 
                 $scope.today = function () {
                     $scope.day = 0;
                     $scope.fetch();
                     $scope.updateDate();
-                }
+                };
                 
                 $scope.fetch();
             }
