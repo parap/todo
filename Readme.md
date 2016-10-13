@@ -4,7 +4,8 @@ The list includes daily, weekly, normal tasks.
 Also it allows to create revolver tasks.
 
 - add authentication system. Update app to interact with different users. Security.
-- create FlashService to indicate that login was successful or not
+- create FlashService to indicate that login was successful or not. 
+Download working sample to check how Johnpapa did it.
 
 - allow Google Accounts login?
 
