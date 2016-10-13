@@ -6,7 +6,15 @@ use Symfony\Component\HttpFoundation\Request;
 
 class RequestM extends Request
 {
-    public function getM($param)
+    public $postM;
+    
+    public function __construct(array $query = array(), array $request = array(), array $attributes = array(), array $cookies = array(), array $files = array(), array $server = array(), $content = null)
+    {
+        $this->postM = json_decode(file_get_contents('php://input'), true);
+        parent::__construct($query, $request, $attributes, $cookies, $files, $server, $content);
+    }
+
+        public function getM($param)
     {
         $elements = $this->getElements();
         
@@ -20,6 +28,7 @@ class RequestM extends Request
         }
 
         $params = explode('fetch?', $this->server->get('REQUEST_URI'));
+
         $params1 = explode("&", $params[1]);
         
         $result = [];
