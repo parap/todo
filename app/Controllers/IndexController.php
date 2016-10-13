@@ -25,11 +25,11 @@ class IndexController
         $this->post = json_decode(file_get_contents('php://input'), true);
     }
 
-    private function getDay(Request $request)
+    private function getQueryParameter(Request $request, $param)
     {
         $elements = $this->getElements($request);
         
-        return array_key_exists("day", $elements) ? $elements["day"] : 0;
+        return array_key_exists($param, $elements) ? $elements[$param] : 0;
     }
     
     private function getElements(Request $request)
@@ -53,7 +53,7 @@ class IndexController
 
     public function fetch(Request $request)
     {
-        $day     = $this->getDay($request);
+        $day     = $this->getQueryParameter($request, 'day');
         $date    = (new \DateTime($day . ' day'))->format('Y-m-d');
         $results = $this->repo->fetch($date);
         $json    = json_encode($results);
@@ -63,7 +63,7 @@ class IndexController
 
     public function fetchArchived(Request $request)
     {
-        $day     = $this->getDay($request);
+        $day     = $this->getQueryParameter($request, 'day');
         $date    = (new \DateTime($day . ' day'))->format('Y-m-d');
         $results = $this->repo->fetchArchived($date);
         $json    = json_encode($results);
