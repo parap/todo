@@ -1,21 +1,20 @@
+//(function(){
+
 'use strict';
 
-function highlightButton(number)
+var highlightButton = function (number)
 {
     document.getElementById('menu-button1').className = "btn";
     document.getElementById('menu-button2').className = "btn";
     document.getElementById('menu-button3').className = "btn";
     document.getElementById('menu-button' + number).className = "btn btn-primary";
-}
+};
 
-var app = angular.module("todoApp", [
-    "ngRoute", "ngCookies", "todoList", "statistic", "archive", "login", "register" 
-//    "AuthenticationService"
-]);
-
-app.config(config);
-
-app.run(run);
+angular.module("todoApp", [
+    "ngRoute", "ngCookies", "todoList", "statistic", "archive", "login", "register"
+])
+        .config(config)
+        .run(run);
 
 config.$inject = ['$routeProvider'];
 function config($routeProvider) {
@@ -36,23 +35,27 @@ function config($routeProvider) {
                 template: "<todo-list></todo-list>"
             });
 }
-;
+
 
 run.$inject = ['$rootScope', '$location', '$cookieStore', '$http'];
 function run($rootScope, $location, $cookieStore, $http) {
     // keep user logged in after page refresh
     $rootScope.globals = $cookieStore.get('globals') || {};
     if ($rootScope.globals.currentUser) {
-        $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
+        $http.defaults.headers.common['Authorization'] = 'Basic ' + // jshint ignore:line
+                $rootScope.globals.currentUser.authdata;
     }
 
     $rootScope.$on('$locationChangeStart', function (event, next, current) {
-        
-        var allowedPage = ($location.path() === '/login' || $location.path() === '/register');
+
+        var allowedPage = ($location.path() === '/login' ||
+                $location.path() === '/register');
         var loggedIn = $rootScope.globals.currentUser;
-        
+
         if (!allowedPage && !loggedIn) {
             $location.path('/login');
         }
     });
 }
+
+//}());
