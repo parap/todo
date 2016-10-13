@@ -9,7 +9,7 @@
 
                     highlightButton('1');
 
-                    var username = AuthenticationService.GetUsername();
+                    var params, username = AuthenticationService.GetUsername();
 
                     $scope.todos = [
                         {
@@ -40,34 +40,41 @@
 
                     $scope.remove = function (item) {
                         $scope.todos.splice(this.$index, 1);
-                        $http.post("/index.php?route=remove", {"id": item.id, "username": username});
+                        params = {"id": item.id, "username": username};
+                        $http.post("/index.php?route=remove", params);
                     };
 
                     $scope.archive = function (item) {
                         $scope.todos.splice(this.$index, 1);
-                        $http.post("/index.php?route=archive", {"id": item.id, "username": username});
+                        params = {"id": item.id, "username": username};
+                        $http.post("/index.php?route=archive", params);
                     };
 
                     $scope.add = function (text, type) {
                         $scope.todos.push({name: text, done: false, type: type});
                         $scope.newTodo = '';
                         $scope.newDaily = '';
+                        params = {"name": text, "type": type, "username": username};
 
-                        $http.post("/index.php?route=create", {"name": text, "type": type, "username": username})
+                        $http.post("/index.php?route=create", params)
                                 .then(function (response) {
                                     $scope.fetch();
                                 });
                     };
 
                     $scope.switch = function (item) {
-                        $http.post("/index.php?route=complete", {"done": item.done, "id": item.id, "type": item.type, "day": $scope.day, "username": username})
+                        params = {"done": item.done, "id": item.id, 
+                            "type": item.type, "day": $scope.day, "username": username};
+                        $http.post("/index.php?route=complete", params)
                                 .then(function (response) {
                                     item.delay = response.data;
                                 });
                     };
 
                     $scope.update = function (item) {
-                        $http.post("/index.php?route=update", {"name": item.name, "id": item.id, "type": item.type, "username": username});
+                        params = {"name": item.name, "id": item.id, 
+                            "type": item.type, "username": username};
+                        $http.post("/index.php?route=update", params);
                     };
 
                     $scope.increaseDay = function () {
