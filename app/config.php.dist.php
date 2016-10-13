@@ -15,6 +15,8 @@ $routes = [
     ''               => 'IndexController::render',
 ];
 
+$freeRoutes = ['user/register', 'user/login'];
+
 $user     = 'user';
 $password = 'password';
 $host     = 'localhost';
