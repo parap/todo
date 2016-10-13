@@ -14,11 +14,13 @@ use Symfony\Component\Routing\Exception\ResourceNotFoundException;
  *
  * @author user
  */
-class Routing {
+class Routing
+{
 
     protected $params;
 
-    public function __construct(RequestM $request, $routes) {
+    public function __construct(RequestM $request, $routes)
+    {
         $routeCollection = new RouteCollection();
 
         foreach ($routes as $path => $controller) {
@@ -35,19 +37,21 @@ class Routing {
         } catch (ResourceNotFoundException $e) {
             $parameters = [
                 'controller' => 'IndexController::render',
-                '_route' => 'index',
-                'error'  =>$e->getMessage()
+                '_route'     => 'index',
+                'error'      => $e->getMessage()
             ];
         }
 
         $this->params = explode('::', $parameters['controller']);
     }
 
-    public function getControllerName() {
+    public function getControllerName()
+    {
         return '\\Controllers\\' . $this->params[0];
     }
 
-    public function getActionName() {
+    public function getActionName()
+    {
         return $this->params[1];
     }
 
