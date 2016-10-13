@@ -43,6 +43,12 @@ class Routing
         }
 
         $this->params = explode('::', $parameters['controller']);
+        $this->params[] = $parameters['_route'];
+    }
+    
+    public function getRoute()
+    {
+        return $this->params[2];
     }
 
     public function getControllerName()
