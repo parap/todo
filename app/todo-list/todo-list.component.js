@@ -28,7 +28,7 @@
                     };
 
                     $scope.fetch = function () {
-                        $http.get("/fetch?day=" + $scope.day + "&name=" + username)
+                        $http.get("/fetch?day=" + $scope.day + "&username=" + username)
                                 .then(function (response) {
                                     $scope.todos = response.data;
 
