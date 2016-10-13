@@ -23,8 +23,9 @@ class IndexController
 
     public function fetch(RequestM $request)
     {
-        $date    = (new \DateTime($request->getM('day') . ' day'))->format('Y-m-d');
-        $results = $this->repo->fetch($date);
+        $date    = (new \DateTime((int)$request->getM('day') . ' day'))->format('Y-m-d');
+        $email   = $request->getM('username');
+        $results = $this->repo->fetch($date, $email);
         $json    = json_encode($results);
 
         return $json;
