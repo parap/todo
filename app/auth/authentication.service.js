@@ -11,6 +11,7 @@ function AuthenticationService($http, $cookieStore, $rootScope) {
     service.Login = Login;
     service.SetCredentials = SetCredentials;
     service.ClearCredentials = ClearCredentials;
+    service.GetUsername = GetUsername;
 
     return service;
 
@@ -34,6 +35,11 @@ function AuthenticationService($http, $cookieStore, $rootScope) {
 
         $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
         $cookieStore.put('globals', $rootScope.globals);
+    }
+    
+    function GetUsername()
+    {
+        return $rootScope.globals.currentUser.username;
     }
 
     function ClearCredentials() {
