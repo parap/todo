@@ -5,7 +5,7 @@
             module('statistic').
             component('statistic', {
                 templateUrl: 'app/statistic/statistic.template.html',
-                controller: function StatisticController($scope, $http) {
+                controller: function StatisticController($scope, $http, AuthenticationService) {
 
                     highlightButton('2');
 
@@ -15,7 +15,7 @@
                     $scope.date = date;
 
                     $scope.fetch = function () {
-                        $http.get("/statistic")
+                        $http.get("/statistic?username=" + AuthenticationService.GetUsername())
                                 .then(function (response) {
                                     $scope.items = response.data;
                                 });
