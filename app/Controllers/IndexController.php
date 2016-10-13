@@ -25,16 +25,30 @@ class IndexController
         $this->post = json_decode(file_get_contents('php://input'), true);
     }
 
-    private function getDay($request)
+    private function getDay(Request $request)
     {
-        // FIXME - remove ugly REQUEST_URI thing
+        $elements = $this->getElements($request);
+        
+        return array_key_exists("day", $elements) ? $elements["day"] : 0;
+    }
+    
+    private function getElements(Request $request)
+    {
         if (!$request->server->get('REQUEST_URI')) {
-            return 0;
+            return [];
         }
 
-        $params = explode('=', $request->server->get('REQUEST_URI'));
-        $day    = count($params) > 1 ? (int) $params[1] : 0;
-        return $day;
+        $params = explode('fetch?', $request->server->get('REQUEST_URI'));
+        $params1 = explode("&", $params[1]);
+        
+        $result = [];
+        
+        foreach($params1 as $value) {
+            $params2 = explode("=", $value);
+            $result[$params2[0]] = $params2[1];
+        }
+        
+        return $result;
     }
 
     public function fetch(Request $request)
