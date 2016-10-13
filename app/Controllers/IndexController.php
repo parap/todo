@@ -3,9 +3,8 @@
 namespace Controllers;
 
 use Classes\ItemRepo;
-use Symfony\Component\HttpFoundation\Request;
+use Classes\RequestM;
 use Classes\ItemType;
-use Classes\UriParser;
 
 /**
  * Description of IndexController
@@ -17,49 +16,46 @@ class IndexController
 
     protected $repo;
     protected $post;
-    protected $queryHelper;
 
     public function __construct()
     {
-        $this->pr   = new UriParser();
         $this->repo = new ItemRepo();
 
         // json_decode($request->getContent()) can be used alternately
         $this->post = json_decode(file_get_contents('php://input'), true);
     }
 
-    public function fetch(Request $request)
+    public function fetch(RequestM $request)
     {
-        $date    = (new \DateTime($this->pr->get($request, 'day') . ' day'))->format('Y-m-d');
+        $date    = (new \DateTime($request->getM('day') . ' day'))->format('Y-m-d');
         $results = $this->repo->fetch($date);
         $json    = json_encode($results);
 
         return $json;
     }
 
-    public function fetchArchived(Request $request)
+    public function fetchArchived(RequestM $request)
     {
-        $day     = $this->getUriParameter($request, 'day');
-        $date    = (new \DateTime($day . ' day'))->format('Y-m-d');
+        $date    = (new \DateTime($request->getM('day') . ' day'))->format('Y-m-d');
         $results = $this->repo->fetchArchived($date);
         $json    = json_encode($results);
 
         return $json;
     }
 
-    public function archive(Request $request)
+    public function archive(RequestM $request)
     {
         $id = $this->post['id'];
         $this->repo->archive($id);
     }
 
-    public function unarchive(Request $request)
+    public function unarchive(RequestM $request)
     {
         $id = $this->post['id'];
         $this->repo->unarchive($id);
     }
 
-    public function create(Request $request)
+    public function create(RequestM $request)
     {
         $name = $this->post['name'];
         $type = $this->post['type'];
@@ -69,14 +65,14 @@ class IndexController
         }
     }
 
-    public function update(Request $request)
+    public function update(RequestM $request)
     {
         $name = $this->post['name'];
         $id   = $this->post['id'];
         $this->repo->update($id, $name);
     }
 
-    public function complete(Request $request)
+    public function complete(RequestM $request)
     {
         $id   = $this->post['id'];
         $type = $this->post['type'];

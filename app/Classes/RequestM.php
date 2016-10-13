@@ -4,22 +4,22 @@ namespace Classes;
 
 use Symfony\Component\HttpFoundation\Request;
 
-class QueryHelper
+class RequestM extends Request
 {
-    public function getQueryParameter(Request $request, $param)
+    public function getM($param)
     {
-        $elements = $this->getElements($request);
+        $elements = $this->getElements();
         
         return array_key_exists($param, $elements) ? $elements[$param] : null;
     }
     
-    private function getElements(Request $request)
+    private function getElements()
     {
-        if (!$request->server->get('REQUEST_URI')) {
+        if (!$this->server->get('REQUEST_URI')) {
             return [];
         }
 
-        $params = explode('fetch?', $request->server->get('REQUEST_URI'));
+        $params = explode('fetch?', $this->server->get('REQUEST_URI'));
         $params1 = explode("&", $params[1]);
         
         $result = [];
