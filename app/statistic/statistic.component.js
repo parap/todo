@@ -1,26 +1,27 @@
+(function () {
+    'use strict';
 
-'use strict';
+    angular.
+            module('statistic').
+            component('statistic', {
+                templateUrl: 'app/statistic/statistic.template.html',
+                controller: function StatisticController($scope, $http) {
 
-angular.
-        module('statistic').
-        component('statistic', {
-            templateUrl: 'app/statistic/statistic.template.html',
-            controller: function StatisticController($scope, $http) {
-                
-                highlightButton('2');
-                
-                var date = new Date();
-                $scope.weekLength = date.getDay();
-                $scope.monthLength = date.getDate();
-                $scope.date = date;
-                
-                $scope.fetch = function () {
-                    $http.get("/statistic")
-                            .then(function (response) {
-                                $scope.items = response.data;
-                            });
+                    highlightButton('2');
+
+                    var date = new Date();
+                    $scope.weekLength = date.getDay();
+                    $scope.monthLength = date.getDate();
+                    $scope.date = date;
+
+                    $scope.fetch = function () {
+                        $http.get("/statistic")
+                                .then(function (response) {
+                                    $scope.items = response.data;
+                                });
+                    }
+
+                    $scope.fetch();
                 }
-                
-                $scope.fetch();
-            }
-        });
+            });
+}());
