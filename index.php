@@ -3,6 +3,7 @@
 use Classes\Db;
 use Classes\Routing;
 use Classes\RequestM;
+use Classes\AuthHandler;
 
 require_once __DIR__ . '/app/config.php';
 require_once __DIR__ . '/vendor/autoload.php';
@@ -13,6 +14,12 @@ new Db($user, $password, $host, $db);
 
 $request = RequestM::createFromGlobals();
 $routing = new Routing($request, $routes);
+$route = $routing->getRoute();
+
+$auth = new AuthHandler($freeRoutes);
+$auth->verify($route, $request);
+
 $controller = $routing->getControllerName();
 $action = $routing->getActionName();
+
 echo (new $controller)->$action($request);
