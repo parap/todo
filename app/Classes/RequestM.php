@@ -28,7 +28,11 @@ class RequestM extends Request
         }
 
         $params = explode('fetch?', $this->server->get('REQUEST_URI'));
-
+        
+        if(empty($params[1])) {
+            return [];
+        }
+        
         $params1 = explode("&", $params[1]);
         
         $result = [];
