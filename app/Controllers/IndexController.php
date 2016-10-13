@@ -5,6 +5,7 @@ namespace Controllers;
 use Classes\ItemRepo;
 use Symfony\Component\HttpFoundation\Request;
 use Classes\ItemType;
+use Classes\UriParser;
 
 /**
  * Description of IndexController
@@ -16,45 +17,20 @@ class IndexController
 
     protected $repo;
     protected $post;
+    protected $queryHelper;
 
     public function __construct()
     {
+        $this->pr   = new UriParser();
         $this->repo = new ItemRepo();
 
         // json_decode($request->getContent()) can be used alternately
         $this->post = json_decode(file_get_contents('php://input'), true);
     }
 
-    private function getQueryParameter(Request $request, $param)
-    {
-        $elements = $this->getElements($request);
-        
-        return array_key_exists($param, $elements) ? $elements[$param] : 0;
-    }
-    
-    private function getElements(Request $request)
-    {
-        if (!$request->server->get('REQUEST_URI')) {
-            return [];
-        }
-
-        $params = explode('fetch?', $request->server->get('REQUEST_URI'));
-        $params1 = explode("&", $params[1]);
-        
-        $result = [];
-        
-        foreach($params1 as $value) {
-            $params2 = explode("=", $value);
-            $result[$params2[0]] = $params2[1];
-        }
-        
-        return $result;
-    }
-
     public function fetch(Request $request)
     {
-        $day     = $this->getQueryParameter($request, 'day');
-        $date    = (new \DateTime($day . ' day'))->format('Y-m-d');
+        $date    = (new \DateTime($this->pr->get($request, 'day') . ' day'))->format('Y-m-d');
         $results = $this->repo->fetch($date);
         $json    = json_encode($results);
 
@@ -63,7 +39,7 @@ class IndexController
 
     public function fetchArchived(Request $request)
     {
-        $day     = $this->getQueryParameter($request, 'day');
+        $day     = $this->getUriParameter($request, 'day');
         $date    = (new \DateTime($day . ' day'))->format('Y-m-d');
         $results = $this->repo->fetchArchived($date);
         $json    = json_encode($results);
