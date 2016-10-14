@@ -11,7 +11,7 @@ var highlightButton = function (number)
 };
 
 angular.module("todoApp", [
-    "ngRoute", "ngCookies", "todoList", "statistic", "archive", "login", "register"
+    "ngRoute", "ngCookies", "todoList", "statistic", "archive", "login", "register", "menu"
 ])
         .config(config)
         .run(run);

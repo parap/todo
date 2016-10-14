@@ -16,7 +16,7 @@
             AuthenticationService.Login(vm.email, vm.password, function (response) {
                 if (response.success) {
                     console.log('login successful');
-                    AuthenticationService.SetCredentials(vm.email, vm.password);
+                    AuthenticationService.SetCredentials(vm.email, vm.password);                                        $scope.logged = AuthenticationService.GetUsername();
                     $location.path('/');
                 } else {
                     console.log('failure! ' + response.message);

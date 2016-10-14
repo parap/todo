@@ -6,6 +6,9 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 - add weekly and monthly tasks;
 - allow to set tasks for particular date.
 
+- set Login/Logout button depend on if user is logged in.
+- on security exception redirect user to login page.
+
 - create FlashService to indicate that login was successful or not. 
 Download working sample to check how Johnpapa did it.
 

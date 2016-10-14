@@ -21,15 +21,12 @@
         <script src="app/auth/login.component.js"></script>
         <script src="app/auth/register.module.js"></script>
         <script src="app/auth/register.component.js"></script>
+        <script src="app/menu/menu.module.js"></script>
+        <script src="app/menu/menu.component.js"></script>
 
     </head>
     <body>
-        <div class="top-menu">
-            <a href="#/" ><button class="btn btn-primary" id="menu-button1">Main</button></a>
-            <a href="#statistic"><button class="btn" id="menu-button2">Statistic</button></a>
-            <a href="#archive"><button class="btn" id="menu-button3">Archive</button></a>
-            <a href="#login"><button class="btn" id="menu-button4">Login</button></a>
-        </div>
+        <menu></menu>
         <div ng-view></div>
     </body>
 </html>
