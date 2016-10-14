@@ -15,7 +15,7 @@
                     $scope.date = date;
 
                     $scope.fetch = function () {
-                        $http.get("/statistic?username=" + AuthenticationService.GetUsername())
+                        $http.get("/statistic?email=" + AuthenticationService.GetUsername())
                                 .then(function (response) {
                                     $scope.items = response.data;
                                 });
