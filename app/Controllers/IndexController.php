@@ -23,8 +23,8 @@ class IndexController
 
     public function fetch(RequestM $request)
     {
-        $email   = $request->getM('email');
         $date    = (new \DateTime((int)$request->getM('day') . ' day'))->format('Y-m-d');
+        $email   = $request->getM('username');
         $results = $this->repo->fetch($date, $email);
         $json    = json_encode($results);
 
@@ -33,9 +33,8 @@ class IndexController
 
     public function fetchArchived(RequestM $request)
     {
-        $email   = $request->getM('email');
         $date    = (new \DateTime((int)$request->getM('day') . ' day'))->format('Y-m-d');
-        $results = $this->repo->fetchArchived($date, $email);
+        $results = $this->repo->fetchArchived($date);
         $json    = json_encode($results);
 
         return $json;
@@ -55,15 +54,11 @@ class IndexController
 
     public function create(RequestM $request)
     {
-        $email   = $request->postM['email'];
-        
         $name = $request->postM['name'];
         $type = $request->postM['type'];
 
         if (!empty($name)) {
-            $parentId = 1; // temporary
-            $typeP = $type ? ItemType::Daily : ItemType::Normal;
-            $this->repo->create($name, $email, $parentId, $typeP);
+            $this->repo->create($name, 1, 1, $type ? ItemType::Daily : ItemType::Normal);
         }
     }
 
