@@ -81,28 +81,46 @@ class ItemRepo extends DbAssist {
         return $this->query($query);
     }
 
-    public function update($id, $text) {
+    public function update($id, $text, $email) {
+        $userId = $this->getId($email);
         $id = $this->safe($id);
         $text = $this->safe($text);
-        $query = "UPDATE item SET name='$text' WHERE id='$id'";
+        $query = "UPDATE item SET name='$text' "
+                . "WHERE id='$id' AND user_id='$userId'";
 
         return $this->query($query);
     }
+    
+    public function getUserIdByItem($id)
+    {
+        $query = sprintf('SELECT user_id FROM item WHERE id="%s"', $id);
+        return $this->query($query)[0]['user_id'];
+    }
 
-    public function complete($id, $type, $date) {
+    public function complete($id, $type, $date, $email)
+    {
+        $userId = $this->getId($email);
+
+        if ($userId !== $this->getUserIdByItem($id)) {
+            // hack attempt, user tries to complete other user's item
+            return;
+        }
+
         if ($type === ItemType::Daily) {
             $this->completeDaily($id, $date);
         }
 
-        $id = $this->safe($id);
-        $query = "UPDATE item SET done='1', completed_at='$date' WHERE id='$id'";
+        $id    = $this->safe($id);
+        $query = "UPDATE item SET done='1', completed_at='$date' "
+                . "WHERE id='$id' AND user_id='$userId'";
 
         return $this->query($query);
     }
 
     public function completeDaily($id, $date) {
         $query = sprintf(
-                "INSERT INTO daily (item_id, completed_at) VALUES ('%s', '%s')", $this->safe($id), $date
+                "INSERT INTO daily (item_id, completed_at) VALUES ('%s', '%s')", 
+                $this->safe($id), $date
         );
 
         return $this->query($query);
@@ -127,7 +145,7 @@ class ItemRepo extends DbAssist {
         return isset($result[0]['completed_at']) ? $result[0]['completed_at'] : '';
     }
 
-    public function uncomplete($id, $type, $date) {
+    public function uncomplete($id, $type, $date, $email) {
         $latest = '';
         $id = $this->safe($id);
 
