@@ -4,11 +4,13 @@ namespace Classes;
 
 use Classes\ItemType;
 
-class ItemRepo extends DbAssist {
+class ItemRepo extends DbAssist
+{
 
-    public function fetch($date, $email) {
+    public function fetch($date, $email)
+    {
         $emailP = $this->safe($email);
-        
+
         $query = "SELECT i.*, DATEDIFF(NOW(), i.completed_at) as delay "
                 . "FROM item i "
                 . "LEFT JOIN user u ON i.user_id = u.id "
@@ -16,7 +18,7 @@ class ItemRepo extends DbAssist {
                 . "(i.archived_at = '0000-00-00' OR i.archived_at > '$date') "
                 . "AND u.email = '$emailP'";
 
-        $results = $this->query($query);
+        $results    = $this->query($query);
         $doneDailys = $this->fetchCompletedDaily($date);
 
         foreach ($results as $key => $one) {
@@ -28,73 +30,78 @@ class ItemRepo extends DbAssist {
         return $results;
     }
 
-    public function fetchArchived($date) {
+    public function fetchArchived($date)
+    {
         $query = "SELECT *"
                 . "FROM item "
                 . "WHERE created_at <= '$date' AND archived_at > '0000-00-00' AND archived_at <= '$date'";
 
-        $results = $this->query($query);
+        $results    = $this->query($query);
         $doneDailys = $this->fetchCompletedDaily($date);
 
         foreach ($results as $key => $one) {
             if ('1' !== $one['type']) {
                 continue;
             }
-            
+
             $results[$key]['done'] = in_array($one['id'], $doneDailys) ? '1' : '0';
         }
 
         return $results;
     }
 
-    public function fetchCompletedDaily($date) {
+    public function fetchCompletedDaily($date)
+    {
         $template = 'SELECT item_id FROM daily WHERE completed_at = "%s"';
-        $query = sprintf($template, $date);
+        $query    = sprintf($template, $date);
 
         return array_map(function($x) {
             return $x['item_id'];
         }, $this->query($query));
     }
-    
+
     public function getUserIdByEmail($email)
     {
         $query = "SELECT id FROM user WHERE email = '$email'";
         return $this->query($query)[0]['id'];
     }
 
-    public function create($name, $email, $parentId, $type) {
+    public function create($name, $email, $parentId, $type)
+    {
         $userId = $this->getUserIdByEmail($email);
-        $query = sprintf(
+        $query  = sprintf(
                 'INSERT INTO item (name, user_id, done, parent_id, type, '
                 . 'created_at, todo_at, completed_at, archived_at) '
                 . 'VALUES ("%s", "%s", "0", "%s", "%s", NOW(), NOW(), '
-                . '"0000-00-00", "0000-00-00")', 
-                $this->safe($name), $userId, $parentId, $type
+                . '"0000-00-00", "0000-00-00")', $this->safe($name), $userId, $parentId, $type
         );
 
         return $this->query($query);
     }
 
-    public function update($id, $text) {
-        $id = $this->safe($id);
-        $text = $this->safe($text);
+    public function update($id, $text)
+    {
+        $id    = $this->safe($id);
+        $text  = $this->safe($text);
         $query = "UPDATE item SET name='$text' WHERE id='$id'";
 
         return $this->query($query);
     }
 
-    public function complete($id, $type, $date) {
+    public function complete($id, $type, $date)
+    {
         if ($type === ItemType::Daily) {
             $this->completeDaily($id, $date);
         }
 
-        $id = $this->safe($id);
+        $id    = $this->safe($id);
         $query = "UPDATE item SET done='1', completed_at='$date' WHERE id='$id'";
 
         return $this->query($query);
     }
 
-    public function completeDaily($id, $date) {
+    public function completeDaily($id, $date)
+    {
         $query = sprintf(
                 "INSERT INTO daily (item_id, completed_at) VALUES ('%s', '%s')", $this->safe($id), $date
         );
@@ -102,16 +109,18 @@ class ItemRepo extends DbAssist {
         return $this->query($query);
     }
 
-    public function findDelay($id) {
-        $id = $this->safe($id);
+    public function findDelay($id)
+    {
+        $id    = $this->safe($id);
         $query = "SELECT DATEDIFF(NOW(), completed_at) as delay "
                 . "FROM item WHERE id='$id'";
 
         return $this->query($query);
     }
 
-    public function findLatestCompletedAt($id) {
-        $query = "SELECT completed_at "
+    public function findLatestCompletedAt($id)
+    {
+        $query  = "SELECT completed_at "
                 . "FROM daily "
                 . "WHERE item_id='$id'"
                 . "ORDER BY completed_at DESC "
@@ -121,9 +130,10 @@ class ItemRepo extends DbAssist {
         return isset($result[0]['completed_at']) ? $result[0]['completed_at'] : '';
     }
 
-    public function uncomplete($id, $type, $date) {
+    public function uncomplete($id, $type, $date)
+    {
         $latest = '';
-        $id = $this->safe($id);
+        $id     = $this->safe($id);
 
         if ($type === ItemType::Daily) {
             $this->uncompleteDaily($id, $date);
@@ -137,7 +147,8 @@ class ItemRepo extends DbAssist {
         return $this->query($query);
     }
 
-    public function uncompleteDaily($id, $date) {
+    public function uncompleteDaily($id, $date)
+    {
         $query = sprintf(
                 "DELETE FROM daily WHERE item_id='%s' AND completed_at = '%s'", $this->safe($id), $date
         );
@@ -145,23 +156,26 @@ class ItemRepo extends DbAssist {
         return $this->query($query);
     }
 
-    public function archive($id) {
-        $id = $this->safe($id);
+    public function archive($id)
+    {
+        $id    = $this->safe($id);
         $query = "UPDATE item SET archived_at=NOW() WHERE id='$id'";
 
         return $this->query($query);
     }
 
-    public function unarchive($id) {
-        $id = $this->safe($id);
+    public function unarchive($id)
+    {
+        $id    = $this->safe($id);
         $query = "UPDATE item SET archived_at='0000-00-00' WHERE id='$id'";
 
         return $this->query($query);
     }
 
-    public function remove($id) {
-        $id = $this->safe($id);
-        $query = "DELETE from item where id='$id'";
+    public function remove($id)
+    {
+        $id         = $this->safe($id);
+        $query      = "DELETE from item where id='$id'";
         $queryDaily = "DELETE from daily WHERE item_id='$id'";
 
         $this->query($queryDaily);
@@ -174,8 +188,9 @@ class ItemRepo extends DbAssist {
      * @param type $format
      * @return type
      */
-    public function getLastMondayDate($format = 'Y-m-d') {
-        $days = date('w') ? date('d') - date('w') + 1 : date('d') - date('w') - 6;
+    public function getLastMondayDate($format = 'Y-m-d')
+    {
+        $days      = date('w') ? date('d') - date('w') + 1 : date('d') - date('w') - 6;
         $timestamp = mktime(date('H'), date('i'), date('s'), date('m'), $days, date('Y'));
 
         return date($format, $timestamp);
@@ -186,30 +201,29 @@ class ItemRepo extends DbAssist {
      * 
      * @return array
      */
-    public function fetchStatistic() {
+    public function fetchStatistic()
+    {
         $res = array_merge_recursive(
-                $this->totalStatistic('2015-01-01', 'all'), 
-                $this->totalStatistic($this->getLastMondayDate(), 'week'), 
-                $this->totalStatistic(date('Y-m' . '-01'), 'month')
+                $this->totalStatistic('2015-01-01', 'all'), $this->totalStatistic($this->getLastMondayDate(), 'week'), $this->totalStatistic(date('Y-m' . '-01'), 'month')
         );
-        
+
         return $res;
         // 
 // total & monthly & weekly completion % of every daily task separately;
 // total & monthly & weekly completion % of all daily/normal tasks;
     }
 
-    public function dailySingleStatistic() {
+    public function dailySingleStatistic()
+    {
         $res = array_merge_recursive(
-                $this->dailySingleFor('2015-01-01', 'all'), 
-                $this->dailySingleFor($this->getLastMondayDate(), 'week'), 
-                $this->dailySingleFor(date('Y-m' . '-01'), 'month')
+                $this->dailySingleFor('2015-01-01', 'all'), $this->dailySingleFor($this->getLastMondayDate(), 'week'), $this->dailySingleFor(date('Y-m' . '-01'), 'month')
         );
-        
+
         return $res;
     }
 
-    public function dailySingleFor($date, $index) {
+    public function dailySingleFor($date, $index)
+    {
         $query = "SELECT i.name , COUNT( d.completed_at ) AS number_completion, DATEDIFF(NOW(), i.created_at)+1 AS life_length
 FROM item i
 LEFT JOIN daily d ON ( i.id = d.item_id ) 
@@ -218,7 +232,7 @@ WHERE (d.completed_at >=  '$date' OR d.completed_at IS NULL) "
                 . "AND (i.archived_at = '0000-00-00' OR i.archived_at >= '$date')
 GROUP BY i.id";
 
-        $got = $this->query($query);
+        $got     = $this->query($query);
         $results = [];
         foreach ($got as $one) {
             $results[$one['name']][$index] = $one;
@@ -227,11 +241,12 @@ GROUP BY i.id";
         return $results;
     }
 
-    public function totalStatistic($date, $index) {
-        $query = "SELECT COUNT(completed_at) as total_done FROM daily WHERE completed_at >= '$date'";
+    public function totalStatistic($date, $index)
+    {
+        $query          = "SELECT COUNT(completed_at) as total_done FROM daily WHERE completed_at >= '$date'";
         $totalCompleted = $this->query($query)[0]['total_done'];
 
-        $query = "SELECT SUM(DATEDIFF(NOW(), i.created_at)) AS life_length_after
+        $query             = "SELECT SUM(DATEDIFF(NOW(), i.created_at)) AS life_length_after
 FROM item i
 LEFT JOIN daily d ON ( i.id = d.item_id ) 
 WHERE i.created_at >=  '$date' AND i.type = '1'";
@@ -243,7 +258,7 @@ WHERE i.created_at <= '$date' AND i.type = '1'";
         $items = $this->query($query)[0]['total'];
 
         $query = "SELECT DATEDIFF(NOW(), '$date') + 1 as diff";
-        $days = $this->query($query)[0]['diff'];
+        $days  = $this->query($query)[0]['diff'];
 
         $totalCreatedBefore = $items * $days;
 
