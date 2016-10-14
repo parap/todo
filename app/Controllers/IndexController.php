@@ -56,9 +56,12 @@ class IndexController
     {
         $name = $request->postM['name'];
         $type = $request->postM['type'];
+        $email = $request->postM['email'];
 
         if (!empty($name)) {
-            $this->repo->create($name, 1, 1, $type ? ItemType::Daily : ItemType::Normal);
+            $parentId = 1;
+            $this->repo->create($name, $email, $parentId, 
+                    $type ? ItemType::Daily : ItemType::Normal);
         }
     }
 

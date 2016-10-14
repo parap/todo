@@ -55,11 +55,21 @@ class ItemRepo extends DbAssist {
             return $x['item_id'];
         }, $this->query($query));
     }
+    
+    public function getUserIdByEmail($email)
+    {
+        $query = "SELECT id FROM user WHERE email = '$email'";
+        return $this->query($query)[0]['id'];
+    }
 
-    public function create($name, $userId, $parentId, $type) {
+    public function create($name, $email, $parentId, $type) {
+        $userId = $this->getUserIdByEmail($email);
         $query = sprintf(
-                'INSERT INTO item (name, user_id, done, parent_id, type, created_at, todo_at, completed_at, archived_at) '
-                . 'VALUES ("%s", "%s", "0", "%s", "%s", NOW(), NOW(), "0000-00-00", "0000-00-00")', $this->safe($name), $userId, $parentId, $type
+                'INSERT INTO item (name, user_id, done, parent_id, type, '
+                . 'created_at, todo_at, completed_at, archived_at) '
+                . 'VALUES ("%s", "%s", "0", "%s", "%s", NOW(), NOW(), '
+                . '"0000-00-00", "0000-00-00")', 
+                $this->safe($name), $userId, $parentId, $type
         );
 
         return $this->query($query);
