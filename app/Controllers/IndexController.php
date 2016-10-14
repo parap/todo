@@ -55,9 +55,10 @@ class IndexController
 
     public function create(RequestM $request)
     {
-        $email = $request->postM['email'];
-        $name  = $request->postM['name'];
-        $type  = $request->postM['type'];
+        $email   = $request->postM['email'];
+        
+        $name = $request->postM['name'];
+        $type = $request->postM['type'];
 
         if (!empty($name)) {
             $parentId = 1; // temporary
@@ -69,9 +70,8 @@ class IndexController
     public function update(RequestM $request)
     {
         $name = $request->postM['name'];
-        $id    = $request->postM['id'];
-        $email = $request->postM['email'];
-        $this->repo->update($id, $name, $email);
+        $id   = $request->postM['id'];
+        $this->repo->update($id, $name);
     }
 
     public function complete(RequestM $request)
@@ -79,11 +79,10 @@ class IndexController
         $type = $request->postM['type'];
         $id   = $request->postM['id'];
         $day  = $request->postM['day'];
-        $email  = $request->postM['email'];
         $date = (new \DateTime($day . ' day'))->format('Y-m-d');
 
         $method = $request->postM['done'] ? 'complete' : 'uncomplete';
-        $this->repo->$method($id, $type, $date, $email);
+        $this->repo->$method($id, $type, $date);
 
         $results = $this->repo->findDelay($id);
 
