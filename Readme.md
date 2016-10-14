@@ -9,6 +9,8 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 - set Login/Logout button depend on if user is logged in.
 - on security exception redirect user to login page.
 
+- fix statistic:  ∞% ∞% ∞%  in final percentage for single completed item
+
 - create FlashService to indicate that login was successful or not. 
 Download working sample to check how Johnpapa did it.
 
