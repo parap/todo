@@ -30,11 +30,14 @@ class ItemRepo extends DbAssist
         return $results;
     }
 
-    public function fetchArchived($date)
+    public function fetchArchived($date, $email)
     {
-        $query = "SELECT *"
-                . "FROM item "
-                . "WHERE created_at <= '$date' AND archived_at > '0000-00-00' AND archived_at <= '$date'";
+        $emailP = $this->safe($email);      
+        $query = "SELECT i.* "
+                . "FROM item i "
+                . "LEFT JOIN user u ON i.user_id = u.id "                
+                . "WHERE i.created_at <= '$date' AND i.archived_at > '0000-00-00' "
+                . "AND i.archived_at <= '$date' AND u.email='$emailP'";
 
         $results    = $this->query($query);
         $doneDailys = $this->fetchCompletedDaily($date);

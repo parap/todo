@@ -34,7 +34,8 @@ class IndexController
     public function fetchArchived(RequestM $request)
     {
         $date    = (new \DateTime((int)$request->getM('day') . ' day'))->format('Y-m-d');
-        $results = $this->repo->fetchArchived($date);
+        $email   = $request->getM('email');
+        $results = $this->repo->fetchArchived($date, $email);
         $json    = json_encode($results);
 
         return $json;
