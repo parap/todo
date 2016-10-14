@@ -13,10 +13,10 @@
 
             vm.dataLoading = true;
 
-            AuthenticationService.Login(vm.username, vm.password, function (response) {
+            AuthenticationService.Login(vm.email, vm.password, function (response) {
                 if (response.success) {
                     console.log('login successful');
-                    AuthenticationService.SetCredentials(vm.username, vm.password);
+                    AuthenticationService.SetCredentials(vm.email, vm.password);
                     $location.path('/');
                 } else {
                     console.log('failure! ' + response.message);
