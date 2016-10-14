@@ -85,7 +85,7 @@ class IndexController
         $method = $request->postM['done'] ? 'complete' : 'uncomplete';
         $this->repo->$method($id, $type, $date, $email);
 
-        $results = $this->repo->findDelay($id, $email);
+        $results = $this->repo->findDelay($id);
 
         return isset($results[0]['delay']) ? $results[0]['delay'] : '';
     }

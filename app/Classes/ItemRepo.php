@@ -126,16 +126,11 @@ class ItemRepo extends DbAssist {
         return $this->query($query);
     }
 
-    public function findDelay($id, $email) {
+    public function findDelay($id) {
         $id = $this->safe($id);
-        $emailP = $this->safe($email);
-        
         $query = "SELECT DATEDIFF(NOW(), completed_at) as delay "
-                . "FROM item i "
-                . "LEFT JOIN user u ON i.user_id = u.id "
-                . "WHERE i.id='$id'"
-                . "AND u.email = '$emailP'";
-        
+                . "FROM item WHERE id='$id'";
+
         return $this->query($query);
     }
 
