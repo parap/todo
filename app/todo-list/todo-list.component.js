@@ -9,7 +9,7 @@
 
                     highlightButton('1');
 
-                    var params, username = AuthenticationService.GetUsername();
+                    var params, email = AuthenticationService.GetUsername();
 
                     $scope.todos = [
                         {
@@ -28,7 +28,7 @@
                     };
 
                     $scope.fetch = function () {
-                        $http.get("/fetch?day=" + $scope.day + "&username=" + username)
+                        $http.get("/fetch?day=" + $scope.day + "&email=" + email)
                                 .then(function (response) {
                                     $scope.todos = response.data;
 
@@ -40,7 +40,7 @@
 
                     $scope.archive = function (item) {
                         $scope.todos.splice(this.$index, 1);
-                        params = {"id": item.id, "username": username};
+                        params = {"id": item.id, "email": email};
                         $http.post("/index.php?route=archive", params);
                     };
 
@@ -48,7 +48,7 @@
                         $scope.todos.push({name: text, done: false, type: type});
                         $scope.newTodo = '';
                         $scope.newDaily = '';
-                        params = {"name": text, "type": type, "username": username};
+                        params = {"name": text, "type": type, "email": email};
 
                         $http.post("/index.php?route=create", params)
                                 .then(function (response) {
@@ -58,7 +58,7 @@
 
                     $scope.switch = function (item) {
                         params = {"done": item.done, "id": item.id, 
-                            "type": item.type, "day": $scope.day, "username": username};
+                            "type": item.type, "day": $scope.day, "email": email};
                         $http.post("/index.php?route=complete", params)
                                 .then(function (response) {
                                     item.delay = response.data;
@@ -67,7 +67,7 @@
 
                     $scope.update = function (item) {
                         params = {"name": item.name, "id": item.id, 
-                            "type": item.type, "username": username};
+                            "type": item.type, "email": email};
                         $http.post("/index.php?route=update", params);
                     };
 

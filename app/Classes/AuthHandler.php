@@ -20,7 +20,7 @@ class AuthHandler
             return;
         }
 
-        $username = $request->getM('username') ? : $request->postM['username'];
+        $username = $request->getM('email') ? : $request->postM['email'];
 
         if (!empty($_SESSION['logged-email']) &&
                 $_SESSION['logged-email'] === $username) {
