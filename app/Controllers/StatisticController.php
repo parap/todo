@@ -3,7 +3,7 @@
 namespace Controllers;
 
 use Classes\ItemRepo;
-use Symfony\Component\HttpFoundation\Request;
+use Classes\RequestM;
 
 /**
  * Description of IndexController
@@ -23,10 +23,11 @@ class StatisticController
         $this->post = json_decode(file_get_contents('php://input'),true);
     }
     
-    public function index(Request $request)
+    public function index(RequestM $request)
     {
-        $daily = $this->repo->dailySingleStatistic();
-        $total = $this->repo->fetchStatistic();
+        $email = $request->getM('email');
+        $daily = $this->repo->dailySingleStatistic($email);
+        $total = $this->repo->fetchStatistic($email);
         $results = ['daily' => $daily, 'total' => $total];
         
         return json_encode($results);

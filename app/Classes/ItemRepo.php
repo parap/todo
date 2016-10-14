@@ -201,10 +201,12 @@ class ItemRepo extends DbAssist
      * 
      * @return array
      */
-    public function fetchStatistic()
+    public function fetchStatistic($email)
     {
         $res = array_merge_recursive(
-                $this->totalStatistic('2015-01-01', 'all'), $this->totalStatistic($this->getLastMondayDate(), 'week'), $this->totalStatistic(date('Y-m' . '-01'), 'month')
+                $this->totalStatistic('2015-01-01', 'all', $email), 
+                $this->totalStatistic($this->getLastMondayDate(), 'week', $email), 
+                $this->totalStatistic(date('Y-m' . '-01'), 'month', $email)
         );
 
         return $res;
@@ -213,24 +215,29 @@ class ItemRepo extends DbAssist
 // total & monthly & weekly completion % of all daily/normal tasks;
     }
 
-    public function dailySingleStatistic()
+    public function dailySingleStatistic($email)
     {
         $res = array_merge_recursive(
-                $this->dailySingleFor('2015-01-01', 'all'), $this->dailySingleFor($this->getLastMondayDate(), 'week'), $this->dailySingleFor(date('Y-m' . '-01'), 'month')
+                $this->dailySingleFor('2015-01-01', 'all', $email), 
+                $this->dailySingleFor($this->getLastMondayDate(), 'week', $email), 
+                $this->dailySingleFor(date('Y-m' . '-01'), 'month', $email)
         );
 
         return $res;
     }
 
-    public function dailySingleFor($date, $index)
+    public function dailySingleFor($date, $index, $email)
     {
+        $emailP = $this->safe($email);
         $query = "SELECT i.name , COUNT( d.completed_at ) AS number_completion, DATEDIFF(NOW(), i.created_at)+1 AS life_length
-FROM item i
+            FROM item i
 LEFT JOIN daily d ON ( i.id = d.item_id ) 
+LEFT JOIN user u ON u.id = i.user_id 
 WHERE (d.completed_at >=  '$date' OR d.completed_at IS NULL) "
                 . "AND i.type = '1' "
-                . "AND (i.archived_at = '0000-00-00' OR i.archived_at >= '$date')
-GROUP BY i.id";
+                . "AND (i.archived_at = '0000-00-00' OR i.archived_at >= '$date') "
+                . "AND u.email = '$emailP' "
+                . "GROUP BY i.id";
 
         $got     = $this->query($query);
         $results = [];
@@ -241,20 +248,28 @@ GROUP BY i.id";
         return $results;
     }
 
-    public function totalStatistic($date, $index)
+    public function totalStatistic($date, $index, $email)
     {
-        $query          = "SELECT COUNT(completed_at) as total_done FROM daily WHERE completed_at >= '$date'";
+        $emailP = $this->safe($email);
+        $query          = "SELECT COUNT(d.completed_at) as total_done "
+                . "FROM daily d "
+                . "LEFT JOIN item i ON i.id = d.item_id "
+                . "LEFT JOIN user u ON u.id = i.user_id "
+                . "WHERE d.completed_at >= '$date' "
+                . "AND u.email='$emailP'";
         $totalCompleted = $this->query($query)[0]['total_done'];
 
-        $query             = "SELECT SUM(DATEDIFF(NOW(), i.created_at)) AS life_length_after
+        $query = "SELECT SUM(DATEDIFF(NOW(), i.created_at)) AS life_length_after
 FROM item i
 LEFT JOIN daily d ON ( i.id = d.item_id ) 
-WHERE i.created_at >=  '$date' AND i.type = '1'";
+LEFT JOIN user u ON u.id = i.user_id 
+WHERE i.created_at >=  '$date' AND i.type = '1' AND u.email='$emailP'";
         $totalCreatedAfter = $this->query($query)[0]['life_length_after'];
 
         $query = "SELECT COUNT(i.id) as total
 FROM item i
-WHERE i.created_at <= '$date' AND i.type = '1'";
+LEFT JOIN user u ON u.id = i.user_id 
+WHERE i.created_at <= '$date' AND i.type = '1' AND u.email='$emailP'";
         $items = $this->query($query)[0]['total'];
 
         $query = "SELECT DATEDIFF(NOW(), '$date') + 1 as diff";
