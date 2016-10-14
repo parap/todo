@@ -9,7 +9,7 @@
 
                     highlightButton('3');
                     
-                    var username = AuthenticationService.GetUsername();                    
+                    var email = AuthenticationService.GetUsername();                    
 
                     $scope.todos = [
                         {
@@ -21,7 +21,7 @@
                     $scope.day = 0;
 
                     $scope.fetch = function () {
-                        $http.get("/fetch-archived?day=" + $scope.day + "&username=" + username)
+                        $http.get("/fetch-archived?day=" + $scope.day + "&email=" + email)
                                 .then(function (response) {
                                     $scope.todos = response.data;
 
@@ -34,13 +34,13 @@
                     $scope.remove = function (item) {
                         if (confirm('It is irreversible action. Please confirm you are going to delete the item forever')) {
                             $scope.todos.splice(this.$index, 1);
-                            $http.post("/index.php?route=remove", {"id": item.id, "username": username});
+                            $http.post("/index.php?route=remove", {"id": item.id, "email": email});
                         }
                     };
 
                     $scope.unarchive = function (item) {
                         $scope.todos.splice(this.$index, 1);
-                        $http.post("/index.php?route=unarchive", {"id": item.id, "username": username});
+                        $http.post("/index.php?route=unarchive", {"id": item.id, "email": email});
                     };
 
                     $scope.fetch();
