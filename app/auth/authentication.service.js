@@ -39,6 +39,7 @@ function AuthenticationService($http, $cookieStore, $rootScope) {
     
     function GetUsername()
     {
+        if (typeof($rootScope.globals.currentUser) === 'undefined') return false;
         return $rootScope.globals.currentUser.username;
     }
 
