@@ -1,19 +1,18 @@
 It is project to learn Angular and to create convenient to-do list.
 
 The list includes daily, weekly, normal tasks.
-Also it allows to create revolver tasks.
+Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
-- add authentication system. Update app to interact with different users. Security.
+- add weekly and monthly tasks;
+- allow to set tasks for particular date.
+
 - create FlashService to indicate that login was successful or not. 
 Download working sample to check how Johnpapa did it.
 
 - allow Google Accounts login?
 
-- add weekly and monthly tasks;
 - add graphs. Like weight site.
 - add calendar to set required date;
-- allow to set tasks for particular date.
-
 
 - allow items drag & n & drop;
 - add amount of completed points per day, progress bar.
@@ -27,6 +26,7 @@ Download working sample to check how Johnpapa did it.
 
 =============== DONE ====================
 
+- add authentication system. Security.
 - move active button (Main/Statistic/Archive)
 - add history (access to archive) for 'normal' tasks;
 - allow to recover or to irreversibly delete archived tasks;
