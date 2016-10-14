@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    var register = function ($scope, $http, $location, $timeout) {
+    var register = function ($scope, $http, $location, $timeout, AuthenticationService) {
 
         var vm = $scope;
         vm.register = register;
@@ -12,8 +12,20 @@
                     .success(function (response) {
                         if (response.success) {
                             console.log('Registration successful');
-                            $timeout(function() {
-                                $location.path('/login')
+                            $timeout(function () {
+// TODO: extract to separate functionality this code duplicated from login.component.js .
+// begin
+                                AuthenticationService.Login(vm.user.email, vm.user.password, function (response) {
+                                    if (response.success) {
+                                        console.log('login successful');
+                                        AuthenticationService.SetCredentials(vm.user.email, vm.user.password);
+                                        $location.path('/');
+                                    } else {
+                                        console.log('failure! ' + response.message);
+                                        vm.dataLoading = false;
+                                    }
+                                });
+// end
                             });
                         } else {
                             console.log(response.message);
@@ -26,7 +38,7 @@
     angular
             .module('register')
             .component('register', {
-                $inject: ['$scope', '$http', '$location', '$timeout'],
+                $inject: ['$scope', '$http', '$location', '$timeout', 'AuthenticationService'],
                 templateUrl: 'app/auth/register.template.html',
                 controller: register
             });
