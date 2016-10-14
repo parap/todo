@@ -15,6 +15,7 @@
 
             AuthenticationService.Login(vm.username, vm.password, function (response) {
                 if (response.success) {
+                    console.log('login successful');
                     AuthenticationService.SetCredentials(vm.username, vm.password);
                     $location.path('/');
                 } else {
