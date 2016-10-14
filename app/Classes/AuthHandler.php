@@ -27,7 +27,9 @@ class AuthHandler
             return;
         }
 
-        throw new \Exception('Wrong name');
+        //FIXME: use information-safe method instead of exception
+        throw new \Exception('Wrong name ');
+//        throw new \Exception('Wrong name '.$username.' and '.$_SESSION['logged-email']);
     }
 
 }
