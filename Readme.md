@@ -6,9 +6,6 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 - add weekly and monthly tasks;
 - allow to set tasks for particular date.
 
-- set Login/Logout button depend on if user is logged in.
-- on security exception redirect user to login page.
-
 - fix statistic:  ∞% ∞% ∞%  in final percentage for single completed item
 
 - create FlashService to indicate that login was successful or not. 
@@ -30,6 +27,9 @@ Download working sample to check how Johnpapa did it.
 - on edit click - focus edit field, select it's content. On 'escape' click close it without save.
 
 =============== DONE ====================
+
+- set Login/Logout button depend on if user is logged in.
+- on security exception redirect user to login page.
 
 - add authentication system. Security.
 - move active button (Main/Statistic/Archive)
