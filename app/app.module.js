@@ -11,7 +11,7 @@ var highlightButton = function (number)
 };
 
 angular.module("todoApp", [
-    "ngRoute", "ngCookies", "todoList", "statistic", "archive", "login", "register", "menu"
+    "ngRoute", "ngCookies", "todoList", "statistic", "archive", "login", "register", "menu", "logout"
 ])
         .config(config)
         .run(run);
@@ -27,6 +27,9 @@ function config($routeProvider) {
             })
             .when('/login', {
                 template: "<login></login>"
+            })
+            .when('/logout', {
+                template: "<logout></logout>"
             })
             .when('/register', {
                 template: "<register></register>"

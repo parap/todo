@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    var login = function ($scope, $location, AuthenticationService) {
+    var login = function ($scope, $location, AuthenticationService, $rootScope) {
         var vm = $scope;
 
         (function initController() {
@@ -29,7 +29,7 @@
     angular
             .module('login')
             .component('login', {
-                $inject: ['$scope', '$location', 'AuthenticationService'],
+                $inject: ['$scope', '$location', 'AuthenticationService', '$rootScope'],
                 templateUrl: 'app/auth/login.template.html',
                 controller: login
             });
