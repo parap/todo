@@ -3,6 +3,10 @@ It is project to learn Angular and to create convenient to-do list.
 The list includes daily, weekly, normal tasks.
 Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
+
+
+- properly intercept "not logged" exception
+
 - add weekly and monthly tasks;
 - allow to set tasks for particular date.
 

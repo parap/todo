@@ -16,6 +16,12 @@ class UserController
         $this->post = json_decode(file_get_contents('php://input'),true);
     }
     
+    public function showLogout()
+    {
+        //FIXME: use correct HTML redirect
+        echo '<html><head><meta redirect /login></head></html>';
+    }
+    
     public function logout(Request $request)
     {
         unset($_SESSION['logged-email']);
