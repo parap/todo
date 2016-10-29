@@ -5,7 +5,7 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 
 
-
+- deploy it
 
 - add weekly and monthly tasks;
 - allow to set tasks for particular date.
