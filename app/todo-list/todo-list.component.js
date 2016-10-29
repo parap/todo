@@ -5,7 +5,7 @@
             module('todoList').
             component('todoList', {
                 templateUrl: 'app/todo-list/todo-list.template.html',
-                controller: function ListController($scope, $http, AuthenticationService) {
+                controller: function ListController($scope, $http, AuthenticationService, $location) {
 
                     highlightButton('1');
 
@@ -30,6 +30,12 @@
                     $scope.fetch = function () {
                         $http.get("/fetch?day=" + $scope.day + "&email=" + email)
                                 .then(function (response) {
+
+                                    if ('logged out' === response.data) {
+                                        $location.path('/login');
+                                        return;
+                                    }
+
                                     $scope.todos = response.data;
 
                                     for (var i = 0; i < $scope.todos.length; i++) {
@@ -57,7 +63,7 @@
                     };
 
                     $scope.switch = function (item) {
-                        params = {"done": item.done, "id": item.id, 
+                        params = {"done": item.done, "id": item.id,
                             "type": item.type, "day": $scope.day, "email": email};
                         $http.post("/index.php?route=complete", params)
                                 .then(function (response) {
@@ -66,7 +72,7 @@
                     };
 
                     $scope.update = function (item) {
-                        params = {"name": item.name, "id": item.id, 
+                        params = {"name": item.name, "id": item.id,
                             "type": item.type, "email": email};
                         $http.post("/index.php?route=update", params);
                     };

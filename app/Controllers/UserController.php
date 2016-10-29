@@ -18,8 +18,7 @@ class UserController
     
     public function showLogout()
     {
-        //FIXME: use correct HTML redirect
-        echo '<html><head><meta redirect /login></head></html>';
+        return 'logged out';
     }
     
     public function logout(Request $request)
