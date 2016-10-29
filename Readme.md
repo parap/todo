@@ -5,7 +5,7 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 
 
-- properly intercept "not logged" exception
+
 
 - add weekly and monthly tasks;
 - allow to set tasks for particular date.
@@ -32,6 +32,8 @@ Download working sample to check how Johnpapa did it.
 
 =============== DONE ====================
 
+
+- properly intercept "not logged" exception
 - set Login/Logout button depend on if user is logged in.
 - on security exception redirect user to login page.
 
