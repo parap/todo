@@ -16,11 +16,11 @@ class AuthHandler
 
     public function verify($route, RequestM $request)
     {
-//        throw new \Exception('Wrong name ');
-        
         if (in_array($route, $this->freeRoutes)) {
             return;
         }
+        
+//        throw new \Exception('Wrong name ');
 
         $username = $request->getM('email') ? : $request->postM['email'];
 
