@@ -22,8 +22,8 @@ try {
     $auth = new AuthHandler($freeRoutes);
     $auth->verify($route, $request);
 } catch (Exception $e) {
-    echo (new UserController)->showLogout($request);
-    return;
+//    echo (new UserController)->showLogout($request);
+//    return;
 }
 
 $controller = $routing->getControllerName();
