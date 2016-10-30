@@ -15,11 +15,12 @@
 
                     $rootScope.logged = AuthenticationService.GetUsername();
                     $scope.logged = $rootScope.logged;
-                    $scope.language = $translate.use();
-
+                    
+                    $scope.language = "undefined" === typeof($translate.use()) ? "ru" : $translate.use();
+                    
                     $scope.changeLanguage = function (langKey) {
                         $translate.use(langKey);
-                        $scope.language = $translate.use();
+                        $scope.language = langKey;
                     };
                 }
             });
