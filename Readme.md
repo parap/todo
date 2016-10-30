@@ -3,9 +3,6 @@ It is project to learn Angular and to create convenient to-do list.
 The list includes daily, weekly, normal tasks.
 Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
-
-- internationalize it (add Russian templates and transcripts)
-
 - add weekly and monthly tasks;
 - allow to set tasks for particular date.
 
@@ -25,12 +22,13 @@ Download working sample to check how Johnpapa did it.
 
 - allow to hide/display every panel;
 - force completed normal items to be auto-archived in one day after completion???
-- add translations, in particular to Russian.
 
 - on edit click - focus edit field, select it's content. On 'escape' click close it without save.
 
 =============== DONE ====================
 
+- internationalize it (add Russian templates and transcripts)
+- add translations, in particular to Russian.
 - deploy it
 - properly intercept "not logged" exception
 - set Login/Logout button depend on if user is logged in.
