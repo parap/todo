@@ -16,12 +16,12 @@ $request = RequestM::createFromGlobals();
 $routing = new Routing($request, $routes);
 $route   = $routing->getRoute();
 
+$controller = $routing->getControllerName();
+$action     = $routing->getActionName();
 // TODO: move it to routing?
 try {
     $auth = new AuthHandler($freeRoutes);
     $auth->verify($route, $request);
-    $controller = $routing->getControllerName();
-    $action     = $routing->getActionName();
 } catch (Exception $e) {
     $controller = 'Controllers\UserController';
     $action = 'showLogout';
