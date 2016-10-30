@@ -10,7 +10,7 @@
                     highlightButton('2');
 
                     var date = new Date();
-                    $scope.weekLength = date.getDay();
+                    $scope.weekLength = (0 === date.getDay() ? 7 : date.getDay());
                     $scope.monthLength = date.getDate();
                     $scope.date = date;
 
