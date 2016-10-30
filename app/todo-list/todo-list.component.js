@@ -30,8 +30,7 @@
                     $scope.fetch = function () {
                         $http.get("fetch?day=" + $scope.day + "&email=" + email)
                                 .then(function (response) {
-
-                                    if ('logged out' === response.data) {
+                                    if ('string' === typeof(response.data)) {
                                         $location.path('/login');
                                         return;
                                     }
