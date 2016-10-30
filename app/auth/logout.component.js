@@ -3,7 +3,7 @@
 
     var logout = function (AuthenticationService, $location) {
         AuthenticationService.ClearCredentials();
-        $location.path('/login');
+        $location.path('login');
     };
 
     angular

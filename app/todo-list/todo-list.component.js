@@ -28,7 +28,7 @@
                     };
 
                     $scope.fetch = function () {
-                        $http.get("/fetch?day=" + $scope.day + "&email=" + email)
+                        $http.get("fetch?day=" + $scope.day + "&email=" + email)
                                 .then(function (response) {
 
                                     if ('logged out' === response.data) {
@@ -47,7 +47,7 @@
                     $scope.archive = function (item) {
                         $scope.todos.splice(this.$index, 1);
                         params = {"id": item.id, "email": email};
-                        $http.post("/index.php?route=archive", params);
+                        $http.post("index.php?route=archive", params);
                     };
 
                     $scope.add = function (text, type) {
@@ -56,7 +56,7 @@
                         $scope.newDaily = '';
                         params = {"name": text, "type": type, "email": email};
 
-                        $http.post("/index.php?route=create", params)
+                        $http.post("index.php?route=create", params)
                                 .then(function (response) {
                                     $scope.fetch();
                                 });
@@ -65,7 +65,7 @@
                     $scope.switch = function (item) {
                         params = {"done": item.done, "id": item.id,
                             "type": item.type, "day": $scope.day, "email": email};
-                        $http.post("/index.php?route=complete", params)
+                        $http.post("index.php?route=complete", params)
                                 .then(function (response) {
                                     item.delay = response.data;
                                 });
@@ -74,7 +74,7 @@
                     $scope.update = function (item) {
                         params = {"name": item.name, "id": item.id,
                             "type": item.type, "email": email};
-                        $http.post("/index.php?route=update", params);
+                        $http.post("index.php?route=update", params);
                     };
 
                     $scope.increaseDay = function () {

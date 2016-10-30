@@ -8,7 +8,7 @@
 
         vm.register = function () {
             vm.dataLoading = true;
-            $http.post('/user/register', vm.user)
+            $http.post('user/register', vm.user)
                     .success(function (response) {
                         if (response.success) {
                             console.log('Registration successful');
