@@ -15,7 +15,7 @@ $routes = [
     ''               => 'IndexController::render',
 ];
 
-$freeRoutes = ['user/register', 'user/login'];
+$freeRoutes = ['user/register', 'user/login', ''];
 
 $user     = 'user';
 $password = 'password';
