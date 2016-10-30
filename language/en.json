@@ -21,5 +21,10 @@
     "SAVE": "Save",
     "RESTORE": "Restore",
     "DELETE": "Delete",
-    "IRREVERSIBLE": "It is irreversible action. Please confirm you are going to delete the item forever"
+    "IRREVERSIBLE": "It is irreversible action. Please confirm you are going to delete the item forever",
+    "DETAILED_DAILY": "Detailed Daily",
+    "TOTAL": "Total",
+    "MONTH": "Month",
+    "WEEK": "Week",
+    "PERCENTAGE": "Percentage"
 }

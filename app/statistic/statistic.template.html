@@ -2,14 +2,14 @@
     <span class="date">{{ date|date }}</span>
     
     <fieldset>
-        <legend class="statistic">Detailed Daily</legend>        
+        <legend class="statistic">{{'DETAILED_DAILY'|translate}}</legend>        
         <ul id="daily-list">
             <li>
                 <div class="row">
-                    <div class="span8">Name:</div>
-                    <div class="span4">Total: </div>
-                <div class="span4">Month: </div>
-                <div class="span4">Week: </div>
+                    <div class="span8">{{'NAME'|translate}}:</div>
+                    <div class="span4">{{'TOTAL'|translate}}: </div>
+                <div class="span4">{{'MONTH'|translate}}: </div>
+                <div class="span4">{{'WEEK'|translate}}: </div>
                 </div>
             </li>
             <li ng-repeat="item in items.daily" ng-init="item.month.number_completion = item.month.number_completion ? item.month.number_completion : '0'; item.month.life_length = item.month.life_length?item.month.life_length:'0'">
@@ -23,16 +23,16 @@
         </ul>
         <div class="row marg">
             <div class="span8">
-                Percentage:
+                {{'PERCENTAGE'|translate}}:
             </div>
             <div class="span4">
-            Total:
+            {{'TOTAL'|translate}}:
             </div>
             <div class="span4">
-            Month: 
+            {{'MONTH'|translate}}: 
             </div>
             <div class="span4">
-            Week: 
+            {{'WEEK'|translate}}: 
             </div>
         </div>
         <div class="row marg">
