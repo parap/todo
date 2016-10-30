@@ -11,13 +11,35 @@ var highlightButton = function (number)
 };
 
 angular.module("todoApp", [
-    "ngRoute", "ngCookies", "todoList", "statistic", "archive", "login", "register", "menu", "logout"
+    "ngRoute", "ngCookies", "todoList", "statistic", "archive", 
+    "login", "register", "menu", "logout", "pascalprecht.translate"
 ])
-        .config(config)
+        .config(configRoute)
+        .config(configTranslate)
         .run(run);
 
-config.$inject = ['$routeProvider'];
-function config($routeProvider) {
+configTranslate.$inject = ['$translateProvider'];
+function configTranslate($translateProvider) {
+    $translateProvider.translations('en', {
+    MAIN: 'Main',
+    STATISTIC: 'Statistic',
+    ARCHIVE: 'Archive',
+    LOGOUT: 'Logout',
+    LOGIN: 'Logout'
+  })
+  .translations('ru', {
+    MAIN: 'Главная',
+    STATISTIC: 'Статистика',
+    ARCHIVE: 'Архив',
+    LOGOUT: 'Выйти',
+    LOGIN: 'Войти'
+  });
+  
+  $translateProvider.preferredLanguage('ru');
+}
+
+configRoute.$inject = ['$routeProvider'];
+function configRoute($routeProvider) {
     $routeProvider
             .when("/statistic", {
                 template: "<statistic></statistic>"
