@@ -20,22 +20,12 @@ angular.module("todoApp", [
 
 configTranslate.$inject = ['$translateProvider'];
 function configTranslate($translateProvider) {
-    $translateProvider.translations('en', {
-    MAIN: 'Main',
-    STATISTIC: 'Statistic',
-    ARCHIVE: 'Archive',
-    LOGOUT: 'Logout',
-    LOGIN: 'Logout'
-  })
-  .translations('ru', {
-    MAIN: 'Главная',
-    STATISTIC: 'Статистика',
-    ARCHIVE: 'Архив',
-    LOGOUT: 'Выйти',
-    LOGIN: 'Войти'
-  });
-  
-  $translateProvider.preferredLanguage('ru');
+    $translateProvider.useStaticFilesLoader({
+        prefix: 'language/',
+        suffix: '.json'
+    });
+
+    $translateProvider.preferredLanguage('ru');
 }
 
 configRoute.$inject = ['$routeProvider'];
