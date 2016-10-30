@@ -4,8 +4,7 @@ The list includes daily, weekly, normal tasks.
 Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 
-
-- deploy it
+- internationalize it (add Russian templates and transcripts)
 
 - add weekly and monthly tasks;
 - allow to set tasks for particular date.
@@ -32,7 +31,7 @@ Download working sample to check how Johnpapa did it.
 
 =============== DONE ====================
 
-
+- deploy it
 - properly intercept "not logged" exception
 - set Login/Logout button depend on if user is logged in.
 - on security exception redirect user to login page.
