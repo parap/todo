@@ -5,7 +5,7 @@
             module('todoList').
             component('archive', {
                 templateUrl: 'app/archive/archive.template.html',
-                controller: function ArchiveController($scope, $http, AuthenticationService) {
+                controller: function ArchiveController($scope, $http, AuthenticationService, $filter) {
 
                     highlightButton('3');
                     
@@ -30,9 +30,9 @@
                                     }
                                 });
                     };
-
+                    
                     $scope.remove = function (item) {
-                        if (confirm('It is irreversible action. Please confirm you are going to delete the item forever')) {
+                        if (confirm($filter('translate')('IRREVERSIBLE'))) {
                             $scope.todos.splice(this.$index, 1);
                             $http.post("index.php?route=remove", {"id": item.id, "email": email});
                         }

@@ -17,5 +17,8 @@
     "TODAY": "Today",
     "ADD_TODO_ITEM": "Add ToDo Item",
     "ADD_Daily_ITEM": "Add Daily Item",
-    "SAVE": "Save"
+    "SAVE": "Save",
+    "RESTORE": "Restore",
+    "DELETE": "Delete",
+    "IRREVERSIBLE": "It is irreversible action. Please confirm you are going to delete the item forever"
 }
