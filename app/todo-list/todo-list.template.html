@@ -1,15 +1,15 @@
 <div class="container-list">
 
     <fieldset>
-        <legend>Normal</legend>
+        <legend>{{'REGULAR'|translate}}</legend>
 
         <form id="todo-form" ng-submit="add(newTodo, 0)">
-            <input id="new-todo" class="" type="text" placeholder="Add Todo Item" ng-model="newTodo" ng-disabled="saving" autofocus required>
+            <input id="new-todo" class="" type="text" placeholder="{{'ADD_TODO_ITEM'|translate}}" ng-model="newTodo" ng-disabled="saving" autofocus required>
         </form>
 
         <div class="row marg">
-            <div class="span9">Name:</div>
-            <div class="span5">Archive</div>
+            <div class="span9">{{'NAME'|translate}}:</div>
+            <div class="span5">{{'ARCHIVE'|translate}}</div>
         </div>
 
         <ul id="todo-list">
@@ -25,7 +25,7 @@
                         </div>
                         <form ng-show="editing" ng-submit="editing = false">
                             <input type="text" ng-model="todo.name" placeholder="todo.name" ng-required/>
-                            <button class="btn" type="submit" ng-click="update(todo)">Save</button>
+                            <button class="btn" type="submit" ng-click="update(todo)">{{'SAVE'|translate}}</button>
                         </form>
 
                     </div>
@@ -35,14 +35,14 @@
     </fieldset>
     <span class="date">{{ date|date }}</span>
     <fieldset>
-        <legend>Daily</legend>
+        <legend>{{'DAILY'|translate}}</legend>
         <form id="daily-form" ng-submit="add(newDaily, 1)">
-            <input id="new-daily" class="" type="text" placeholder="Add Daily Item" ng-model="newDaily" ng-disabled="saving" autofocus required>
+            <input id="new-daily" class="" type="text" placeholder="{{'ADD_DAILY_ITEM'|translate}}" ng-model="newDaily" ng-disabled="saving" autofocus required>
         </form>
 
         <div class="row marg">
-            <div class="span10">Name:</div>
-            <div class="span4">Archive</div>
+            <div class="span10">{{'NAME'|translate}}</div>
+            <div class="span4">{{'ARCHIVE'|translate}}</div>
         </div>
 
         <ul id="daily-list">
@@ -59,7 +59,7 @@
                         <button ng-hide="editing" class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="archive(todo)"></button>
                         <form ng-show="editing" ng-submit="editing = false">
                             <input type="text" class="" ng-model="todo.name" placeholder="todo.name" ng-required/>
-                            <button class="btn" type="submit" ng-click="update(todo)">Save</button>
+                            <button class="btn" type="submit" ng-click="update(todo)">{{'SAVE'|translate}}</button>
                         </form>
                     </div>
                 </div>
@@ -67,8 +67,8 @@
         </ul>
     </fieldset>
     <div class="controls">
-        <button ng-click="decreaseDay()" >Yesterday</button>
-        <button ng-click="increaseDay()" >Tomorrow</button>
-        <span ng-hide="0 == day"><button ng-click="today()" >Today</button></span>
+        <button ng-click="decreaseDay()" >{{'YESTERDAY'|translate}}</button>
+        <button ng-click="increaseDay()" >{{'TOMORROW'|translate}}</button>
+        <span ng-hide="0 == day"><button ng-click="today()" >{{'TODAY'|translate}}</button></span>
     </div>
 </div>

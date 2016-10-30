@@ -7,5 +7,15 @@
     "REGISTER": "Зарегистрироваться",
     "USERNAME": "Емейл",
     "PASSWORD": "Пароль",
-    "SWITCH_ENGLISH": "English"
+    "SWITCH_ENGLISH": "English",
+    "REGULAR": "Разовые",
+    "DAILY": "Ежедневные",
+    "NAME": "Название",
+    "ARCHIVE": "Архивировать",
+    "YESTERDAY": "Следующий день",
+    "TOMORROW": "Предыдущий день",
+    "TODAY": "Сегодня",
+    "ADD_TODO_ITEM": "Новая разовая задача",
+    "ADD_DAILY_ITEM": "Новая ежедневная задача",
+    "SAVE": "Сохранить"
 }

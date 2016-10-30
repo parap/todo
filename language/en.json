@@ -7,5 +7,15 @@
     "REGISTER": "Register",
     "USERNAME": "Username",
     "PASSWORD": "Password",
-    "SWITCH_RUSSIAN": "Русский язык"
+    "SWITCH_RUSSIAN": "Русский язык",
+    "REGULAR": "Regular",
+    "DAILY": "Daily",
+    "NAME": "Name",
+    "ARCHIVE": "Archive",
+    "YESTERDAY": "Yesterday",
+    "TOMORROW": "Tomorrow",
+    "TODAY": "Today",
+    "ADD_TODO_ITEM": "Add ToDo Item",
+    "ADD_Daily_ITEM": "Add Daily Item",
+    "SAVE": "Save"
 }
