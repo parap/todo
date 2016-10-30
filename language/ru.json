@@ -4,5 +4,8 @@
     "ARCHIVE": "Архив",
     "LOGOUT": "Выйти",
     "LOGIN": "Войти",
+    "REGISTER": "Зарегистрироваться",
+    "USERNAME": "Емейл",
+    "PASSWORD": "Пароль",
     "SWITCH_ENGLISH": "English"
 }

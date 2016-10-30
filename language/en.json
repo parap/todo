@@ -4,5 +4,8 @@
     "ARCHIVE": "Archive",
     "LOGOUT": "Logout",
     "LOGIN": "Login",
+    "REGISTER": "Register",
+    "USERNAME": "Username",
+    "PASSWORD": "Password",
     "SWITCH_RUSSIAN": "Русский язык"
 }
