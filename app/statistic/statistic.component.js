@@ -5,7 +5,8 @@
             module('statistic').
             component('statistic', {
                 templateUrl: 'app/statistic/statistic.template.html',
-                controller: function StatisticController($scope, $http, AuthenticationService) {
+                controller: function StatisticController($scope, $http, 
+                AuthenticationService, $location) {
 
                     highlightButton('2');
 
@@ -17,6 +18,12 @@
                     $scope.fetch = function () {
                         $http.get("statistic?email=" + AuthenticationService.GetUsername())
                                 .then(function (response) {
+                                    
+                                    if ('string' === typeof(response.data)) {
+                                        $location.path('/login');
+                                        return;
+                                    }
+                                    
                                     $scope.items = response.data;
                                 });
                     }
