@@ -5,7 +5,8 @@
             module('todoList').
             component('archive', {
                 templateUrl: 'app/archive/archive.template.html',
-                controller: function ArchiveController($scope, $http, AuthenticationService, $filter) {
+                controller: function ArchiveController($scope, $http, 
+                AuthenticationService, $filter, $location) {
 
                     highlightButton('3');
                     
@@ -23,6 +24,12 @@
                     $scope.fetch = function () {
                         $http.get("fetch-archived?day=" + $scope.day + "&email=" + email)
                                 .then(function (response) {
+                                    
+                                    if ('string' === typeof(response.data)) {
+                                        $location.path('/login');
+                                        return;
+                                    }
+                                    
                                     $scope.todos = response.data;
 
                                     for (var i = 0; i < $scope.todos.length; i++) {
