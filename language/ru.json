@@ -26,5 +26,8 @@
     "TOTAL": "Всего",
     "MONTH": "Месяц",
     "WEEK": "Неделя",
-    "PERCENTAGE": "Итого"
+    "PERCENTAGE": "Итого",
+    "DID_TODAY": "Cегодня",
+    "DAYS_PASSED": " дней назад",
+    "NEVER_DID": "ни разу"
 }

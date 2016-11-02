@@ -20,13 +20,35 @@
                             <input ng-hide="editing" type="checkbox" ng-model="todo.done"  ng-click="switch(todo)">
                             <label ng-hide="editing" class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label>
                         </div>
+                        
                         <div class="span4">
-                            <button ng-hide="editing" class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="archive(todo)"></button>
+                            <button ng-hide="editing" class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="archive(todo)" title="{{'TO_ARCHIVE'|translate}}"></button>
                         </div>
                         <form ng-show="editing" ng-submit="editing = false">
                             <input type="text" ng-model="todo.name" placeholder="todo.name" ng-required/>
                             <button class="btn" type="submit" ng-click="update(todo)">{{'SAVE'|translate}}</button>
                         </form>
+                        
+                        <button class="glyphicon glyphicon-time" title="Set date"></button>
+                        
+                        
+                        <p class="input-group">
+                            <input type="text" class="form-control" uib-datepicker-popup="{{format}}" 
+                                   ng-model="dt" is-open="popup1.opened" 
+                                   template-url="my/template.html"
+                                   datepicker-options="dateOptions" ng-required="true" 
+                                   close-text="Close" alt-input-formats="altInputFormats" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                        
+                        
+                        
+                        
+<!--                        <button type="button" class="btn btn-default" ng-click="open1()">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                        </button>-->
 
                     </div>
                 </div>
@@ -54,7 +76,7 @@
                             <label ng-hide="editing" class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label>
                         </div>
                         <div class="span5">
-                            <span ng-hide="editing" class="color{{todo.delay}}">{{todo.delay ? (todo.delay == '0' ? 'did today' : todo.delay + ' days passed') : 'never did'}}</span>
+                            <span ng-hide="editing" class="color{{todo.delay}}">{{todo.delay ? (todo.delay === '0' ? ('DID_TODAY'|translate) : todo.delay + ('DAYS_PASSED'|translate)) : ('NEVER_DID'|translate)}}</span>
                         </div>
                         <button ng-hide="editing" class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="archive(todo)"></button>
                         <form ng-show="editing" ng-submit="editing = false">
