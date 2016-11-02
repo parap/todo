@@ -33,8 +33,11 @@ Download working sample to check how Johnpapa did it.
 
 - allow hide & display panels;
 
+- allow set statistic range: calendar months/weeks or any other defined time interval.
 
 - on edit click - focus edit field, select it's content. On 'escape' click close it without save.
+
+
 
 =============== DONE ====================
 
