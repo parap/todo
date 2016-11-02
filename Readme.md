@@ -10,7 +10,6 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 - force completed normal items to be disappear eventually next days after completion:
 make font smaller and thinner.
 
-- set legend fit current locale
 
 - translate current date month to Russian
 - fix Russian {1 день, 2-3-4 дня, 5-6-7 дней} translation
@@ -36,6 +35,8 @@ Download working sample to check how Johnpapa did it.
 - on edit click - focus edit field, select it's content. On 'escape' click close it without save.
 
 =============== DONE ====================
+
+- set legend fit current locale
 
 - fix wrong delay calculation: if complete task 1 day ago then complete it 2 days ago it shows as completed 2 days ago
 
