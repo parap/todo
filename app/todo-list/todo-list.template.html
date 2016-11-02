@@ -91,6 +91,6 @@
     <div class="controls">
         <button ng-click="decreaseDay()" >{{'YESTERDAY'|translate}}</button>
         <button ng-click="increaseDay()" >{{'TOMORROW'|translate}}</button>
-        <span ng-hide="0 == day"><button ng-click="today()" >{{'TODAY'|translate}}</button></span>
+        <span><button ng-disabled="0 == day" ng-click="today()" >{{'TODAY'|translate}}</button></span>
     </div>
 </div>
