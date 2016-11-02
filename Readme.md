@@ -38,6 +38,8 @@ Download working sample to check how Johnpapa did it.
 
 =============== DONE ====================
 
+- fix "cannot remove" bug;
+
 - set legend fit current locale
 
 - fix wrong delay calculation: if complete task 1 day ago then complete it 2 days ago it shows as completed 2 days ago
