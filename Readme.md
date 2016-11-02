@@ -5,6 +5,12 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 =============== TO DO ================
 
+- force completed normal items to be disappear eventually next days after completion:
+make font smaller and thinner.
+
+- translate current date month to Russian
+- fix Russian {1 день, 2-3-4 дня, 5-6-7 дней} translation
+
 - allow to set tasks for particular date.
 - add weekly and monthly tasks;
 
@@ -21,7 +27,7 @@ Download working sample to check how Johnpapa did it.
 - add revolver tasks;
 
 - allow hide & display panels;
-- force completed normal items to be auto-archived in one day after completion???
+
 
 - on edit click - focus edit field, select it's content. On 'escape' click close it without save.
 
