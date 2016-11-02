@@ -8,6 +8,8 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 - force completed normal items to be disappear eventually next days after completion:
 make font smaller and thinner.
 
+- set legend fit current locale
+
 - translate current date month to Russian
 - fix Russian {1 день, 2-3-4 дня, 5-6-7 дней} translation
 
