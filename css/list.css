@@ -55,10 +55,30 @@ div.row {
 
 legend {
     color: black;
-    width: 8%;
+    /*width: 13%;*/
     margin-left: 100px;
     margin-bottom: 0;
     border-width: 0;
+}
+
+legend.legend-regular-ru{
+    width: 9%;
+}
+
+legend.legend-regular-en{
+    width: 8%;
+}
+
+legend.legend-daily-ru{
+    width: 13%;
+}
+
+legend.legend-daily-en{
+    width: 5%;
+}
+
+legend.ng-binding {
+    width: 8%;
 }
 
 .statistic {
