@@ -5,6 +5,8 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 =============== TO DO ================
 
+- dynamically change legend in dependence from language selected
+
 - save language preference to cookies
 
 - force completed normal items to be disappear eventually next days after completion:
