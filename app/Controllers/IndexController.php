@@ -47,6 +47,12 @@ class IndexController
         $this->repo->archive($id);
     }
 
+    public function remove(RequestM $request)
+    {
+        $id = $request->postM['id'];
+        $this->repo->remove($id);
+    }
+
     public function unarchive(RequestM $request)
     {
         $id = $request->postM['id'];
@@ -92,5 +98,4 @@ class IndexController
     {
         return file_get_contents('index.html');
     }
-
 }
