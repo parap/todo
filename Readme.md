@@ -3,10 +3,10 @@ It is project to learn Angular and to create convenient to-do list.
 The list includes daily, weekly, normal tasks.
 Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
-- add weekly and monthly tasks;
-- allow to set tasks for particular date.
+=============== TO DO ================
 
-- fix statistic:  ∞% ∞% ∞%  in final percentage for single completed item
+- allow to set tasks for particular date.
+- add weekly and monthly tasks;
 
 - create FlashService to indicate that login was successful or not. 
 Download working sample to check how Johnpapa did it.
@@ -20,12 +20,14 @@ Download working sample to check how Johnpapa did it.
 - add amount of completed points per day, progress bar.
 - add revolver tasks;
 
-- allow to hide/display every panel;
+- allow hide & display panels;
 - force completed normal items to be auto-archived in one day after completion???
 
 - on edit click - focus edit field, select it's content. On 'escape' click close it without save.
 
 =============== DONE ====================
+
+- fix statistic:  ∞% ∞% ∞%  in final percentage for single completed item
 
 - internationalize it (add Russian templates and transcripts)
 - add translations, in particular to Russian.
