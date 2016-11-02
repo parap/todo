@@ -27,6 +27,10 @@ Download working sample to check how Johnpapa did it.
 
 =============== DONE ====================
 
+- fix wrong delay calculation: if complete task 1 day ago then complete it 2 days ago it shows as completed 2 days ago
+
+- translate "never did", "X days ago"
+
 - fix statistic:  ∞% ∞% ∞%  in final percentage for single completed item
 
 - internationalize it (add Russian templates and transcripts)
