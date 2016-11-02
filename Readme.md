@@ -5,6 +5,8 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 =============== TO DO ================
 
+- save language preference to cookies
+
 - force completed normal items to be disappear eventually next days after completion:
 make font smaller and thinner.
 
