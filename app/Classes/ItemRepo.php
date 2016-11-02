@@ -11,7 +11,16 @@ class ItemRepo extends DbAssist
     {
         $emailP = $this->safe($email);
 
-        $query = "SELECT i.*, DATEDIFF(NOW(), i.completed_at) as delay "
+        // subquery included in DATEDIFF 
+        // seeks the most recent item completion date in the past 
+        // to create correct delay
+        
+        $query = "SELECT i.*, "
+                . "DATEDIFF(NOW(), (SELECT d.completed_at FROM daily AS d "
+                . "WHERE d.item_id = i.id "
+                . "AND d.completed_at <= NOW()"
+                . "ORDER BY completed_at DESC "
+                . "LIMIT 1)) as delay "
                 . "FROM item i "
                 . "LEFT JOIN user u ON i.user_id = u.id "
                 . "WHERE i.created_at <= '$date' AND "
@@ -55,7 +64,10 @@ class ItemRepo extends DbAssist
 
     public function fetchCompletedDaily($date)
     {
-        $template = 'SELECT item_id FROM daily WHERE completed_at = "%s"';
+        $template = 'SELECT item_id FROM daily '
+                . 'WHERE completed_at = "%s"'
+//                . 'AND completed_at <= NOW()'
+                ;
         $query    = sprintf($template, $date);
 
         return array_map(function($x) {
@@ -98,6 +110,7 @@ class ItemRepo extends DbAssist
         }
 
         $id    = $this->safe($id);
+        
         $query = "UPDATE item SET done='1', completed_at='$date' WHERE id='$id'";
 
         return $this->query($query);
