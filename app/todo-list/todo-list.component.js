@@ -5,7 +5,8 @@
             module('todoList').
             component('todoList', {
                 templateUrl: 'app/todo-list/todo-list.template.html',
-                controller: function ListController($scope, $http, AuthenticationService, $location) {
+                controller: function ListController($scope, $http, AuthenticationService, 
+                $location, $rootScope) {
 
                     highlightButton('1');
 
@@ -17,6 +18,99 @@
                             done: false
                         }
                     ];
+                    
+                    $scope.language = $rootScope.language;
+                    // 
+// TEST CODE BEGINS
+//                    $scope.today = function () {
+//                        $scope.dt = new Date();
+//                    };
+//                    $scope.today();
+//
+//                    $scope.clear = function () {
+//                        $scope.dt = null;
+//                        $scope.datepickerPopupTemplateUrl = 'my/template'
+//                    };
+//
+//                    
+//                    $scope.inlineOptions = {
+//                        customClass: getDayClass,
+//                        minDate: new Date(),
+//                        showWeeks: true,
+//                        datepickerPopupTemplateUrl: 'my/template'
+//                    };
+//
+//                    $scope.dateOptions = {
+//                        dateDisabled: disabled,
+//                        formatYear: 'yy',
+//                        maxDate: new Date(2020, 5, 22),
+//                        minDate: new Date(),
+//                        startingDay: 1,
+//                        datepickerPopupTemplateUrl: 'my/template'
+//                    };
+//                    
+//                    $scope.attrs = {
+//                        datepickerPopupTemplateUrl: 'my/template'
+//                    }
+//
+//                    // Disable weekend selection
+//                    function disabled(data) {
+//                        var date = data.date,
+//                                mode = data.mode;
+//                        return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+//                    }
+//
+//                    $scope.toggleMin = function () {
+//                        $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
+//                        $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
+//                    };
+//
+//                    $scope.toggleMin();
+//
+//                    $scope.open1 = function () {
+//                        $scope.popup1.opened = true;
+//                    };
+//                    
+//                    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+//                    $scope.format = $scope.formats[0];
+//                    $scope.altInputFormats = ['M!/d!/yyyy'];
+//                    $scope.datepickerPopupTemplateUrl = {'attrs': 'my/template'};
+//
+//
+//                    $scope.popup1 = {
+//                        opened: false
+//                    };
+//
+//                    function getDayClass(data) {
+//                        var date = data.date,
+//                                mode = data.mode;
+//                        if (mode === 'day') {
+//                            var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
+//
+//                            for (var i = 0; i < $scope.events.length; i++) {
+//                                var currentDay = new Date($scope.events[i].date).setHours(0, 0, 0, 0);
+//
+//                                if (dayToCheck === currentDay) {
+//                                    return $scope.events[i].status;
+//                                }
+//                            }
+//                        }
+//
+//                        return '';
+//                    }
+// TEST CODE ENDS
+
+  
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
 
                     $scope.day = 0;
                     $scope.date = new Date();

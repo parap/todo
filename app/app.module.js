@@ -12,7 +12,8 @@ var highlightButton = function (number)
 
 angular.module("todoApp", [
     "ngRoute", "ngCookies", "todoList", "statistic", "archive", 
-    "login", "register", "menu", "logout", "pascalprecht.translate"
+    "login", "register", "menu", "logout", "pascalprecht.translate",
+    "ui.bootstrap"
 ])
         .config(configRoute)
         .config(configTranslate)
@@ -54,6 +55,8 @@ function configRoute($routeProvider) {
 
 run.$inject = ['$rootScope', '$location', '$cookieStore', '$http'];
 function run($rootScope, $location, $cookieStore, $http) {
+    // FIXME: see menu.component.js usage of baseLanguage
+    $rootScope.baseLanguage='ru';
     // keep user logged in after page refresh
     $rootScope.globals = $cookieStore.get('globals') || {};
     if ($rootScope.globals.currentUser) {
