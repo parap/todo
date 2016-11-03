@@ -9,6 +9,7 @@ $routes = [
     'archive'        => 'IndexController::archive',
     'unarchive'      => 'IndexController::unarchive',
     'fetch-archived' => 'IndexController::fetchArchived',
+    'set-date'       => 'IndexController::setDate',
     'statistic'      => 'StatisticController::index',
     'user/register'  => 'UserController::register',
     'user/login'     => 'UserController::login',
