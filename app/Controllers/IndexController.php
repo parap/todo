@@ -93,6 +93,13 @@ class IndexController
 
         return isset($results[0]['delay']) ? $results[0]['delay'] : '';
     }
+    
+    public function setDate(RequestM $request)
+    {
+        $id   = $request->postM['id'];
+        $date  = $request->postM['date'];
+        $this->repo->setDate($id, $date);
+    }
 
     public function render()
     {
