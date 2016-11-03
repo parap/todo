@@ -8,8 +8,10 @@
         </form>
 
         <div class="row marg">
-            <div class="span9">{{'NAME'|translate}}:</div>
+            <div class="span12">{{'NAME'|translate}}:</div>
+            <div class="span6">{{'CHANGE_DATE'|translate}}:</div>
             <div class="span5">{{'TO_ARCHIVE'|translate}}:</div>
+
         </div>
 
         <ul id="todo-list">
@@ -20,22 +22,15 @@
                             <input ng-hide="editing" type="checkbox" ng-model="todo.done"  ng-click="switch(todo)">
                             <label ng-hide="editing" class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label>
                         </div>
-                        
-                        <div class="span4">
-                            <button ng-hide="editing" class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="archive(todo)" title="{{'TO_ARCHIVE'|translate}}"></button>
-                        </div>
-                        <form ng-show="editing" ng-submit="editing = false">
-                            <input type="text" ng-model="todo.name" placeholder="todo.name" ng-required/>
-                            <button class="btn" type="submit" ng-click="update(todo)">{{'SAVE'|translate}}</button>
-                        </form>
+<span class="inline-table">{{todo.todo_at|date}}</span>                        
 
 
 <!--// TEST CODE BEGINS-->                                              
-<span>{{todo.todo_at|date}}</span>
+
 
                         <button type="button" 
                                 uib-datepicker-popup="{{format}}"
-                                class="btn btn-default" 
+                                class="btn btn-default inline-table" 
                                 ng-click="open($index)"
                                 ng-model="todo.todo_at" 
                                 ng-change="change(todo.id, todo.todo_at)"
@@ -45,6 +40,14 @@
                             
                             <i class="glyphicon glyphicon-time"></i>
                         </button>
+                        <div class="span4">
+                            <button ng-hide="editing" class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="archive(todo)" title="{{'TO_ARCHIVE'|translate}}"></button>
+                        </div>
+
+                        <form ng-show="editing" ng-submit="editing = false">
+                            <input type="text" ng-model="todo.name" placeholder="todo.name" ng-required/>
+                            <button class="btn" type="submit" ng-click="update(todo)">{{'SAVE'|translate}}</button>
+                        </form>
                         
 <!--// TEST CODE ENDS-->
 

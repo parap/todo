@@ -22,6 +22,11 @@
     width: 80px;
 }
 
+.span6 {
+    display: inline-table;
+    width: 110px;
+}
+
 .span8 {
     display: inline-table;
     width: 350px;
@@ -37,12 +42,31 @@
     width: 430px;
 }
 
+.span12 {
+    display: inline-table;
+    width: 460px;
+}
+
+button.inline-table {
+    display: inline-table;
+}
+
 div.marg {
    margin-left: 25px; 
 }
 
+/*hack to display all buttons inline*/
+div.ng-pristine, div.ng-valid-date-disabled {
+    display:inline-table;
+}
+
 div.row {
-    display:table;
+    display:inline-table;
+    width: 800px;
+}
+
+span.inline-table{
+    display: inline-table;
 }
 
 .row label {
