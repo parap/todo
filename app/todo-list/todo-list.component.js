@@ -20,35 +20,30 @@
                     ];
                     
                     $scope.language = $rootScope.language;
-                    // 
-// TEST CODE BEGINS
-                    $scope.clear = function () {
-                        $scope.dt = null;
-                    };
 
+                    
+                    
+// TEST CODE BEGINS
                     $scope.inlineOptions = {
-                        customClass: getDayClass,
-                        minDate: new Date(),
-                        showWeeks: true,
                     };
 
                     $scope.dateOptions = {
                         formatYear: 'yy',
                         maxDate: new Date(2020, 5, 22),
                         minDate: new Date(),
-                        startingDay: 1,
+                        showWeeks: false,
+                        showButtonBar: false,
+                        startingDay: 1
                     };
                     
                     $scope.toggleMin = function () {
                         $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
                         $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
                     };
-
+                    
                     $scope.toggleMin();
 
                     $scope.format = ['dd-MMMM-yyyy'];
-                    $scope.format = ['dd-MMMM-yyyy'];
-//                    $scope.format = $scope.formats[0];
                     $scope.altInputFormats = ['M!/d!/yyyy'];
                     
                     $scope.popup = {};
@@ -56,38 +51,11 @@
                         $scope.popup[index] = {};
                         $scope.popup[index].opened = true;
                     };
-
-
-                    function getDayClass(data) {
-                        var date = data.date,
-                                mode = data.mode;
-                        if (mode === 'day') {
-                            var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
-
-                            for (var i = 0; i < $scope.events.length; i++) {
-                                var currentDay = new Date($scope.events[i].date).setHours(0, 0, 0, 0);
-
-                                if (dayToCheck === currentDay) {
-                                    return $scope.events[i].status;
-                                }
-                            }
-                        }
-
-                        return '';
-                    }
-// TEST CODE ENDS
-
-  
                     
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
+                    $scope.change = function (id, todo_at) {
+                        var params = {'id': id, 'date': todo_at, 'email': email};
+                        $http.post("index.php?route=set-date", params);
+                    };
 
                     $scope.day = 0;
                     $scope.date = new Date();
