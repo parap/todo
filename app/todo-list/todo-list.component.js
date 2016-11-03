@@ -22,82 +22,63 @@
                     $scope.language = $rootScope.language;
                     // 
 // TEST CODE BEGINS
-//                    $scope.today = function () {
-//                        $scope.dt = new Date();
-//                    };
-//                    $scope.today();
-//
-//                    $scope.clear = function () {
-//                        $scope.dt = null;
-//                        $scope.datepickerPopupTemplateUrl = 'my/template'
-//                    };
-//
-//                    
-//                    $scope.inlineOptions = {
-//                        customClass: getDayClass,
-//                        minDate: new Date(),
-//                        showWeeks: true,
-//                        datepickerPopupTemplateUrl: 'my/template'
-//                    };
-//
-//                    $scope.dateOptions = {
-//                        dateDisabled: disabled,
-//                        formatYear: 'yy',
-//                        maxDate: new Date(2020, 5, 22),
-//                        minDate: new Date(),
-//                        startingDay: 1,
-//                        datepickerPopupTemplateUrl: 'my/template'
-//                    };
-//                    
-//                    $scope.attrs = {
-//                        datepickerPopupTemplateUrl: 'my/template'
-//                    }
-//
-//                    // Disable weekend selection
-//                    function disabled(data) {
-//                        var date = data.date,
-//                                mode = data.mode;
-//                        return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
-//                    }
-//
-//                    $scope.toggleMin = function () {
-//                        $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
-//                        $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
-//                    };
-//
-//                    $scope.toggleMin();
-//
-//                    $scope.open1 = function () {
-//                        $scope.popup1.opened = true;
-//                    };
-//                    
-//                    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+                    $scope.todayB = function () {
+                        $scope.dt = new Date();
+                    };
+                    $scope.todayB();
+
+                    $scope.clear = function () {
+                        $scope.dt = null;
+                    };
+
+                    $scope.inlineOptions = {
+                        customClass: getDayClass,
+                        minDate: new Date(),
+                        showWeeks: true,
+                    };
+
+                    $scope.dateOptions = {
+                        formatYear: 'yy',
+                        maxDate: new Date(2020, 5, 22),
+                        minDate: new Date(),
+                        startingDay: 1,
+                    };
+                    
+                    $scope.toggleMin = function () {
+                        $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
+                        $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
+                    };
+
+                    $scope.toggleMin();
+
+                    $scope.format = ['dd-MMMM-yyyy'];
 //                    $scope.format = $scope.formats[0];
-//                    $scope.altInputFormats = ['M!/d!/yyyy'];
-//                    $scope.datepickerPopupTemplateUrl = {'attrs': 'my/template'};
-//
-//
-//                    $scope.popup1 = {
-//                        opened: false
-//                    };
-//
-//                    function getDayClass(data) {
-//                        var date = data.date,
-//                                mode = data.mode;
-//                        if (mode === 'day') {
-//                            var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
-//
-//                            for (var i = 0; i < $scope.events.length; i++) {
-//                                var currentDay = new Date($scope.events[i].date).setHours(0, 0, 0, 0);
-//
-//                                if (dayToCheck === currentDay) {
-//                                    return $scope.events[i].status;
-//                                }
-//                            }
-//                        }
-//
-//                        return '';
-//                    }
+                    $scope.altInputFormats = ['M!/d!/yyyy'];
+                    
+                    $scope.popup = {};
+                    $scope.open = function (index) {
+                        $scope.popup[index] = {};
+                        $scope.popup[index].opened = true;
+                    };
+
+
+                    function getDayClass(data) {
+                        var date = data.date,
+                                mode = data.mode;
+                        if (mode === 'day') {
+                            var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
+
+                            for (var i = 0; i < $scope.events.length; i++) {
+                                var currentDay = new Date($scope.events[i].date).setHours(0, 0, 0, 0);
+
+                                if (dayToCheck === currentDay) {
+                                    return $scope.events[i].status;
+                                }
+                            }
+                        }
+
+                        return '';
+                    }
 // TEST CODE ENDS
 
   

@@ -30,27 +30,18 @@
                         </form>
 
 
-<!--// TEST CODE BEGINS-->                        
-<!--                        <button class="glyphicon glyphicon-time" title="Set date"></button>
-                        
-                        
-                        <p class="input-group">
-                            <input type="text" class="form-control" uib-datepicker-popup="{{format}}" 
-                                   ng-model="dt" is-open="popup1.opened" 
-                                   template-url="my/template.html"
-                                   datepicker-options="dateOptions" ng-required="true" 
-                                   close-text="Close" alt-input-formats="altInputFormats" />
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
-                            </span>
-                        </p>
-                        -->
-                        
-                        
-                        
-<!--                        <button type="button" class="btn btn-default" ng-click="open1()">
-                            <i class="glyphicon glyphicon-calendar"></i>
-                        </button>-->
+<!--// TEST CODE BEGINS-->                                              
+                        <button type="button" 
+                                uib-datepicker-popup="{{format}}"
+                                class="btn btn-default" 
+                                ng-click="open($index)"
+                                ng-model="dt" 
+                                is-open="popup[$index].opened" 
+                                datepicker-options="dateOptions">
+                            
+                            <i class="glyphicon glyphicon-time"></i>
+                        </button>
+                        {{dt}}
 <!--// TEST CODE ENDS-->
 
                     </div>
