@@ -301,4 +301,11 @@ WHERE i.created_at <= '$date' AND i.type = '1' AND u.email='$emailP'";
         return [$index => ['done' => (int) $totalCompleted, 'time' => (int) $totalCreatedAfter + (int) $totalCreatedBefore]];
     }
 
+    public function setDate($id, $date)
+    {
+        $id    = $this->safe($id);
+        $query = "UPDATE item SET todo_at='$date' WHERE id='$id'";
+
+        return $this->query($query);
+    }
 }
