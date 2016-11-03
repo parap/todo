@@ -22,11 +22,6 @@
                     $scope.language = $rootScope.language;
                     // 
 // TEST CODE BEGINS
-                    $scope.todayB = function () {
-                        $scope.dt = new Date();
-                    };
-                    $scope.todayB();
-
                     $scope.clear = function () {
                         $scope.dt = null;
                     };
@@ -51,6 +46,7 @@
 
                     $scope.toggleMin();
 
+                    $scope.format = ['dd-MMMM-yyyy'];
                     $scope.format = ['dd-MMMM-yyyy'];
 //                    $scope.format = $scope.formats[0];
                     $scope.altInputFormats = ['M!/d!/yyyy'];
