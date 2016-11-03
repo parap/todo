@@ -25,7 +25,6 @@ make font smaller and thinner.
 - translate current date month to Russian
 - fix Russian {1 день, 2-3-4 дня, 5-6-7 дней} translation
 
-- allow to set tasks for particular date.
 - add weekly and monthly tasks;
 
 - create FlashService to indicate that login was successful or not. 
@@ -49,6 +48,8 @@ Download working sample to check how Johnpapa did it.
 
 
 =============== DONE ====================
+
+- allow to set tasks for particular date.
 
 - fix "cannot remove" bug;
 
