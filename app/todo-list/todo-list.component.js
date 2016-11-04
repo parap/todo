@@ -52,10 +52,19 @@
                         $scope.popup[index].opened = true;
                     };
                     
-                    $scope.change = function (id, todo_at) {
+                    $scope.change = function (id, todo_at, index) {
                         var params = {'id': id, 'date': todo_at, 'email': email};
-                        $http.post("index.php?route=set-date", params);
+                        $http.post("index.php?route=set-date", params)
+                                .then(function (response) {
+                                    $scope.todos[index].time_left = $scope.convertTimeLeft(response.data);
+                                });
                     };
+                    
+                    $scope.convertTimeLeft = function(timeLeft) {
+                        if (timeLeft < 0) return 8;
+                        if (timeLeft > 8) return 0;
+                        return (8 - timeLeft);
+                    }
 
                     $scope.day = 0;
                     $scope.date = new Date();

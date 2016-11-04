@@ -15,14 +15,14 @@
         </div>
 
         <ul id="todo-list">
-            <li ng-repeat="todo in todos">
+            <li ng-repeat="todo in todos" ng-init="todo.time_left=convertTimeLeft(todo.time_left)">
                 <div ng-if="todo.type == 0">
                     <div class="row">
                         <div class="span8">
                             <input ng-hide="editing" type="checkbox" ng-model="todo.done"  ng-click="switch(todo)">
                             <label ng-hide="editing" class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label>
                         </div>
-<span class="inline-table">{{todo.todo_at|date}}</span>                        
+<span class="inline-table color{{todo.time_left}}">{{todo.todo_at|date}}</span>                        
 
 
 <!--// TEST CODE BEGINS-->                                              
@@ -33,7 +33,7 @@
                                 class="btn btn-default inline-table" 
                                 ng-click="open($index)"
                                 ng-model="todo.todo_at" 
-                                ng-change="change(todo.id, todo.todo_at)"
+                                ng-change="change(todo.id, todo.todo_at, $index)"
                                 show-button-bar="false"
                                 is-open="popup[$index].opened" 
                                 datepicker-options="dateOptions">
