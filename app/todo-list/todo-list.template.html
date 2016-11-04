@@ -15,7 +15,7 @@
         </div>
 
         <ul id="todo-list">
-            <li ng-repeat="todo in todos" ng-init="todo.time_left=convertTimeLeft(todo.time_left)">
+            <li ng-repeat="todo in todos" ng-init="todo.time_left=convertTimeLeft(todo.time_left, todo.done)">
                 <div ng-if="todo.type == 0">
                     <div class="row">
                         <div class="span8">

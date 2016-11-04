@@ -99,7 +99,7 @@ class IndexController
         $id   = $request->postM['id'];
         $date  = $request->postM['date'];
         $this->repo->setDate($id, $date);
-        echo $this->repo->findTimeLeft($id);
+        echo json_encode($this->repo->findTimeLeft($id));
     }
 
     public function render()

@@ -46,11 +46,13 @@
                         var params = {'id': id, 'date': todo_at, 'email': email};
                         $http.post("index.php?route=set-date", params)
                                 .then(function (response) {
-                                    $scope.todos[index].time_left = $scope.convertTimeLeft(response.data);
+                                    $scope.todos[index].time_left = $scope.convertTimeLeft(response.data.time_left, response.data.done);
                                 });
                     };
                     
-                    $scope.convertTimeLeft = function(timeLeft) {
+                    $scope.convertTimeLeft = function(timeLeft, done) {
+                        if (done) return 0;
+                        if (done === "1") return 0;
                         if (timeLeft < 0) return 8;
                         if (timeLeft > 8) return 0;
                         return (8 - timeLeft);

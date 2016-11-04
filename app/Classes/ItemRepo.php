@@ -313,9 +313,9 @@ WHERE i.created_at <= '$date' AND i.type = '1' AND u.email='$emailP'";
     public function findTimeLeft($id)
     {
         $id    = $this->safe($id);
-        $query = "SELECT DATEDIFF(i.todo_at, NOW()) AS time_left "
+        $query = "SELECT DATEDIFF(i.todo_at, NOW()) AS time_left, done "
                 . "FROM item AS i "
                 . "WHERE i.id = '$id' ";
-        return $this->query($query)[0]['time_left'];
+        return $this->query($query)[0];
     }
 }
