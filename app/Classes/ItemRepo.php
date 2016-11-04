@@ -16,11 +16,12 @@ class ItemRepo extends DbAssist
         // to create correct delay
         
         $query = "SELECT i.*, "
+                . "DATEDIFF(i.todo_at, NOW()) AS time_left, "
                 . "DATEDIFF(NOW(), (SELECT d.completed_at FROM daily AS d "
                 . "WHERE d.item_id = i.id "
                 . "AND d.completed_at <= NOW()"
                 . "ORDER BY completed_at DESC "
-                . "LIMIT 1)) as delay "
+                . "LIMIT 1)) AS delay "
                 . "FROM item i "
                 . "LEFT JOIN user u ON i.user_id = u.id "
                 . "WHERE i.created_at <= '$date' AND "
@@ -307,5 +308,14 @@ WHERE i.created_at <= '$date' AND i.type = '1' AND u.email='$emailP'";
         $query = "UPDATE item SET todo_at='$date' WHERE id='$id'";
 
         return $this->query($query);
+    }
+    
+    public function findTimeLeft($id)
+    {
+        $id    = $this->safe($id);
+        $query = "SELECT DATEDIFF(i.todo_at, NOW()) AS time_left "
+                . "FROM item AS i "
+                . "WHERE i.id = '$id' ";
+        return $this->query($query)[0]['time_left'];
     }
 }
