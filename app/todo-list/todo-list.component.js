@@ -25,24 +25,17 @@
                     
 // TEST CODE BEGINS
                     $scope.inlineOptions = {
+                        minDate: new Date(2014, 1, 1)
                     };
 
                     $scope.dateOptions = {
                         formatYear: 'yy',
                         maxDate: new Date(2020, 5, 22),
-                        minDate: new Date(),
                         showWeeks: false,
                         showButtonBar: false,
                         startingDay: 1
                     };
                     
-                    $scope.toggleMin = function () {
-                        $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
-                        $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
-                    };
-                    
-                    $scope.toggleMin();
-
                     $scope.format = ['dd-MMMM-yyyy'];
                     $scope.altInputFormats = ['M!/d!/yyyy'];
                     
