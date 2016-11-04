@@ -3,8 +3,12 @@
     color: #ddd;
 }
 
-#todo-list li button {
+#todo-list>li>button {
     margin-left: 40px;
+}
+
+.row>button, .row>div>button {
+    margin-left:40px;
 }
 
 .standard {
