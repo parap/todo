@@ -51,7 +51,7 @@
                     };
                     
                     $scope.convertTimeLeft = function(timeLeft, done) {
-                        if (done) return 0;
+                        if (done === true) return 0;
                         if (done === "1") return 0;
                         if (timeLeft < 0) return 8;
                         if (timeLeft > 8) return 0;
@@ -108,6 +108,7 @@
                         $http.post("index.php?route=complete", params)
                                 .then(function (response) {
                                     item.delay = response.data;
+                                    item.time_left = $scope.convertTimeLeft(item.time_left, item.done);
                                 });
                     };
 
