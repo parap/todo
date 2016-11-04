@@ -20,10 +20,7 @@
                     ];
                     
                     $scope.language = $rootScope.language;
-
-                    
-                    
-// TEST CODE BEGINS
+// calendar part begins                    
                     $scope.inlineOptions = {
                         minDate: new Date(2014, 1, 1)
                     };
@@ -58,6 +55,7 @@
                         if (timeLeft > 8) return 0;
                         return (8 - timeLeft);
                     }
+// calendar part ends
 
                     $scope.day = 0;
                     $scope.date = new Date();
