@@ -5,6 +5,7 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 =============== TO DO ================
 
+- allow selecting dates in the past in calendar
 
 - add bonus prize system, earning coins:
 Did all everyday tasks for one day? Earn a silver coin.
@@ -20,7 +21,6 @@ Etc.
 
 - force completed normal items to be disappear eventually next days after completion:
 make font smaller and thinner.
-
 
 - translate current date month to Russian
 - fix Russian {1 день, 2-3-4 дня, 5-6-7 дней} translation
@@ -45,9 +45,9 @@ Download working sample to check how Johnpapa did it.
 
 - on edit click - focus edit field, select it's content. On 'escape' click close it without save.
 
-
-
 =============== DONE ====================
+
+- color calendar dates in dependence from how much time left
 
 - allow to set tasks for particular date.
 
