@@ -5,8 +5,6 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 =============== TO DO ================
 
-- allow selecting dates in the past in calendar
-
 - add bonus prize system, earning coins:
 Did all everyday tasks for one day? Earn a silver coin.
 Did all everyday tasks for a whole week? Earn a gold coin.
@@ -46,6 +44,9 @@ Download working sample to check how Johnpapa did it.
 - on edit click - focus edit field, select it's content. On 'escape' click close it without save.
 
 =============== DONE ====================
+
+- make completed dates to be shown in green
+- allow selecting dates in the past in calendar
 
 - color calendar dates in dependence from how much time left
 
