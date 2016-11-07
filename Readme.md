@@ -7,13 +7,7 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 =============== TO DO ================
 
-- add bonus prize system, earning coins:
-Did all everyday tasks for one day? Earn a silver coin.
-Did all everyday tasks for a whole week? Earn a gold coin.
-Did all everyday tasks for a whole month? Earn a platinum coin.
-Did a plain task? Earn copper coin.
-Did one kind of a tasks for a whole week? Earn a copper coin.
-Etc.
+
 
 - dynamically change legend in dependence from language selected
 
@@ -44,6 +38,14 @@ Download working sample to check how Johnpapa did it.
 - allow setting statistic range: calendar months/weeks or any other defined time interval.
 
 - on edit click - focus edit field, select it's content. On 'escape' click close it without save.
+
+- add bonus prize system, earning coins:
+Did all everyday tasks for one day? Earn a silver coin.
+Did all everyday tasks for a whole week? Earn a gold coin.
+Did all everyday tasks for a whole month? Earn a platinum coin.
+Did a plain task? Earn copper coin.
+Did one kind of a tasks for a whole week? Earn a copper coin.
+Etc.
 
 =============== DONE ====================
 
