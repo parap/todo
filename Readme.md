@@ -7,7 +7,9 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 =============== TO DO ================
 
+- BASE: add weekly and monthly tasks;
 
+- BASE: add revolver tasks;
 
 - dynamically change legend in dependence from language selected
 
@@ -17,9 +19,6 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 make font smaller and thinner.
 
 - translate current date month to Russian
-- fix Russian {1 день, 2-3-4 дня, 5-6-7 дней} translation
-
-- add weekly and monthly tasks;
 
 - create FlashService to indicate that login was successful or not. 
 Download working sample to check how Johnpapa did it.
@@ -27,11 +26,10 @@ Download working sample to check how Johnpapa did it.
 - allow Google Accounts login?
 
 - add graphs. Like weight site.
-- add calendar to set required date;
 
 - allow items drag & n & drop;
 - add amount of completed points per day, progress bar.
-- add revolver tasks;
+
 
 - allow hide & display panels;
 
@@ -49,10 +47,13 @@ Etc.
 
 =============== DONE ====================
 
+- fix Russian {1 день, 2-3-4 дня, 5-6-7 дней} translation
 - make completed dates to be shown in green
 - allow selecting dates in the past in calendar
 
 - color calendar dates in dependence from how much time left
+
+- add calendar to set required date;
 
 - allow to set tasks for particular date.
 
