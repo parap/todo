@@ -135,6 +135,19 @@
                         $scope.fetch();
                         $scope.updateDate();
                     };
+                    
+                    //FIXME: use pluralization instead of this code
+                    $scope.russianDays = function (days) {
+                        if("1" === days) {
+                            return "DAYS_PASSED_1";
+                        }
+
+                        if("2" === days || "3" === days || "4" === days) {
+                            return "DAYS_PASSED_2";
+                        }
+                        
+                        return "DAYS_PASSED_3";
+                    }
 
                     $scope.fetch();
                 }

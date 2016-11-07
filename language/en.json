@@ -29,6 +29,8 @@
     "WEEK": "Week",
     "PERCENTAGE": "Percentage",
     "DID_TODAY": "Did today",
-    "DAYS_PASSED": " days passed",
+    "DAYS_PASSED_1": " days passed",
+    "DAYS_PASSED_2": " days passed",
+    "DAYS_PASSED_3": " days passed",
     "NEVER_DID": "never did"
 }

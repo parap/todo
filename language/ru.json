@@ -29,6 +29,8 @@
     "WEEK": "Неделя",
     "PERCENTAGE": "Итого",
     "DID_TODAY": "Cегодня",
-    "DAYS_PASSED": " дня назад",
+    "DAYS_PASSED_1": " день назад",
+    "DAYS_PASSED_2": " дня назад",
+    "DAYS_PASSED_3": " дней назад",
     "NEVER_DID": "ни разу"
 }

@@ -77,7 +77,7 @@
                             <label ng-hide="editing" class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label>
                         </div>
                         <div class="span5">
-                            <span ng-hide="editing" class="color{{todo.delay}}">{{todo.delay ? (todo.delay === '0' ? ('DID_TODAY'|translate) : todo.delay + ('DAYS_PASSED'|translate)) : ('NEVER_DID'|translate)}}</span>
+                            <span ng-hide="editing" class="color{{todo.delay}}">{{todo.delay ? ("0" === todo.delay ? ('DID_TODAY'|translate) : todo.delay + ' ' + (russianDays(todo.delay)|translate)) : ('NEVER_DID'|translate)}}</span>
                         </div>
                         <button ng-hide="editing" class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="archive(todo)"></button>
                         <form ng-show="editing" ng-submit="editing = false">
