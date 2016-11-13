@@ -7,9 +7,9 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 =============== TO DO ================
 
-- BASE: add weekly and monthly tasks;
+- !!! BASE: add weekly and monthly tasks;
 
-- BASE: add revolver tasks;
+- !!! BASE: add revolver tasks;
 
 - dynamically change legend in dependence from language selected
 
@@ -46,6 +46,8 @@ Did one kind of a tasks for a whole week? Earn a copper coin.
 Etc.
 
 =============== DONE ====================
+
+- fix "logged in" state of menu buttons for logged out user due to outdated session
 
 - fix Russian {1 день, 2-3-4 дня, 5-6-7 дней} translation
 - make completed dates to be shown in green
