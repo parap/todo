@@ -72,6 +72,7 @@
                         $http.get("fetch?day=" + $scope.day + "&email=" + email)
                                 .then(function (response) {
                                     if ('string' === typeof(response.data)) {
+                                        AuthenticationService.ClearCredentials();
                                         $location.path('/login');
                                         return;
                                     }
