@@ -45,6 +45,8 @@ Did a plain task? Earn copper coin.
 Did one kind of a tasks for a whole week? Earn a copper coin.
 Etc.
 
+- fix pluralization for "day" in Russian
+
 =============== DONE ====================
 
 - fix "logged in" state of menu buttons for logged out user due to outdated session
