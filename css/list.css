@@ -142,7 +142,7 @@ ul {
     list-style-type: none;
 }
 
-form input {
+#new-daily, #new-todo{
     width: 400px;
 }
 
