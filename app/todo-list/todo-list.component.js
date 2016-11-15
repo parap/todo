@@ -102,15 +102,26 @@
 
                     $scope.archive = function (item) {
                         $scope.todos.splice(this.$index, 1);
-                        params = {"id": item.id, "email": email};
+                        var params = {"id": item.id, "email": email};
                         $http.post("index.php?route=archive", params);
                     };
 
                     $scope.add = function (text, type) {
-                        $scope.todos.push({name: text, done: false, type: type});
+                        
+                        var dParams = new Object;
+                        if (1 === type) {
+                            dParams.hour = 'hour';
+                            dParams.day = $scope.dailyCheck;
+                            dParams.month = $scope.monthlyCheck;
+                            var week = [];
+                            for(var i=1;i<8;i++) week[i] = $scope['weeklyCheck' + i];
+                            dParams.week = week;
+                        }
+                        
+                        $scope.todos.push({name: text, done: false, type: type, params: dParams});
                         $scope.newTodo = '';
                         $scope.newDaily = '';
-                        params = {"name": text, "type": type, "email": email};
+                        params = {"name": text, "type": type, "email": email, params: dParams};
 
                         $http.post("index.php?route=create", params)
                                 .then(function (response) {
