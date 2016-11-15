@@ -60,7 +60,10 @@
 // calendar part ends
 
                     $scope.day = 0;
+                    $scope.addPeriod = false;
                     $scope.date = new Date();
+                    $scope.days = [];
+                    for(var i=1;i<32;i++) $scope.days[i] = i;
 
                     $scope.updateDate = function () {
                         var date = new Date();
