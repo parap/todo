@@ -2,12 +2,13 @@
 
 'use strict';
 
-var highlightButton = function (number)
-{
-    document.getElementById('menu-button1').className = "btn";
-    document.getElementById('menu-button2').className = "btn";
-    document.getElementById('menu-button3').className = "btn";
-    document.getElementById('menu-button' + number).className = "btn btn-primary";
+var highlightButton = function (number) {
+    if (document.getElementById('menu-button1')) {
+        document.getElementById('menu-button1').className = "btn";
+        document.getElementById('menu-button2').className = "btn";
+        document.getElementById('menu-button3').className = "btn";
+        document.getElementById('menu-button' + number).className = "btn btn-primary";
+    }
 };
 
 angular.module("todoApp", [
