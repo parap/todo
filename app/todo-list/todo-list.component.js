@@ -55,6 +55,7 @@
                         if (done === "1") return 0;
                         if (timeLeft < 0) return 8;
                         if (timeLeft > 8) return 0;
+                        if (timeLeft === '0') return ''; // color blue things to do today
                         return (8 - timeLeft);
                     }
 // calendar part ends
