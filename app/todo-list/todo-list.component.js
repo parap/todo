@@ -58,12 +58,24 @@
                         return (8 - timeLeft);
                     }
 // calendar part ends
-
-                    $scope.day = 0;
+// add periodic form begins
                     $scope.addPeriod = false;
                     $scope.date = new Date();
                     $scope.days = [];
+                    $scope.dailyCheck = true;
                     for(var i=1;i<32;i++) $scope.days[i] = i;
+                    $scope.deselectWeekEl = function () {
+                        for (var i=1;i<8;i++) $scope['weeklyCheck' + i] = false;
+                    }
+                    $scope.deselectDayEl = function () {
+                        $scope.dailyCheck = false;
+                    }
+                    $scope.deselectMonthEl = function () {
+                        $scope.monthlyCheck = "";
+                    }
+// add periodic form ends                    
+                    
+                    $scope.day = 0;
 
                     $scope.updateDate = function () {
                         var date = new Date();
