@@ -45,7 +45,7 @@
                         </div>
                         <button ng-hide="editing" class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="archive(todo)"></button>
                         <form ng-show="editing" ng-submit="editing = false">
-                            <input type="text" class="" ng-model="todo.name" placeholder="todo.name" ng-required/>
+                            <input type="text" class="editing" ng-model="todo.name" placeholder="todo.name" ng-required/>
                             <button class="btn" type="submit" ng-click="update(todo)">{{'SAVE'|translate}}</button>
                         </form>
                     </div>
@@ -73,7 +73,7 @@
                 <div ng-if="todo.type == 0">
                     <div class="row">
                         <div class="span8">
-                            <input ng-hide="editing" type="checkbox" ng-model="todo.done"  ng-click="switch(todo)">
+                            <input ng-hide="editing" type="checkbox" ng-model="todo.done" ng-click="switch(todo)">
                             <label ng-hide="editing" class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label>
                         </div>
 <span class="inline-table color{{todo.time_left}}">{{todo.todo_at|date}}</span>                        
@@ -99,7 +99,7 @@
                         </div>
 
                         <form ng-show="editing" ng-submit="editing = false">
-                            <input type="text" ng-model="todo.name" placeholder="todo.name" ng-required/>
+                            <input type="text" class="editing" ng-model="todo.name" placeholder="todo.name" ng-required/>
                             <button class="btn" type="submit" ng-click="update(todo)">{{'SAVE'|translate}}</button>
                         </form>
                         
