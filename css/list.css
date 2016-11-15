@@ -207,3 +207,11 @@ A2EE00
 .top-menu {
     margin-left: 50px;
 }
+
+.daily-form {
+    padding-left: 25px;
+}
+
+.daily-form input {
+    margin-left: 5px;
+}
