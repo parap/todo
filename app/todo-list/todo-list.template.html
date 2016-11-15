@@ -3,27 +3,29 @@
     <span class="date">{{ date|date }}</span>
     <fieldset>
         <legend class="legend-daily-{{language}}">{{'DAILY'|translate}}</legend>
-        <form id="daily-form" ng-submit="add(newDaily, 1)">
+        <form id="daily-form" ng-submit="add(newDaily, 1);addPeriod=false">
             <input ng-focus="addPeriod=true" id="new-daily" class="" type="text" placeholder="{{'ADD_DAILY_ITEM'|translate}}" ng-model="newDaily" ng-disabled="saving" autofocus />
-            <span ng-show="addPeriod"><button ng-click="addPeriod=false" >Close</button></span>
+            <span ng-show="addPeriod"><button ng-click="addPeriod=false">Close</button></span>
             <div ng-show="addPeriod" class="daily-form">
                 <!--Placeholder for periodic inputs<br/>-->
                 <strong>Daily:</strong><br/>
-                Every day<input type="checkbox" name="daily"/><br/>
+                Every day<input type="checkbox" name="daily" checked class="daily-check"/><br/>
                 <strong>Weekly:</strong><br/>
-                Monday<input type="checkbox" name="week1"/> 
-                Tuesday<input type="checkbox" name="week2"/> 
-                Wednesday<input type="checkbox" name="week3"/> 
-                Thursday<input type="checkbox" name="week4"/> 
-                Friday<input type="checkbox" name="week5"/> 
-                Saturday<input type="checkbox" name="week6"/> 
-                Sunday<input type="checkbox" name="week7"/> 
+                Monday<input type="checkbox" name="week1" class="weekly-check"/> 
+                Tuesday<input type="checkbox" name="week2" class="weekly-check"/> 
+                Wednesday<input type="checkbox" name="week3" class="weekly-check"/> 
+                Thursday<input type="checkbox" name="week4" class="weekly-check"/> 
+                Friday<input type="checkbox" name="week5" class="weekly-check"/> 
+                Saturday<input type="checkbox" name="week6" class="weekly-check"/> 
+                Sunday<input type="checkbox" name="week7" class="weekly-check"/> 
                 <br/>
                 <strong>Monthly:</strong><br/>
                 Day of month:
                 <select>
                      <option ng-repeat="zday in days">{{zday}}</option>
                 </select>
+                <br/>
+                <input type="submit" value="Submit"/>
             </div>
         </form>
         <div class="row marg" ng-hide="addPeriod">
