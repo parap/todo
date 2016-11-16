@@ -35,7 +35,7 @@
 
         <ul id="daily-list" ng-hide="addPeriod">
             <li ng-repeat="todo in todos" ng-init="todo.delay = todo.delay > 8 ? 8 : todo.delay">
-                <div ng-if="todo.type == 1">
+                <div ng-if="todo.type > 0">
                     <div class="row">    
                         <div class="span8">
                             <input ng-hide="editing" type="checkbox" ng-model="todo.done"  ng-click="switch (todo)">
@@ -77,7 +77,7 @@
                             <input ng-hide="editing" type="checkbox" ng-model="todo.done" ng-click="switch(todo)">
                             <label ng-hide="editing" class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label>
                         </div>
-<span class="inline-table color{{todo.time_left}}">{{todo.todo_at|date}}</span>                        
+<span class="inline-table color{{todo.time_left}}">{{todo.todo_at|date}}</span>
 
 
 <!--// TEST CODE BEGINS-->                                              
