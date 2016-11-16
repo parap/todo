@@ -49,7 +49,7 @@
                                     $scope.todos[index].time_left = $scope.convertTimeLeft(response.data.time_left, response.data.done);
                                 });
                     };
-                    
+
                     $scope.convertTimeLeft = function(timeLeft, done) {
                         if (done === true) return 0;
                         if (done === "1") return 0;
@@ -66,7 +66,7 @@
                     $scope.dailyCheck = true;
                     for(var i=1;i<32;i++) $scope.days[i] = i;
                     $scope.deselectWeekEl = function () {
-                        for (var i=1;i<8;i++) $scope['weeklyCheck' + i] = false;
+                        for (var i=1; i<8; i++) $scope['weeklyCheck' + i] = false;
                     }
                     $scope.deselectDayEl = function () {
                         $scope.dailyCheck = false;
@@ -111,7 +111,6 @@
                         
                         var dParams = new Object;
                         if (1 === type) {
-                            dParams.hour = 'hour';
                             dParams.day = $scope.dailyCheck;
                             dParams.month = $scope.monthlyCheck;
                             var week = [];
