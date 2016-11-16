@@ -229,8 +229,10 @@ class ItemRepo extends DbAssist
         $id         = $this->safe($id);
         $query      = "DELETE from item where id='$id'";
         $queryDaily = "DELETE from daily WHERE item_id='$id'";
+        $queryRepeats = "DELETE from repeats WHERE item_id='$id'";
 
         $this->query($queryDaily);
+        $this->query($queryRepeats);
         return $this->query($query);
     }
 
