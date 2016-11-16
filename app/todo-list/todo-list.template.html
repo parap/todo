@@ -4,9 +4,9 @@
     <fieldset>
         <legend class="legend-daily-{{language}}">{{'DAILY'|translate}}</legend>
         <form id="daily-form" ng-submit="add(newDaily, 1);addPeriod=false">
-            <input id="new-daily" class="" type="text" placeholder="{{'ADD_DAILY_ITEM'|translate}}" ng-model="newDaily" ng-disabled="saving" autofocus />
-            <!--<input ng-focus="addPeriod=true" id="new-daily" class="" type="text" placeholder="{{'ADD_DAILY_ITEM'|translate}}" ng-model="newDaily" ng-disabled="saving" autofocus />-->
-<!--            <span ng-show="addPeriod"><button ng-click="addPeriod=false">Close</button></span>
+            <!--<input id="new-daily" class="" type="text" placeholder="{{'ADD_DAILY_ITEM'|translate}}" ng-model="newDaily" ng-disabled="saving" autofocus />-->
+            <input ng-focus="addPeriod=true" id="new-daily" class="" type="text" placeholder="{{'ADD_DAILY_ITEM'|translate}}" ng-model="newDaily" ng-disabled="saving" autofocus />
+            <span ng-show="addPeriod"><button ng-click="addPeriod=false">Close</button></span>
             <div ng-show="addPeriod" class="daily-form">
                 <strong>Daily:</strong><br/>
                 Every day<input type="checkbox" name="daily" class="daily-check" ng-model="dailyCheck" ng-click="deselectMonthEl();deselectWeekEl()"/><br/>
@@ -26,7 +26,7 @@
                 </select>
                 <br/>
                 <input type="submit" value="Submit"/>
-            </div>-->
+            </div>
         </form>
         <div class="row marg" ng-hide="addPeriod">
             <div class="span10">{{'NAME'|translate}}:</div>
