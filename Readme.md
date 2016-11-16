@@ -11,7 +11,17 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 - !!! BASE: add revolver tasks;
 
+- migrate to Doctrine;
+
+- use Postgres to train it;
+
+- sort items according to month statistic (move less executed-popular up, more executed-popular down)
+
+- allow to add annotation when creating item. Display annotation as title (standard HTML popup) on item hover
+
 - dynamically change legend in dependence from language selected
+
+- make user to be logged in for 1 day (not a few hours as it is now)
 
 - save language preference to cookies
 
