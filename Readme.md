@@ -11,11 +11,15 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 - !!! BASE: add revolver tasks;
 
+- add calendar button to select date to "Next day" and "Previous day" buttons
+
+- allow deletion of weekly&monthly tasks in archive
+
 - migrate to Doctrine;
 
 - use Postgres to train it;
 
-- sort items according to month statistic (move less executed-popular up, more executed-popular down)
+- sort items according to month statistic (move rarely completed-popular up, often completed-popular down)
 
 - allow to add annotation when creating item. Display annotation as title (standard HTML popup) on item hover
 
