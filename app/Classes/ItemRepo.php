@@ -101,21 +101,29 @@ class ItemRepo extends DbAssist
         $this->query("SELECT @last := LAST_INSERT_ID()");
         
         if(!empty($params['day'])) {
+            return;
             // plain daily task, do nothing
-        } elseif (!empty($params['month'])) {
+        }
+        
+        if (!empty($params['month'])) {
             $this->createRepeats($params['month'], 'm');
-        } elseif (!empty($params['week'])) {
-            foreach($params['week'] as $key => $value) {
-                if (!$value) {
-                    continue;
-                }
-                
-                $this->createRepeats($key, 'w');
+            return;
+        }
+        
+        if (empty($params['week'])) {
+            return; 
+        }
+        
+        foreach ($params['week'] as $key => $value) {
+            if (!$value) {
+                continue;
             }
+
+            $this->createRepeats($key, 'w');
         }
     }
-    
-    public function createRepeats($number, $intervalType)
+
+public function createRepeats($number, $intervalType)
     {
         $number = $this->safe($number);
         $intervalType = $this->safe($intervalType);
