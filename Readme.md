@@ -97,10 +97,10 @@ Etc.
 - add history (access to archive) for 'normal' tasks;
 - allow to recover or to irreversibly delete archived tasks;
 
-/*
- * - add statistics. Separate page.:
- * 
- * monthly & weekly completion % of every daily task;
- * monthly & weekly completion % of all daily/normal tasks;
- */
+
+ - add statistics. Separate page.:
+ 
+- monthly & weekly completion % of every daily task;
+- monthly & weekly completion % of all daily/normal tasks;
+
 
