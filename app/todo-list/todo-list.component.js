@@ -65,15 +65,30 @@
                     $scope.days = [];
                     $scope.dailyCheck = true;
                     for(var i=1;i<32;i++) $scope.days[i] = i;
+                    $scope.selectDay = function() {
+                        $scope.deselectWeekEl();
+                        $scope.deselectMonthEl();
+                    };
+                    
+                    $scope.selectWeek = function() {
+                        $scope.deselectDayEl();
+                        $scope.deselectMonthEl();
+                    };
+                    
+                    $scope.selectMonth = function() {
+                        $scope.deselectDayEl();
+                        $scope.deselectWeekEl();
+                    };
+                    
                     $scope.deselectWeekEl = function () {
                         for (var i=1; i<8; i++) $scope['weeklyCheck' + i] = false;
-                    }
+                    };
                     $scope.deselectDayEl = function () {
                         $scope.dailyCheck = false;
-                    }
+                    };
                     $scope.deselectMonthEl = function () {
                         $scope.monthlyCheck = "";
-                    }
+                    };
 // add periodic form ends                    
                     
                     $scope.day = 0;
