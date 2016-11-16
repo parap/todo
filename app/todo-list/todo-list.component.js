@@ -64,20 +64,24 @@
                     $scope.date = new Date();
                     $scope.days = [];
                     $scope.dailyCheck = true;
+                    $scope.currentType = 1;
                     for(var i=1;i<32;i++) $scope.days[i] = i;
                     $scope.selectDay = function() {
                         $scope.deselectWeekEl();
                         $scope.deselectMonthEl();
+                        $scope.currentType = 1;
                     };
                     
                     $scope.selectWeek = function() {
                         $scope.deselectDayEl();
                         $scope.deselectMonthEl();
+                        $scope.currentType = 2;
                     };
                     
                     $scope.selectMonth = function() {
                         $scope.deselectDayEl();
                         $scope.deselectWeekEl();
+                        $scope.currentType = 3;
                     };
                     
                     $scope.deselectWeekEl = function () {
@@ -125,7 +129,8 @@
                     $scope.add = function (text, type) {
                         
                         var dParams = new Object;
-                        if (1 === type) {
+                        // type = 0 - regular, 1 -daily, 2 - weekly, 3 - monthly
+                        if (type > 1) {
                             dParams.day = $scope.dailyCheck;
                             dParams.month = $scope.monthlyCheck;
                             var week = [];

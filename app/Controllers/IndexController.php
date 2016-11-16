@@ -71,8 +71,7 @@ class IndexController
         }
         
         $parentId = 1;
-        $createdType = $type ? ItemType::Daily : ItemType::Normal;
-        $this->repo->create($name, $email, $parentId, $createdType, $params);
+        $this->repo->create($name, $email, $parentId, $type, $params);
     }
 
     public function update(RequestM $request)

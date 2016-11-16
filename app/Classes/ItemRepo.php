@@ -94,7 +94,7 @@ class ItemRepo extends DbAssist
         
         $this->query($query);
         
-        if (ItemType::Normal === $type) {
+        if (in_array($type, [ItemType::Normal, ItemType::Daily])) {
             return;
         }
 
