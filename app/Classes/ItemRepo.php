@@ -24,9 +24,14 @@ class ItemRepo extends DbAssist
                 . "LIMIT 1)) AS delay "
                 . "FROM item i "
                 . "LEFT JOIN user u ON i.user_id = u.id "
+                . "LEFT JOIN repeats r ON i.id = r.item_id "
                 . "WHERE i.created_at <= '$date' AND "
                 . "(i.archived_at = '0000-00-00' OR i.archived_at > '$date') "
-                . "AND u.email = '$emailP'";
+                . "AND u.email = '$emailP' "
+                . "AND (i.type = '0' OR i.type = '1' "
+                . "OR (i.type = '2' AND WEEKDAY('$date') = r.number) "
+                . "OR (i.type = '3' AND DAYOFMONTH('$date') = r.number) )"
+                ;
 
         $results    = $this->query($query);
         $doneDailys = $this->fetchCompletedDaily($date);
@@ -93,15 +98,17 @@ class ItemRepo extends DbAssist
         );
         
         $this->query($query);
-        
+
         if (in_array($type, [ItemType::Normal, ItemType::Daily])) {
             return;
         }
-        
+
         if(!empty($params['day'])) {
             return;
             // plain daily task, do nothing
         }
+        
+        $this->query("SELECT @last := LAST_INSERT_ID()");
         
         if (!empty($params['month'])) {
             $this->createRepeats($params['month'], 'm');
@@ -117,17 +124,15 @@ class ItemRepo extends DbAssist
                 continue;
             }
 
-            $this->createRepeats($key, 'w');
+            $this->createRepeats(--$key, 'w');
         }
     }
 
     public function createRepeats($number, $intervalType)
     {
-        $this->query("SELECT @last := LAST_INSERT_ID()");
-
         $number       = $this->safe($number);
         $intervalType = $this->safe($intervalType);
-        $query        = 'INSERT INTO repeats (item_id, number1, interval_type1, '
+        $query        = 'INSERT INTO repeats (item_id, number, interval_type, '
                 . 'created_at, archived_at, repeatt) '
                 . 'VALUES (@last, "%s", "%s", NOW(), "0000-00-00", "1")';
         $this->query(sprintf($query, $number, $intervalType));
