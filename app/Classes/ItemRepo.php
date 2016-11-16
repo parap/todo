@@ -82,7 +82,7 @@ class ItemRepo extends DbAssist
         return $this->query($query)[0]['id'];
     }
 
-    public function create($name, $email, $parentId, $type)
+    public function create($name, $email, $parentId, $type, $params)
     {
         $userId = $this->getUserIdByEmail($email);
         $query  = sprintf(
@@ -91,8 +91,37 @@ class ItemRepo extends DbAssist
                 . 'VALUES ("%s", "%s", "0", "%s", "%s", NOW(), NOW(), '
                 . '"0000-00-00", "0000-00-00")', $this->safe($name), $userId, $parentId, $type
         );
+        
+        $this->query($query);
+        
+        if (ItemType::Normal === $type) {
+            return;
+        }
 
-        return $this->query($query);
+        $this->query("SELECT @last := LAST_INSERT_ID()");
+        
+        if(!empty($params['day'])) {
+            // plain daily task, do nothing
+        } elseif (!empty($params['month'])) {
+            $params['month'] = $this->safe($params['month']);
+            $paramType = 'm';
+            $query     = 'INSERT INTO repeats (item_id, number1, interval_type1, '
+                    . 'created_at, archived_at, repeatt) '
+                    . 'VALUES (@last, "%s", "m", NOW(), "0000-00-00", "1")';
+            $this->query(sprintf($query, $params['month']));
+        } elseif (!empty($params['week'])) {
+            $paramType = 'w';
+            foreach($params['week'] as $key => $value) {
+                if (!$value) {
+                    continue;
+                }
+                
+                $query = 'INSERT INTO repeats (item_id, number1, interval_type1, '
+                        . 'created_at, archived_at, repeatt) '
+                        . 'VALUES (@last, "%s", "w", NOW(), "0000-00-00", "1")';
+                $this->query(sprintf($query, $key));
+            }
+        }
     }
 
     public function update($id, $text)
