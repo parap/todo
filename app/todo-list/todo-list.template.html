@@ -3,10 +3,10 @@
     <span class="date">{{ date|date }}</span>
     <fieldset>
         <legend class="legend-daily-{{language}}">{{'DAILY'|translate}}</legend>
-        <form id="daily-form" ng-submit="add(newDaily, currentType);addPeriod=false">
+        <form id="daily-form" ng-submit="add(newDaily, currentType); addPeriod = false">
             <!--<input id="new-daily" class="" type="text" placeholder="{{'ADD_DAILY_ITEM'|translate}}" ng-model="newDaily" ng-disabled="saving" autofocus />-->
-            <input ng-focus="addPeriod=true" id="new-daily" class="" type="text" placeholder="{{'ADD_DAILY_ITEM'|translate}}" ng-model="newDaily" ng-disabled="saving" autofocus />
-            <span ng-show="addPeriod"><button ng-click="addPeriod=false">Close</button></span>
+            <input ng-focus="addPeriod = true" id="new-daily" class="" type="text" placeholder="{{'ADD_DAILY_ITEM'|translate}}" ng-model="newDaily" ng-disabled="saving" autofocus />
+            <span ng-show="addPeriod"><button ng-click="addPeriod = false">Close</button></span>
             <div ng-show="addPeriod" class="daily-form">
                 <strong>Daily:</strong><br/>
                 Every day<input type="checkbox" name="daily" class="daily-check" ng-model="dailyCheck" ng-click="selectDay()"/><br/>
@@ -22,7 +22,7 @@
                 <strong>Monthly:</strong><br/>
                 Day of every month:
                 <select ng-model="monthlyCheck" ng-click="selectMonth()">
-                     <option ng-repeat="zday in days">{{zday}}</option>
+                    <option ng-repeat="zday in days">{{zday}}</option>
                 </select>
                 <br/>
                 <input type="submit" value="Submit"/>
@@ -42,7 +42,7 @@
                             <label ng-hide="editing" class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label>
                         </div>
                         <div class="span5">
-                            <span ng-hide="editing" class="color{{todo.delay}}">{{todo.delay ? ("0" === todo.delay ? ('DID_TODAY'|translate) : todo.delay + ' ' + (russianDays(todo.delay)|translate)) : ('NEVER_DID'|translate)}}</span>
+                            <span ng-hide="editing" class="color{{todo.delay}}">{{todo.delay ? ("0" === todo.delay ? ('DID_TODAY' | translate) : todo.delay + ' ' + (russianDays(todo.delay) | translate)) : ('NEVER_DID' | translate)}}</span>
                         </div>
                         <button ng-hide="editing" class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="archive(todo)"></button>
                         <form ng-show="editing" ng-submit="editing = false">
@@ -54,15 +54,15 @@
             </li>
         </ul>
     </fieldset>
-    
+
     <div class="controls">
         <button ng-click="decreaseDay()" >{{'YESTERDAY'|translate}}</button>
         <button ng-click="increaseDay()" >{{'TOMORROW'|translate}}</button>
         <span><button ng-disabled="0 == day" ng-click="today()" >{{'TODAY'|translate}}</button></span>
     </div>
-    
-    
-        <fieldset>
+
+
+    <fieldset>
         <legend class="legend-regular-{{language}}">{{'REGULAR'|translate}}</legend>
 
         <form id="todo-form" ng-submit="add(newTodo, 0)">
@@ -77,17 +77,17 @@
         </div>
 
         <ul id="todo-list">
-            <li ng-repeat="todo in todos" ng-init="todo.time_left=convertTimeLeft(todo.time_left, todo.done)">
+            <li ng-repeat="todo in todos" ng-init="todo.time_left = convertTimeLeft(todo.time_left, todo.done)">
                 <div ng-if="todo.type == 0">
                     <div class="row">
                         <div class="span8">
-                            <input ng-hide="editing" type="checkbox" ng-model="todo.done" ng-click="switch(todo)">
+                            <input ng-hide="editing" type="checkbox" ng-model="todo.done" ng-click="switch (todo)">
                             <label ng-hide="editing" class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label>
                         </div>
-<span class="inline-table color{{todo.time_left}}">{{todo.todo_at|date}}</span>
+                        <span class="inline-table color{{todo.time_left}}">{{todo.todo_at|date}}</span>
 
 
-<!--// TEST CODE BEGINS-->                                              
+                        <!--// TEST CODE BEGINS-->                                              
 
 
                         <button type="button" 
@@ -99,7 +99,7 @@
                                 show-button-bar="false"
                                 is-open="popup[$index].opened" 
                                 datepicker-options="dateOptions">
-                            
+
                             <i class="glyphicon glyphicon-time"></i>
                         </button>
                         <div class="span4">
@@ -110,8 +110,8 @@
                             <input type="text" class="editing" ng-model="todo.name" placeholder="todo.name" ng-required/>
                             <button class="btn" type="submit" ng-click="update(todo)">{{'SAVE'|translate}}</button>
                         </form>
-                        
-<!--// TEST CODE ENDS-->
+
+                        <!--// TEST CODE ENDS-->
 
                     </div>
                 </div>
