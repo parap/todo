@@ -86,10 +86,6 @@
                         </div>
                         <span class="inline-table color{{todo.time_left}}">{{todo.todo_at|date}}</span>
 
-
-                        <!--// TEST CODE BEGINS-->                                              
-
-
                         <button type="button" 
                                 uib-datepicker-popup="{{format}}"
                                 class="btn btn-default inline-table" 
@@ -110,8 +106,6 @@
                             <input type="text" class="editing" ng-model="todo.name" placeholder="todo.name" ng-required/>
                             <button class="btn" type="submit" ng-click="update(todo)">{{'SAVE'|translate}}</button>
                         </form>
-
-                        <!--// TEST CODE ENDS-->
 
                     </div>
                 </div>
