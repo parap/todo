@@ -97,8 +97,6 @@ class ItemRepo extends DbAssist
         if (in_array($type, [ItemType::Normal, ItemType::Daily])) {
             return;
         }
-
-        $this->query("SELECT @last := LAST_INSERT_ID()");
         
         if(!empty($params['day'])) {
             return;
@@ -123,11 +121,13 @@ class ItemRepo extends DbAssist
         }
     }
 
-public function createRepeats($number, $intervalType)
+    public function createRepeats($number, $intervalType)
     {
-        $number = $this->safe($number);
+        $this->query("SELECT @last := LAST_INSERT_ID()");
+
+        $number       = $this->safe($number);
         $intervalType = $this->safe($intervalType);
-        $query = 'INSERT INTO repeats (item_id, number1, interval_type1, '
+        $query        = 'INSERT INTO repeats (item_id, number1, interval_type1, '
                 . 'created_at, archived_at, repeatt) '
                 . 'VALUES (@last, "%s", "%s", NOW(), "0000-00-00", "1")';
         $this->query(sprintf($query, $number, $intervalType));
