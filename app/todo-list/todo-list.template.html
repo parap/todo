@@ -9,19 +9,19 @@
             <span ng-show="addPeriod"><button ng-click="addPeriod=false">Close</button></span>
             <div ng-show="addPeriod" class="daily-form">
                 <strong>Daily:</strong><br/>
-                Every day<input type="checkbox" name="daily" class="daily-check" ng-model="dailyCheck" ng-click="deselectMonthEl();deselectWeekEl()"/><br/>
+                Every day<input type="checkbox" name="daily" class="daily-check" ng-model="dailyCheck" ng-click="selectDay()"/><br/>
                 <strong>Weekly:</strong><br/>
-                Monday<input type="checkbox" name="week1" class="weekly-check" ng-model="weeklyCheck1" ng-click="deselectDayEl();deselectMonthEl()"/> 
-                Tuesday<input type="checkbox" name="week2" class="weekly-check" ng-model="weeklyCheck2" ng-click="deselectDayEl();deselectMonthEl()"/> 
-                Wednesday<input type="checkbox" name="week3" class="weekly-check" ng-model="weeklyCheck3" ng-click="deselectDayEl();deselectMonthEl()"/> 
-                Thursday<input type="checkbox" name="week4" class="weekly-check" ng-model="weeklyCheck4" ng-click="deselectDayEl();deselectMonthEl()"/> 
-                Friday<input type="checkbox" name="week5" class="weekly-check" ng-model="weeklyCheck5" ng-click="deselectDayEl();deselectMonthEl()"/> 
-                Saturday<input type="checkbox" name="week6" class="weekly-check" ng-model="weeklyCheck6" ng-click="deselectDayEl();deselectMonthEl()"/> 
-                Sunday<input type="checkbox" name="week7" class="weekly-check" ng-model="weeklyCheck7" ng-click="deselectDayEl();deselectMonthEl()"/> 
+                Monday<input type="checkbox" name="week1" class="weekly-check" ng-model="weeklyCheck1" ng-click="selectWeek()"/> 
+                Tuesday<input type="checkbox" name="week2" class="weekly-check" ng-model="weeklyCheck2" ng-click="selectWeek()"/> 
+                Wednesday<input type="checkbox" name="week3" class="weekly-check" ng-model="weeklyCheck3" ng-click="selectWeek()"/> 
+                Thursday<input type="checkbox" name="week4" class="weekly-check" ng-model="weeklyCheck4" ng-click="selectWeek()"/> 
+                Friday<input type="checkbox" name="week5" class="weekly-check" ng-model="weeklyCheck5" ng-click="selectWeek()"/> 
+                Saturday<input type="checkbox" name="week6" class="weekly-check" ng-model="weeklyCheck6" ng-click="selectWeek()"/> 
+                Sunday<input type="checkbox" name="week7" class="weekly-check" ng-model="weeklyCheck7" ng-click="selectWeek()"/> 
                 <br/>
                 <strong>Monthly:</strong><br/>
                 Day of every month:
-                <select ng-model="monthlyCheck" ng-click="deselectDayEl();deselectWeekEl()">
+                <select ng-model="monthlyCheck" ng-click="selectMonth()">
                      <option ng-repeat="zday in days">{{zday}}</option>
                 </select>
                 <br/>
