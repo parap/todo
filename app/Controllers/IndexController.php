@@ -64,14 +64,15 @@ class IndexController
         $name = $request->postM['name'];
         $type = $request->postM['type'];
         $email = $request->postM['email'];
-
+        $params = $request->postM['params'];
+        
         if (empty($name)) {
             return;
         }
         
         $parentId = 1;
         $createdType = $type ? ItemType::Daily : ItemType::Normal;
-        $this->repo->create($name, $email, $parentId, $createdType);
+        $this->repo->create($name, $email, $parentId, $createdType, $params);
     }
 
     public function update(RequestM $request)
