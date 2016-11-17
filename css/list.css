@@ -215,3 +215,9 @@ A2EE00
 .daily-form input {
     margin-left: 5px;
 }
+
+/*login form*/
+
+#email, #password {
+    width: 300px;
+}
