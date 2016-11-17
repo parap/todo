@@ -11,6 +11,8 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 - !!! BASE: add revolver tasks;
 
+- show monthly and weekly tasks that are uncompleted even if last date passed!
+
 - add calendar button to select date to "Next day" and "Previous day" buttons
 
 - allow deletion of weekly&monthly tasks in archive
@@ -37,13 +39,13 @@ make font smaller and thinner.
 - create FlashService to indicate that login was successful or not. 
 Download working sample to check how Johnpapa did it.
 
-- allow Google Accounts login?
+- allow Google Accounts login.
 
 - add graphs. Like weight site.
 
 - allow items drag & n & drop;
-- add amount of completed points per day, progress bar.
 
+- add amount of completed points per day, progress bar.
 
 - allow hide & display panels;
 
