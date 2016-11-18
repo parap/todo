@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Структура таблицы `daily`
 --
 
-CREATE TABLE IF NOT EXISTS `daily` (
+CREATE TABLE IF NOT EXISTS `completed` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `item_id` int(11) NOT NULL,
   `completed_at` date NOT NULL,

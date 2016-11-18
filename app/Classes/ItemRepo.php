@@ -17,9 +17,9 @@ class ItemRepo extends DbAssist
         
         $query = "SELECT i.*, "
                 . "DATEDIFF(i.todo_at, NOW()) AS time_left, "
-                . "DATEDIFF(NOW(), (SELECT d.completed_at FROM daily AS d "
+                . "DATEDIFF(NOW(), (SELECT d.completed_at FROM completed AS d "
                 . "WHERE d.item_id = i.id "
-                . "AND d.completed_at <= NOW()"
+                . "AND d.completed_at <= NOW() "
                 . "ORDER BY completed_at DESC "
                 . "LIMIT 1)) AS delay "
                 . "FROM item i "
@@ -32,6 +32,8 @@ class ItemRepo extends DbAssist
                 . "OR (i.type = '2' AND WEEKDAY('$date') = r.number) "
                 . "OR (i.type = '3' AND DAYOFMONTH('$date') = r.number) )"
                 ;
+        
+//        echo $query;
 
         $results    = $this->query($query);
         $doneDailys = $this->fetchCompletedDaily($date);
@@ -70,7 +72,7 @@ class ItemRepo extends DbAssist
 
     public function fetchCompletedDaily($date)
     {
-        $template = 'SELECT item_id FROM daily '
+        $template = 'SELECT item_id FROM completed '
                 . 'WHERE completed_at = "%s"'
 //                . 'AND completed_at <= NOW()'
                 ;
@@ -105,7 +107,7 @@ class ItemRepo extends DbAssist
 
         if(!empty($params['day'])) {
             return;
-            // plain daily task, do nothing
+            // plain completed task, do nothing
         }
         
         $this->query("SELECT @last := LAST_INSERT_ID()");
@@ -163,7 +165,7 @@ class ItemRepo extends DbAssist
     public function completeDaily($id, $date)
     {
         $query = sprintf(
-                "INSERT INTO daily (item_id, completed_at) VALUES ('%s', '%s')", $this->safe($id), $date
+                "INSERT INTO completed (item_id, completed_at) VALUES ('%s', '%s')", $this->safe($id), $date
         );
 
         return $this->query($query);
@@ -172,7 +174,7 @@ class ItemRepo extends DbAssist
     public function findDelay($id)
     {
         $id    = $this->safe($id);
-        $query = "SELECT DATEDIFF(NOW(), (SELECT d.completed_at FROM daily AS d "
+        $query = "SELECT DATEDIFF(NOW(), (SELECT d.completed_at FROM completed AS d "
                 . "WHERE d.item_id = i.id "
                 . "AND d.completed_at <= NOW()"
                 . "ORDER BY completed_at DESC "
@@ -186,7 +188,7 @@ class ItemRepo extends DbAssist
     public function findLatestCompletedAt($id)
     {
         $query  = "SELECT completed_at "
-                . "FROM daily "
+                . "FROM completed "
                 . "WHERE item_id='$id'"
                 . "ORDER BY completed_at DESC "
                 . "LIMIT 1";
@@ -215,7 +217,7 @@ class ItemRepo extends DbAssist
     public function uncompleteDaily($id, $date)
     {
         $query = sprintf(
-                "DELETE FROM daily WHERE item_id='%s' AND completed_at = '%s'", $this->safe($id), $date
+                "DELETE FROM completed WHERE item_id='%s' AND completed_at = '%s'", $this->safe($id), $date
         );
 
         return $this->query($query);
@@ -241,7 +243,7 @@ class ItemRepo extends DbAssist
     {
         $id         = $this->safe($id);
         $query      = "DELETE from item where id='$id'";
-        $queryDaily = "DELETE from daily WHERE item_id='$id'";
+        $queryDaily = "DELETE from completed WHERE item_id='$id'";
         $queryRepeats = "DELETE from repeats WHERE item_id='$id'";
 
         $this->query($queryDaily);
@@ -278,7 +280,7 @@ class ItemRepo extends DbAssist
 
         return $res;
         // 
-// total & monthly & weekly completion % of every daily task separately;
+// total & monthly & weekly completion % of every completed task separately;
 // total & monthly & weekly completion % of all daily/normal tasks;
     }
 
@@ -298,7 +300,7 @@ class ItemRepo extends DbAssist
         $emailP = $this->safe($email);
         $query = "SELECT i.name , COUNT( d.completed_at ) AS number_completion, DATEDIFF(NOW(), i.created_at)+1 AS life_length
             FROM item i
-LEFT JOIN daily d ON ( i.id = d.item_id ) 
+LEFT JOIN completed d ON ( i.id = d.item_id ) 
 LEFT JOIN user u ON u.id = i.user_id 
 WHERE (d.completed_at >=  '$date' OR d.completed_at IS NULL) "
                 . "AND i.type = '1' "
@@ -319,7 +321,7 @@ WHERE (d.completed_at >=  '$date' OR d.completed_at IS NULL) "
     {
         $emailP = $this->safe($email);
         $query          = "SELECT COUNT(d.completed_at) as total_done "
-                . "FROM daily d "
+                . "FROM completed d "
                 . "LEFT JOIN item i ON i.id = d.item_id "
                 . "LEFT JOIN user u ON u.id = i.user_id "
                 . "WHERE d.completed_at >= '$date' "
@@ -328,7 +330,7 @@ WHERE (d.completed_at >=  '$date' OR d.completed_at IS NULL) "
 
         $query = "SELECT SUM(DATEDIFF(NOW(), i.created_at)) AS life_length_after
 FROM item i
-LEFT JOIN daily d ON ( i.id = d.item_id ) 
+LEFT JOIN completed d ON ( i.id = d.item_id ) 
 LEFT JOIN user u ON u.id = i.user_id 
 WHERE i.created_at >=  '$date' AND i.type = '1' AND u.email='$emailP'";
         $totalCreatedAfter = $this->query($query)[0]['life_length_after'];
