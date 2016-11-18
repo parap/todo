@@ -7,6 +7,8 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 =============== TO DO ================
 
+- add annotation for tasks to display on mouse hover
+
 - add "weekly tasks only" mode - display all weekly tasks
 
 - add "monthly tasks only" mode - display all monthly tasks
