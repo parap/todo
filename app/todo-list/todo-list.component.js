@@ -102,7 +102,18 @@
                         date.setDate(date.getDate() + $scope.day);
                         $scope.date = date;
                     };
+                    
+                    $scope.initEditItemForm = function (item) {
+                        item.daily = (item.type === '1');
+                        item.weekly = [];
+                        for (var i = 0; i < 7; i++) {
+                            item.weekly[i] = (item.type === '2' && item.numbers.indexOf(i) > -1);
+                        }
+                        
+                        item.monthly = (item.type === '3' ? item.numbers : false);
 
+                    }
+                    
                     $scope.fetch = function () {
                         $http.get("fetch?day=" + $scope.day + "&email=" + email)
                                 .then(function (response) {

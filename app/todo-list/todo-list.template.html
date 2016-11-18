@@ -4,7 +4,6 @@
     <fieldset>
         <legend class="legend-daily-{{language}}">{{'DAILY'|translate}}</legend>
         <form id="daily-form" ng-submit="add(newDaily, currentType); addPeriod = false">
-            <!--<input id="new-daily" class="" type="text" placeholder="{{'ADD_DAILY_ITEM'|translate}}" ng-model="newDaily" ng-disabled="saving" autofocus />-->
             <input ng-focus="addPeriod = true" id="new-daily" class="" type="text" placeholder="{{'ADD_DAILY_ITEM'|translate}}" ng-model="newDaily" ng-disabled="saving" autofocus />
             <span ng-show="addPeriod"><button ng-click="addPeriod = false">Close</button></span>
             <div ng-show="addPeriod" class="daily-form">
@@ -47,6 +46,24 @@
                         <button ng-hide="editing" class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="archive(todo)"></button>
                         <form ng-show="editing" ng-submit="editing = false">
                             <input type="text" class="editing" ng-model="todo.name" placeholder="todo.name" ng-required/>
+                            <div class="daily-form" ng-init="initEditItemForm(todo)">
+                                <strong>Daily:</strong><br/>
+                                Every day<input type="checkbox" name="daily" class="daily-check" ng-model="todo.daily" ng-click="selectDay()"/><br/>
+                                <strong>Weekly:</strong><br/>
+                                Monday<input type="checkbox" name="week1" class="weekly-check" ng-model="todo.weekly[0]" ng-click="selectWeek()"/> 
+                                Tuesday<input type="checkbox" name="week2" class="weekly-check" ng-model="todo.weekly[1]" ng-click="selectWeek()"/> 
+                                Wednesday<input type="checkbox" name="week3" class="weekly-check" ng-model="todo.weekly[2]" ng-click="selectWeek()"/> 
+                                Thursday<input type="checkbox" name="week4" class="weekly-check" ng-model="todo.weekly[3]" ng-click="selectWeek()"/> 
+                                Friday<input type="checkbox" name="week5" class="weekly-check" ng-model="todo.weekly[4]" ng-click="selectWeek()"/> 
+                                Saturday<input type="checkbox" name="week6" class="weekly-check" ng-model="todo.weekly[5]" ng-click="selectWeek()"/> 
+                                Sunday<input type="checkbox" name="week7" class="weekly-check" ng-model="todo.weekly[6]" ng-click="selectWeek()"/> 
+                                <br/>
+                                <strong>Monthly:</strong><br/>
+                                Day of every month:
+                                <select ng-model="todo.monthly" ng-click="selectMonth()">
+                                    <option ng-repeat="zday in days">{{zday}}</option>
+                                </select>
+                            </div>
                             <button class="btn" type="submit" ng-click="update(todo)">{{'SAVE'|translate}}</button>
                         </form>
                     </div>
