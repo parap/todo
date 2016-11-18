@@ -16,6 +16,8 @@ class ItemRepo extends DbAssist
         // to create correct delay
         
         $query = "SELECT i.*, "
+                . "GROUP_CONCAT(rr.number) as numbers, "
+                . "rr.interval_type AS interval_type, "
                 . "DATEDIFF(i.todo_at, NOW()) AS time_left, "
                 . "DATEDIFF(NOW(), (SELECT d.completed_at FROM completed AS d "
                 . "WHERE d.item_id = i.id "
@@ -25,12 +27,14 @@ class ItemRepo extends DbAssist
                 . "FROM item i "
                 . "LEFT JOIN user u ON i.user_id = u.id "
                 . "LEFT JOIN repeats r ON i.id = r.item_id "
+                . "LEFT JOIN repeats rr ON i.id = rr.item_id "
                 . "WHERE i.created_at <= '$date' AND "
                 . "(i.archived_at = '0000-00-00' OR i.archived_at > '$date') "
                 . "AND u.email = '$emailP' "
                 . "AND (i.type = '0' OR i.type = '1' "
                 . "OR (i.type = '2' AND WEEKDAY('$date') = r.number) "
-                . "OR (i.type = '3' AND DAYOFMONTH('$date') = r.number) )"
+                . "OR (i.type = '3' AND DAYOFMONTH('$date') = r.number) ) "
+                . "GROUP BY i.id "
                 ;
         
 //        echo $query;
