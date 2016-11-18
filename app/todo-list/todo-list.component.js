@@ -88,7 +88,7 @@
                         for (var i=1; i<8; i++) {
                             $scope['weeklyCheck' + i] = false;
                             if(typeof(item) === 'undefined') continue;
-                            item.weekly[i-1] = (item.type === '2' && item.numbers.indexOf(i-1) > -1);
+                            item.weekly[i-1] = false;
                         }
 
                     };
