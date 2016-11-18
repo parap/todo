@@ -179,8 +179,24 @@
                     };
 
                     $scope.update = function (item) {
+                        var numbers = '', type = item.type;
+                        
+                        if (item.daily === true) {
+                            type = 1;
+                        } else if (item.monthly !== "") {
+                            type = 3;
+                            numbers = item.monthly;
+                        } else {
+                            for (var i = 0; i < 7; i++) {
+                                if (item.weekly[i] === true) {
+                                    type = 2;
+                                    numbers += ''+i;
+                                }
+                            }
+                        }
+                        
                         params = {"name": item.name, "id": item.id,
-                            "type": item.type, "email": email};
+                            "email": email, "type": type, "numbers": numbers};
                         $http.post("index.php?route=update", params);
                     };
 

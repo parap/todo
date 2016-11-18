@@ -76,9 +76,11 @@ class IndexController
 
     public function update(RequestM $request)
     {
-        $name = $request->postM['name'];
-        $id   = $request->postM['id'];
-        $this->repo->update($id, $name);
+        $name    = $request->postM['name'];
+        $id      = $request->postM['id'];
+        $type    = $request->postM['type'];
+        $numbers = $request->postM['numbers'];
+        $this->repo->update($id, $name, $type, $numbers);
     }
 
     public function complete(RequestM $request)
