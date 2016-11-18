@@ -66,32 +66,41 @@
                     $scope.dailyCheck = true;
                     $scope.currentType = 1;
                     for(var i=1;i<32;i++) $scope.days[i] = i;
-                    $scope.selectDay = function() {
-                        $scope.deselectWeekEl();
-                        $scope.deselectMonthEl();
+                    $scope.selectDay = function(item) {
+                        $scope.deselectWeekEl(item);
+                        $scope.deselectMonthEl(item);
                         $scope.currentType = 1;
                     };
                     
-                    $scope.selectWeek = function() {
-                        $scope.deselectDayEl();
-                        $scope.deselectMonthEl();
+                    $scope.selectWeek = function(item) {
+                        $scope.deselectDayEl(item);
+                        $scope.deselectMonthEl(item);
                         $scope.currentType = 2;
                     };
                     
-                    $scope.selectMonth = function() {
-                        $scope.deselectDayEl();
-                        $scope.deselectWeekEl();
+                    $scope.selectMonth = function(item) {
+                        $scope.deselectDayEl(item);
+                        $scope.deselectWeekEl(item);
                         $scope.currentType = 3;
                     };
                     
-                    $scope.deselectWeekEl = function () {
-                        for (var i=1; i<8; i++) $scope['weeklyCheck' + i] = false;
+                    $scope.deselectWeekEl = function (item) {
+                        for (var i=1; i<8; i++) {
+                            $scope['weeklyCheck' + i] = false;
+                            if(typeof(item) === 'undefined') continue;
+                            item.weekly[i-1] = (item.type === '2' && item.numbers.indexOf(i-1) > -1);
+                        }
+
                     };
-                    $scope.deselectDayEl = function () {
+                    $scope.deselectDayEl = function (item) {
                         $scope.dailyCheck = false;
+                        if(typeof(item) === 'undefined') return;
+                        item.daily = false;
                     };
-                    $scope.deselectMonthEl = function () {
+                    $scope.deselectMonthEl = function (item) {
                         $scope.monthlyCheck = "";
+                        if(typeof(item) === 'undefined') return;
+                        item.monthly = "";
                     };
 // add periodic form ends                    
                     
@@ -111,7 +120,6 @@
                         }
                         
                         item.monthly = (item.type === '3' ? item.numbers : false);
-
                     }
                     
                     $scope.fetch = function () {
