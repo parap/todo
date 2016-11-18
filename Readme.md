@@ -7,9 +7,12 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 =============== TO DO ================
 
+- refactor. rename daily table to complete. remove completed_at field from item table.
+Thus any type of task will be processed similarly.
+
 - add to login page auto-link to test account;
 
-- add description of the project to the project;
+- add description of the project page;
 
 - !!! BASE: add weekly and monthly tasks;
 
