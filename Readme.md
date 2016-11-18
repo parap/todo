@@ -7,7 +7,11 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 =============== TO DO ================
 
-- somehow allow to see weekly and monthly tasks assigned for other days ??
+- add "weekly tasks only" mode - display all weekly tasks
+
+- add "monthly tasks only" mode - display all monthly tasks
+
+- by default display approaching weekly&monthly tasks. For instance in closest 2 days.
 
 - !!! BASE: add revolver tasks;
 
