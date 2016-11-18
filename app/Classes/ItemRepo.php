@@ -134,6 +134,12 @@ class ItemRepo extends DbAssist
         }
     }
 
+    /**
+     * 
+     * @param type $number
+     * @param type $intervalType
+     * FIXME: it needs SELECT @last := LAST_INSERT_ID() query ran beforehand
+     */
     public function createRepeats($number, $intervalType)
     {
         $number       = $this->safe($number);
@@ -143,14 +149,33 @@ class ItemRepo extends DbAssist
                 . 'VALUES (@last, "%s", "%s", NOW(), "0000-00-00", "1")';
         $this->query(sprintf($query, $number, $intervalType));
     }
+    
+    public function removeItemFromRepeats($id)
+    {
+        $this->query("DELETE FROM repeats WHERE item_id = '$id'");
+    }
 
-    public function update($id, $text)
+    public function update($id, $text, $type, $numbers)
     {
         $id    = $this->safe($id);
         $text  = $this->safe($text);
-        $query = "UPDATE item SET name='$text' WHERE id='$id'";
+        $type  = $this->safe($type);
+        $query = "UPDATE item SET name='$text', type='$type' WHERE id='$id'";
+        $this->query($query);
+        
+        //1 daily 2 weekly 3 monthly
+        $this->removeItemFromRepeats($id);
+        $this->query("SELECT @last := '$id'");        
 
-        return $this->query($query);
+        if ('2' === $type) {
+            for($i = 0;$i < strlen($numbers);$i++) {
+                $this->createRepeats($numbers[$i], 'w');
+            }
+        } elseif('3' === $type) {
+            $this->createRepeats($numbers, 'm');
+        }
+        
+        return;
     }
 
     public function complete($id, $type, $date)
