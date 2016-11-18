@@ -7,16 +7,16 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 =============== TO DO ================
 
-- refactor. rename daily table to complete. remove completed_at field from item table.
+- somehow allow to see weekly and monthly tasks assigned for other days ??
+
+- !!! BASE: add revolver tasks;
+
+- refactor. remove completed_at field from item table.
 Thus any type of task will be processed similarly.
 
 - add to login page auto-link to test account;
 
 - add description of the project page;
-
-- !!! BASE: add weekly and monthly tasks;
-
-- !!! BASE: add revolver tasks;
 
 - show monthly and weekly tasks that are uncompleted even if last date passed!
 
@@ -71,6 +71,10 @@ Etc.
 - fix pluralization for "day" in Russian
 
 =============== DONE ====================
+
+- !!! BASE: add weekly and monthly tasks;
+
+- refactor: rename "daily" table to "completed" table
 
 - fix "logged in" state of menu buttons for logged out user due to outdated session
 
