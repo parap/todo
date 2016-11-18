@@ -114,10 +114,11 @@ class ItemRepo extends DbAssist
             // plain completed task, do nothing
         }
         
-        $this->query("SELECT @last := LAST_INSERT_ID()");
+        $last = $this->query("SELECT @last := LAST_INSERT_ID()");
+        $last = $last[0]['@last := LAST_INSERT_ID()'];
         
         if (!empty($params['month'])) {
-            $this->createRepeats($params['month'], 'm');
+            $this->createRepeats($params['month'], 'm', $last);
             return;
         }
         
@@ -130,7 +131,7 @@ class ItemRepo extends DbAssist
                 continue;
             }
 
-            $this->createRepeats(--$key, 'w');
+            $this->createRepeats(--$key, 'w', $last);
         }
     }
 
@@ -138,16 +139,16 @@ class ItemRepo extends DbAssist
      * 
      * @param type $number
      * @param type $intervalType
-     * FIXME: it needs SELECT @last := LAST_INSERT_ID() query ran beforehand
      */
-    public function createRepeats($number, $intervalType)
+    public function createRepeats($number, $intervalType, $last)
     {
         $number       = $this->safe($number);
+        $last       = $this->safe($last);
         $intervalType = $this->safe($intervalType);
         $query        = 'INSERT INTO repeats (item_id, number, interval_type, '
                 . 'created_at, archived_at, repeatt) '
-                . 'VALUES (@last, "%s", "%s", NOW(), "0000-00-00", "1")';
-        $this->query(sprintf($query, $number, $intervalType));
+                . 'VALUES ("%s", "%s", "%s", NOW(), "0000-00-00", "1")';
+        $this->query(sprintf($query, $last, $number, $intervalType));
     }
     
     public function removeItemFromRepeats($id)
@@ -165,14 +166,13 @@ class ItemRepo extends DbAssist
         
         //1 daily 2 weekly 3 monthly
         $this->removeItemFromRepeats($id);
-        $this->query("SELECT @last := '$id'");        
 
         if ('2' === $type) {
             for($i = 0;$i < strlen($numbers);$i++) {
-                $this->createRepeats($numbers[$i], 'w');
+                $this->createRepeats($numbers[$i], 'w', $id);
             }
         } elseif('3' === $type) {
-            $this->createRepeats($numbers, 'm');
+            $this->createRepeats($numbers, 'm', $id);
         }
         
         return;
