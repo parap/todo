@@ -102,7 +102,20 @@
                         if(typeof(item) === 'undefined') return;
                         item.monthly = "";
                     };
-// add periodic form ends                    
+// add periodic form ends
+// add revolver form begins
+
+                    $scope.revolverSimple = true;
+                    $scope.addRevolverTask = function() {
+                        //dynamically add new input type=text field to the bottom in .revolver-form
+                        //window.createElement('<b>Hello</b>');
+                    }
+                    
+                    $scope.removeRevolverTask = function() {
+                        // dynamically remove last input type=text field in .revolver-form
+                    }
+
+// add revolver form ends
                     
                     $scope.day = 0;
 
@@ -148,13 +161,16 @@
                     $scope.add = function (text, type) {
                         
                         var dParams = new Object;
-                        // type = 0 - regular, 1 -daily, 2 - weekly, 3 - monthly
+                        // type = 0 - regular, 1 - daily, 2 - weekly, 3 - monthly
                         if (type > 1) {
                             dParams.day = $scope.dailyCheck;
                             dParams.month = $scope.monthlyCheck;
                             var week = [];
                             for(var i=1;i<8;i++) week[i] = $scope['weeklyCheck' + i];
                             dParams.week = week;
+                        } else {
+                            //type = 0, task may be revolver. Populate me!
+                            // read all input elements in .revolver-form
                         }
                         
                         $scope.todos.push({name: text, done: false, type: type, params: dParams});
