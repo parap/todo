@@ -7,15 +7,20 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 =============== TO DO ================
 
+- !!! BASE: add revolver tasks;
+
+- refactor: move "edit daily task" forms to separate template and processing code to separate controller
+to make todo-list template and component simpler
+
 - add annotation for tasks to display on mouse hover
+
+- add comments to tasks to add on-fly. Like Trello has.
 
 - add "weekly tasks only" mode - display all weekly tasks
 
 - add "monthly tasks only" mode - display all monthly tasks
 
 - by default display approaching weekly&monthly tasks. For instance in closest 2 days.
-
-- !!! BASE: add revolver tasks;
 
 - refactor. remove completed_at field from item table.
 Thus any type of task will be processed similarly.
