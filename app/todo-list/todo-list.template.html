@@ -84,15 +84,21 @@
         <legend class="legend-regular-{{language}}">{{'REGULAR'|translate}}</legend>
 
         <form id="todo-form" ng-submit="add(newTodo, 0)">
-            <input id="new-todo" ng-focus="addRevolver = true" class="" type="text" placeholder="{{'ADD_TODO_ITEM'|translate}}" ng-model="newTodo" ng-disabled="saving" autofocus required>
+            <input id="new-todo" ng-focus="addRevolver = true" class="" type="text" placeholder="{{'ADD_TODO_ITEM'|translate}}" ng-model="newTodo" ng-disabled="saving" autofocus >
             <span ng-show="addRevolver"><button ng-click="addRevolver = false">Close</button></span>
             <div ng-show="addRevolver" class="revolver-form">
                 <strong>Simple:</strong><br/>
                 No subtasks<input type="checkbox" name="revolver-simple" ng-model="revolverSimple" ng-click="selectSimple()" checked /><br/>
                 <strong>Revolver, has subtasks:</strong><br/>
-                <input type="text" name="subtask" /> 
-                <button ng-click="addRevolverTask()">Add more subtasks</button>
-                <button ng-click="removeRevolverTask()">Remove subtask</button>
+                
+                <div id="container">
+                    <div ng-repeat="task in revolverTasks">
+                        <input type="text" name="{{task}}" />
+                    </div>
+                </div>
+                
+                <button ng-click="addRevolverTask()" ng-disabled="revolverTasks.length > 10">Add more subtasks</button>
+                <button ng-click="removeRevolverTask()" ng-disabled="revolverTasks.length == 0">Remove subtask</button>
                 <br/>
                 <input type="submit" value="Submit"/>
             </div>

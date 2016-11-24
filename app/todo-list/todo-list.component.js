@@ -106,15 +106,17 @@
 // add revolver form begins
 
                     $scope.revolverSimple = true;
+                    $scope.revolverTasks = ['0 next'];
                     $scope.addRevolverTask = function() {
-                        //dynamically add new input type=text field to the bottom in .revolver-form
-                        //window.createElement('<b>Hello</b>');
+                        var name = $scope.revolverTasks.length + ' next';
+                        $scope.revolverTasks.push(name);
                     }
                     
                     $scope.removeRevolverTask = function() {
-                        // dynamically remove last input type=text field in .revolver-form
+                        if($scope.revolverTasks.length > 1) {
+                            $scope.revolverTasks.pop();
+                        } 
                     }
-
 // add revolver form ends
                     
                     $scope.day = 0;
