@@ -23,8 +23,7 @@ function AuthenticationService($http, $cookies, $rootScope) {
     }
 
     function SetCredentials(username, password) {
-            var authdata = Base64.encode(username + ':' + password);
-//        var authdata = username + ':' + password;
+        var authdata = Base64.encode(username + ':' + password);
 
         $rootScope.globals = {
             currentUser: {
@@ -34,7 +33,11 @@ function AuthenticationService($http, $cookies, $rootScope) {
         };
 
         $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
-        $cookies.put('globals', $rootScope.globals);
+        
+        var expires = new Date();
+        expires.setMonth(expires.getMonth() + 2);
+        
+        $cookies.putObject('globals', $rootScope.globals, {expires: expires});
     }
     
     function GetUsername()
