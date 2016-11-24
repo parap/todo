@@ -9,6 +9,8 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 - !!! BASE: add revolver tasks;
 
+- show RIP images for plain tasks outdated for a week, month, every next month, year
+
 - add tags
 
 - refactor: move "edit daily task" forms to separate template and processing code to separate controller
