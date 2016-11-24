@@ -70,7 +70,7 @@ class IndexController
             return;
         }
         
-        $parentId = 1;
+        $parentId = null;
         $this->repo->create($name, $email, $parentId, $type, $params);
     }
 
