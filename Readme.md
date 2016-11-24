@@ -9,6 +9,8 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 - !!! BASE: add revolver tasks;
 
+- add tags
+
 - refactor: move "edit daily task" forms to separate template and processing code to separate controller
 to make todo-list template and component simpler
 
