@@ -187,12 +187,7 @@
                             for(var i=1;i<8;i++) week[i] = $scope['weeklyCheck' + i];
                             dParams.week = week;
                         } else {
-//                            alert($scope.subtasks.join(', ') + ' and ' + $scope.revolverTasks.join(', '));
-                            //type = 0, task may be revolver. Populate me!
-                            // read all input elements in .revolver-form
-                            
-//                            $scope.subtasks.join(', ')
-                            
+                            dParams.subtasks = $scope.subtasks;
                         }
                         
                         $scope.todos.push({name: text, done: false, type: type, params: dParams});
