@@ -119,6 +119,7 @@
                         <div class="span8">
                             <input ng-hide="editing" type="checkbox" ng-model="todo.done" ng-click="switch (todo)">
                             <label ng-hide="editing" class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label>
+                            <label ng-hide="editing || !todo.next_subitem" class="italic done-{{todo.done}}" >(<span ng-bind="todo.next_subitem"></span>)</label>
                         </div>
                         <span class="inline-table color{{todo.time_left}}">{{todo.todo_at|date}}</span>
 
