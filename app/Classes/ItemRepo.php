@@ -104,6 +104,17 @@ class ItemRepo extends DbAssist
         );
         
         $this->query($query);
+        
+        if(!empty($params['subtasks'])) {
+            $last = $this->query("SELECT @last := LAST_INSERT_ID()");
+            $last = $last[0]['@last := LAST_INSERT_ID()'];
+            foreach ($params['subtasks'] as $key => $task) {
+                $task = $this->safe($task);
+                $this->createSubtask($last, $task);
+            }
+
+            return;
+        }
 
         if (in_array($type, [ItemType::Normal, ItemType::Daily])) {
             return;
@@ -133,6 +144,12 @@ class ItemRepo extends DbAssist
 
             $this->createRepeats(--$key, 'w', $last);
         }
+    }
+    
+    public function createSubtask($last, $name)
+    {
+        $query = 'INSERT INTO subitem (item_id, name) VALUES ("%s", "%s")';
+        $this->query(sprintf($query, $last, $name));
     }
 
     /**
