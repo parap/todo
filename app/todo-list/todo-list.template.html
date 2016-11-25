@@ -93,7 +93,7 @@
                 
                 <div id="container">
                     <div ng-repeat="task in revolverTasks">
-                        <input type="text" name="{{task}}" />
+                        <input type="text" name="{{task}}" ng-model="subtasks[$index]" placeholder="Add subtask" />
                     </div>
                 </div>
                 

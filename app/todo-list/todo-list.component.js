@@ -107,6 +107,7 @@
 
                     $scope.revolverSimple = true;
                     $scope.revolverTasks = ['subtask0'];
+                    $scope.subtasks=[];
                     $scope.addRevolverTask = function() {
                         var name = 'subtask'+$scope.revolverTasks.length;
                         $scope.revolverTasks.push(name);
