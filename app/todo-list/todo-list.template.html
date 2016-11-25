@@ -83,7 +83,7 @@
     <fieldset>
         <legend class="legend-regular-{{language}}">{{'REGULAR'|translate}}</legend>
 
-        <form id="todo-form" ng-submit="add(newTodo, 0)">
+        <form id="todo-form" ng-submit="add(newTodo, 0);addRevolver=false" >
             <input id="new-todo" ng-focus="addRevolver = true" class="" type="text" placeholder="{{'ADD_TODO_ITEM'|translate}}" ng-model="newTodo" ng-disabled="saving" autofocus >
             <span ng-show="addRevolver"><button ng-click="addRevolver = false">Close</button></span>
             <div ng-show="addRevolver" class="revolver-form">
