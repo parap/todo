@@ -88,12 +88,13 @@
             <span ng-show="addRevolver"><button ng-click="addRevolver = false">Close</button></span>
             <div ng-show="addRevolver" class="revolver-form">
                 <strong>Simple:</strong><br/>
-                No subtasks<input type="checkbox" name="revolver-simple" ng-model="revolverSimple" ng-click="selectSimple()" checked /><br/>
+                No subtasks
+                <input type="checkbox" name="revolver-simple" ng-model="revolverSimple" ng-click="closeRevolverTasks()" checked /><br/>
                 <strong>Revolver, has subtasks:</strong><br/>
                 
                 <div id="container">
                     <div ng-repeat="task in revolverTasks">
-                        <input type="text" name="{{task}}" ng-model="subtasks[$index]" placeholder="Add subtask" />
+                        <input type="text" name="{{task}}" ng-model="subtasks[$index]" placeholder="Add subtask" ng-click="deselectSimple()" />
                     </div>
                 </div>
                 

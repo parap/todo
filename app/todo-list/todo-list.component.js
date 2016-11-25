@@ -108,15 +108,30 @@
                     $scope.revolverSimple = true;
                     $scope.revolverTasks = ['subtask0'];
                     $scope.subtasks=[];
+                    
+                    $scope.deselectSimple = function() {
+                        $scope.revolverSimple = false;  
+                    }
+                    
+                    $scope.closeRevolverTasks = function() {
+                        $scope.revolverTasks = [];
+                        $scope.subtasks=[];
+                    }
+                    
                     $scope.addRevolverTask = function() {
                         var name = 'subtask'+$scope.revolverTasks.length;
                         $scope.revolverTasks.push(name);
+                        $scope.revolverSimple = false;
                     }
                     
                     $scope.removeRevolverTask = function() {
-                        if($scope.revolverTasks.length > 1) {
+                        if ($scope.revolverTasks.length > 0) {
                             $scope.revolverTasks.pop();
-                        } 
+                        }
+                        
+                        if (0 === $scope.revolverTasks.length) {
+                            $scope.revolverSimple = true;
+                        }
                     }
 // add revolver form ends
                     
@@ -172,8 +187,12 @@
                             for(var i=1;i<8;i++) week[i] = $scope['weeklyCheck' + i];
                             dParams.week = week;
                         } else {
+//                            alert($scope.subtasks.join(', ') + ' and ' + $scope.revolverTasks.join(', '));
                             //type = 0, task may be revolver. Populate me!
                             // read all input elements in .revolver-form
+                            
+//                            $scope.subtasks.join(', ')
+                            
                         }
                         
                         $scope.todos.push({name: text, done: false, type: type, params: dParams});
