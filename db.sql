@@ -46,7 +46,6 @@ CREATE TABLE IF NOT EXISTS `item` (
   `name` varchar(256) NOT NULL,
   `user_id` int(11) NOT NULL,
   `done` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0 - not done, 1 - done',
-  `parent_id` int(11) DEFAULT NULL,
   `type` tinyint(4) NOT NULL DEFAULT '1' COMMENT '0 - normal, 1 - daily, 2 - weekly, 3 - monthly, 4 - revolver',
   `created_at` date NOT NULL,
   `todo_at` datetime NOT NULL,
