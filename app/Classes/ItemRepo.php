@@ -287,13 +287,15 @@ class ItemRepo extends DbAssist
 
     public function remove($id)
     {
-        $id         = $this->safe($id);
-        $query      = "DELETE from item where id='$id'";
-        $queryDaily = "DELETE from completed WHERE item_id='$id'";
+        $id           = $this->safe($id);
+        $query        = "DELETE from item where id='$id'";
+        $queryDaily   = "DELETE from completed WHERE item_id='$id'";
         $queryRepeats = "DELETE from repeats WHERE item_id='$id'";
+        $querySub     = "DELETE from subtask WHERE item_id='$id'";
 
         $this->query($queryDaily);
         $this->query($queryRepeats);
+        $this->query($querySub);
         return $this->query($query);
     }
 
