@@ -96,5 +96,6 @@ CREATE TABLE IF NOT EXISTS `subitem` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `item_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
+  `subitem` ADD  `completed_at` DATE NOT NULL DEFAULT  '0000-00-00'
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
