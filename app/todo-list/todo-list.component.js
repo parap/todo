@@ -106,9 +106,9 @@
 // add revolver form begins
 
                     $scope.revolverSimple = true;
-                    $scope.revolverTasks = ['0 next'];
+                    $scope.revolverTasks = ['subtask0'];
                     $scope.addRevolverTask = function() {
-                        var name = $scope.revolverTasks.length + ' next';
+                        var name = 'subtask'+$scope.revolverTasks.length;
                         $scope.revolverTasks.push(name);
                     }
                     
