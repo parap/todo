@@ -221,3 +221,7 @@ A2EE00
 #email, #password {
     width: 300px;
 }
+
+.italic {
+    font-style: italic;
+}
