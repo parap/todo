@@ -70,8 +70,7 @@ class IndexController
             return;
         }
         
-        $parentId = null;
-        $this->repo->create($name, $email, $parentId, $type, $params);
+        $this->repo->create($name, $email, $type, $params);
     }
 
     public function update(RequestM $request)
