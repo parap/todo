@@ -99,7 +99,7 @@ class ItemRepo extends DbAssist
         $query  = sprintf(
                 'INSERT INTO item (name, user_id, done, type, '
                 . 'created_at, todo_at, completed_at, archived_at) '
-                . 'VALUES ("%s", "%s", "0", "%s", "%s", NOW(), NOW(), '
+                . 'VALUES ("%s", "%s", "0", "%s", NOW(), NOW(), '
                 . '"0000-00-00", "0000-00-00")', $this->safe($name), $userId, $type
         );
         
