@@ -117,7 +117,7 @@
                 <div ng-if="todo.type == 0">
                     <div class="row">
                         <div class="span8">
-                            <input ng-hide="editing" type="checkbox" ng-model="todo.done" ng-click="switch (todo)">
+                            <input ng-hide="editing || (todo.next_subitem||todo.last_completed_subitem)" type="checkbox" ng-model="todo.done" ng-click="switch (todo)">
                             <label ng-hide="editing" class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label>
                             <label ng-hide="editing || !(todo.next_subitem||todo.last_completed_subitem)" class="italic done-{{todo.done}}" >
                                 (
