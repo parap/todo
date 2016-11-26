@@ -118,7 +118,7 @@
                     <div class="row">
                         <div class="span8">
                             <input ng-hide="editing || (todo.next_subitem || todo.last_completed_subitem)" type="checkbox" ng-model="todo.done" ng-click="switch (todo)">
-                            <label ng-hide="editing" class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label>
+                            <label ng-hide="editing" class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true; subtasks = []"></label>
                             <label ng-hide="editing || !(todo.next_subitem||todo.last_completed_subitem)" class="italic done-{{todo.done}}" >
                                 (
                                 <input ng-hide="editing || !todo.last_completed_subitem" type="checkbox" checked ng-click="uncheckLast(todo)">
@@ -149,11 +149,11 @@
                         <form ng-show="editing" ng-submit="editing = false">
                             <input type="text" class="editing" ng-model="todo.name" placeholder="todo.name" ng-required/>
                             <button class="btn" type="submit" ng-click="update(todo)">{{'SAVE'|translate}}</button>
-                            <div ng-repeat="subitem in todo.subitems.split('###')">
-                                <input type="text" value="{{subitem}}" name="subtask{{$index}}" />
+                            <div ng-repeat="subitem in todo.subitems.split('###')" >
+                                <any ng-init="subtasksEdit[$index] = subitem"></any>
+                                <input type="text" ng-model="subtasksEdit[$index]" />
                             </div>
                         </form>
-
                     </div>
                 </div>
             </li>

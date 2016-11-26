@@ -108,6 +108,7 @@
                     $scope.revolverSimple = true;
                     $scope.revolverTasks = ['subtask0'];
                     $scope.subtasks=[];
+                    $scope.subtasksEdit=[];
                     
                     $scope.deselectSimple = function() {
                         $scope.revolverSimple = false;  
@@ -238,6 +239,8 @@
                             type = 3;
                             numbers = item.monthly;
                         } else {
+                            //weekly or normal
+                            
                             for (var i = 0; i < 7; i++) {
                                 if (item.weekly[i] === true) {
                                     type = 2;
