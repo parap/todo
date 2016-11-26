@@ -45,6 +45,7 @@ class ItemRepo extends DbAssist
                 . "OR (i.type = '2' AND WEEKDAY('$date') = r.number) "
                 . "OR (i.type = '3' AND DAYOFMONTH('$date') = r.number) ) "
                 . "GROUP BY i.id "
+                . "ORDER BY s.id ASC "
                 ;
         
 //        echo $query;
@@ -183,13 +184,18 @@ class ItemRepo extends DbAssist
         $this->query("DELETE FROM repeats WHERE item_id = '$id'");
     }
 
-    public function update($id, $text, $type, $numbers)
+    public function update($id, $text, $type, $numbers, $sub)
     {
         $id    = $this->safe($id);
         $text  = $this->safe($text);
         $type  = $this->safe($type);
+        $sub  = $this->safe($sub);
         $query = "UPDATE item SET name='$text', type='$type' WHERE id='$id'";
         $this->query($query);
+        
+        if(!empty($sub)){
+            
+        }
         
         //1 daily 2 weekly 3 monthly
         $this->removeItemFromRepeats($id);
