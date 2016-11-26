@@ -119,11 +119,11 @@
                         <div class="span8">
                             <input ng-hide="editing" type="checkbox" ng-model="todo.done" ng-click="switch (todo)">
                             <label ng-hide="editing" class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label>
-                            <label ng-hide="editing || !todo.next_subitem" class="italic done-{{todo.done}}" >
+                            <label ng-hide="editing || !(todo.next_subitem||todo.last_completed_subitem)" class="italic done-{{todo.done}}" >
                                 (
                                 <input ng-hide="editing || !todo.last_completed_subitem" type="checkbox" checked ng-click="uncheckLast(todo)">
                                 <span ng-bind="todo.last_completed_subitem"></span>
-                                <input ng-hide="editing" type="checkbox" ng-model="todo.done" ng-click="checkNext(todo)">
+                                <input ng-hide="editing || !todo.next_subitem" type="checkbox" ng-click="checkNext(todo)">
                                 <span ng-bind="todo.next_subitem"></span>
                                 )
                             </label>
