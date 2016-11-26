@@ -228,6 +228,22 @@ class ItemRepo extends DbAssist
             AND item_id = '$id'
             ORDER BY id ASC LIMIT 1";
 
+        $this->query($query);
+        
+        // if there are no "next" subtask left - mark parent task as completed
+        $next = $this->findNextSubtask($id);
+        if(empty($next)){
+            $this->complete($id, 0, $date);
+        }
+    }
+    
+    public function findNextSubtask($id)
+    {
+        $id = $this->safe($id);
+        $query = "SELECT ss.name FROM subitem ss "
+                . "WHERE ss.completed_at = '0000-00-00' "
+                . "AND ss.item_id = '$id' "
+                . "ORDER BY ss.id ASC LIMIT 1";
         return $this->query($query);
     }
 
