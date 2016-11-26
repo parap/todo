@@ -135,10 +135,6 @@
                     }
 // add revolver form ends
 // check last/next revolver subtask being
-                    $scope.uncheckLast = function(item) {
-                        // uncheck last (AJAX call)
-                        // reload page
-                    }
                     $scope.checkNext = function(item) {
                         params = {"id": item.id, "day": $scope.day, "email": email};
                         $http.post("index.php?route=complete-next", params)
@@ -147,6 +143,13 @@
                                 });
 
                         // reload page
+                    }
+                    $scope.uncheckLast = function(item) {
+                        params = {"id": item.id, "day": $scope.day, "email": email};
+                        $http.post("index.php?route=uncomplete-last", params)
+                                .then(function () {
+                                    $scope.fetch();
+                                });
                     }
 // check last/next revolver subtask end
                     

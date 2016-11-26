@@ -233,10 +233,29 @@ class ItemRepo extends DbAssist
         // if there are no "next" subtask left - mark parent task as completed
         $next = $this->findNextSubtask($id);
         if(empty($next)){
-            $this->complete($id, 0, $date);
+            $this->complete($id, ItemType::Normal, $date);
         }
     }
     
+    public function uncompleteLast($id, $date)
+    {
+        $id = $this->safe($id);
+
+        $query = "UPDATE subitem 
+            SET completed_at = '0000-00-00'
+            WHERE completed_at <> '0000-00-00' 
+            AND item_id = '$id'
+            ORDER BY id DESC LIMIT 1";
+
+        $this->query($query);
+
+        // if there are "next" subtask(s) left - mark parent task as uncompleted
+        $next = $this->findNextSubtask($id);
+        if (!empty($next)) {
+            $this->uncomplete($id, ItemType::Normal, $date);
+        }
+    }
+
     public function findNextSubtask($id)
     {
         $id = $this->safe($id);

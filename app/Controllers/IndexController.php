@@ -105,8 +105,15 @@ class IndexController
         $date = (new \DateTime($day . ' day'))->format('Y-m-d');
 
         $this->repo->completeNext($id, $date);
-        
-        // if all subitems are completed - complete big item
+    }
+
+    public function uncompleteLast(RequestM $request)
+    {
+        $id   = $request->postM['id'];
+        $day  = $request->postM['day'];
+        $date = (new \DateTime($day . ' day'))->format('Y-m-d');
+
+        $this->repo->uncompleteLast($id, $date);
     }
     
     public function setDate(RequestM $request)
