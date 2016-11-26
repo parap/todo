@@ -5,6 +5,7 @@ $routes = [
     'create'         => 'IndexController::create',
     'update'         => 'IndexController::update',
     'complete'       => 'IndexController::complete',
+    'complete-next'  => 'IndexController::completeNext',
     'remove'         => 'IndexController::remove',
     'archive'        => 'IndexController::archive',
     'unarchive'      => 'IndexController::unarchive',
