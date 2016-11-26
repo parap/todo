@@ -82,6 +82,7 @@ class IndexController
         $this->repo->update($id, $name, $type, $numbers);
     }
 
+    //FIXME: check email
     public function complete(RequestM $request)
     {
         $type = $request->postM['type'];
@@ -95,6 +96,17 @@ class IndexController
         $results = $this->repo->findDelay($id);
 
         return isset($results[0]['delay']) ? $results[0]['delay'] : '';
+    }
+    
+    public function completeNext(RequestM $request)
+    {
+        $id   = $request->postM['id'];
+        $day  = $request->postM['day'];
+        $date = (new \DateTime($day . ' day'))->format('Y-m-d');
+
+        $this->repo->completeNext($id, $date);
+        
+        // if all subitems are completed - complete big item
     }
     
     public function setDate(RequestM $request)

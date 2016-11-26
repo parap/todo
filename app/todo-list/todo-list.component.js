@@ -134,6 +134,21 @@
                         }
                     }
 // add revolver form ends
+// check last/next revolver subtask being
+                    $scope.uncheckLast = function(item) {
+                        // uncheck last (AJAX call)
+                        // reload page
+                    }
+                    $scope.checkNext = function(item) {
+                        params = {"id": item.id, "day": $scope.day, "email": email};
+                        $http.post("index.php?route=complete-next", params)
+                                .then(function () {
+                                    $scope.fetch();
+                                });
+
+                        // reload page
+                    }
+// check last/next revolver subtask end
                     
                     $scope.day = 0;
 

@@ -22,6 +22,10 @@ class ItemRepo extends DbAssist
                 . "WHERE ss.completed_at = '0000-00-00' "
                 . "AND ss.item_id = i.id "
                 . "ORDER BY ss.id ASC LIMIT 1) as next_subitem,"
+                . "(SELECT ss.name FROM subitem ss "
+                . "WHERE ss.completed_at <> '0000-00-00' "
+                . "AND ss.item_id = i.id "
+                . "ORDER BY ss.id DESC LIMIT 1) as last_completed_subitem,"
                 . "rr.interval_type AS interval_type, "
                 . "DATEDIFF(i.todo_at, NOW()) AS time_left, "
                 . "DATEDIFF(NOW(), (SELECT d.completed_at FROM completed AS d "
@@ -210,6 +214,19 @@ class ItemRepo extends DbAssist
         $id    = $this->safe($id);
         
         $query = "UPDATE item SET done='1', completed_at='$date' WHERE id='$id'";
+
+        return $this->query($query);
+    }
+    
+    public function completeNext($id, $date)
+    {
+        $id = $this->safe($id);
+
+        $query = "UPDATE subitem 
+            SET completed_at = NOW()
+            WHERE completed_at = '0000-00-00'
+            AND item_id = '$id'
+            ORDER BY id ASC LIMIT 1";
 
         return $this->query($query);
     }
