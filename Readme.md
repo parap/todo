@@ -7,14 +7,16 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 =============== TO DO ================
 
+- add balls (value) for daily tasks. So that there could be more and less important tasks.
+
 - show RIP images for plain tasks outdated for a week, month, every next month, year
 
-- add tags
+- add tags to be able to fetch tasks of some tag only;
 
 - refactor: move "edit daily task" forms to separate template and processing code to separate controller
 to make todo-list template and component simpler
 
-- add annotation for tasks to display on mouse hover
+- let user to add annotation for tasks to be displayed on mouse hover
 
 - add comments to tasks to add on-fly. Like Trello has.
 
@@ -80,6 +82,11 @@ Did one kind of a tasks for a whole week? Earn a copper coin.
 Etc.
 
 - fix pluralization for "day" in Russian
+
+
+=============== TODO statistic ===========
+
+
 
 =============== DONE ====================
 
