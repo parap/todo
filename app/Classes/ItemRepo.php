@@ -184,19 +184,30 @@ class ItemRepo extends DbAssist
         $this->query("DELETE FROM repeats WHERE item_id = '$id'");
     }
 
+    public function removeItemFromSubitem($id)
+    {
+        $this->query("DELETE FROM subitem WHERE item_id = '$id'");
+    }
+
     public function update($id, $text, $type, $numbers, $sub)
     {
         $id    = $this->safe($id);
         $text  = $this->safe($text);
         $type  = $this->safe($type);
-        $sub  = $this->safe($sub);
+
         $query = "UPDATE item SET name='$text', type='$type' WHERE id='$id'";
         $this->query($query);
         
-        if(!empty($sub)){
+        // revolver
+        if (!empty($sub)) {
+            $this->removeItemFromSubitem($id);
+            foreach($sub as $subitem) {
+                $this->createSubtask($id, $this->safe($subitem));
+            }
             
+            return;
         }
-        
+
         //1 daily 2 weekly 3 monthly
         $this->removeItemFromRepeats($id);
 
@@ -352,13 +363,14 @@ class ItemRepo extends DbAssist
     public function remove($id)
     {
         $id           = $this->safe($id);
+
+        $this->removeItemFromRepeats($id);
+        $this->removeItemFromSubitem($id);
+
         $query        = "DELETE from item where id='$id'";
         $queryDaily   = "DELETE from completed WHERE item_id='$id'";
-        $queryRepeats = "DELETE from repeats WHERE item_id='$id'";
-        $querySub     = "DELETE from subtask WHERE item_id='$id'";
 
         $this->query($queryDaily);
-        $this->query($queryRepeats);
         $this->query($querySub);
         return $this->query($query);
     }
