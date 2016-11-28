@@ -70,8 +70,7 @@ class IndexController
             return;
         }
         
-        $parentId = 1;
-        $this->repo->create($name, $email, $parentId, $type, $params);
+        $this->repo->create($name, $email, $type, $params);
     }
 
     public function update(RequestM $request)
@@ -80,9 +79,11 @@ class IndexController
         $id      = $request->postM['id'];
         $type    = $request->postM['type'];
         $numbers = $request->postM['numbers'];
-        $this->repo->update($id, $name, $type, $numbers);
+        $sub     = $request->postM['subb'];
+        $this->repo->update($id, $name, $type, $numbers, $sub);
     }
 
+    //FIXME: check email
     public function complete(RequestM $request)
     {
         $type = $request->postM['type'];
@@ -96,6 +97,24 @@ class IndexController
         $results = $this->repo->findDelay($id);
 
         return isset($results[0]['delay']) ? $results[0]['delay'] : '';
+    }
+    
+    public function completeNext(RequestM $request)
+    {
+        $id   = $request->postM['id'];
+        $day  = $request->postM['day'];
+        $date = (new \DateTime($day . ' day'))->format('Y-m-d');
+
+        $this->repo->completeNext($id, $date);
+    }
+
+    public function uncompleteLast(RequestM $request)
+    {
+        $id   = $request->postM['id'];
+        $day  = $request->postM['day'];
+        $date = (new \DateTime($day . ' day'))->format('Y-m-d');
+
+        $this->repo->uncompleteLast($id, $date);
     }
     
     public function setDate(RequestM $request)

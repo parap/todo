@@ -4,8 +4,8 @@ angular
         .module('todoApp')
         .factory('AuthenticationService', AuthenticationService);
 
-AuthenticationService.$inject = ['$http', '$cookieStore', '$rootScope'];
-function AuthenticationService($http, $cookieStore, $rootScope) {
+AuthenticationService.$inject = ['$http', '$cookies', '$rootScope'];
+function AuthenticationService($http, $cookies, $rootScope) {
     var service = {};
 
     service.Login = Login;
@@ -23,8 +23,7 @@ function AuthenticationService($http, $cookieStore, $rootScope) {
     }
 
     function SetCredentials(username, password) {
-            var authdata = Base64.encode(username + ':' + password);
-//        var authdata = username + ':' + password;
+        var authdata = Base64.encode(username + ':' + password);
 
         $rootScope.globals = {
             currentUser: {
@@ -34,7 +33,11 @@ function AuthenticationService($http, $cookieStore, $rootScope) {
         };
 
         $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
-        $cookieStore.put('globals', $rootScope.globals);
+        
+        var expires = new Date();
+        expires.setMonth(expires.getMonth() + 2);
+        
+        $cookies.putObject('globals', $rootScope.globals, {expires: expires});
     }
     
     function GetUsername()
@@ -45,7 +48,7 @@ function AuthenticationService($http, $cookieStore, $rootScope) {
 
     function ClearCredentials() {
         $rootScope.globals = {};
-        $cookieStore.remove('globals');
+        $cookies.remove('globals');
         $http.defaults.headers.common.Authorization = 'Basic';
     }
 }

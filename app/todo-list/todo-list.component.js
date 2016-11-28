@@ -102,7 +102,64 @@
                         if(typeof(item) === 'undefined') return;
                         item.monthly = "";
                     };
-// add periodic form ends                    
+// add periodic form ends
+// add revolver form begins
+
+                    $scope.revolverSimple = true;
+                    $scope.revolverTasks = ['subtask0'];
+                    $scope.subtasks=[];
+                    $scope.subtasksEdit=[];
+                    
+                    $scope.deselectSimple = function() {
+                        $scope.revolverSimple = false;  
+                    }
+                    
+                    $scope.closeRevolverTasks = function() {
+                        $scope.revolverTasks = [];
+                        $scope.subtasks=[];
+                    }
+                    
+                    $scope.addRevolverTask = function(item) {
+                        var name = 'subtask'+$scope.revolverTasks.length;
+                        $scope.revolverTasks.push(name);
+                        $scope.revolverSimple = false;
+                        if (typeof(item.subtasksEdit) !== "undefined") {
+                            item.subtasksEdit.push('');
+                        }
+                    }
+                    
+                    $scope.removeRevolverTask = function(item) {
+                        if ($scope.revolverTasks.length > 0) {
+                            $scope.revolverTasks.pop();
+                        }
+                        
+                        if ((typeof(item.subtasksEdit) !== "undefined" && item.subtasksEdit.length > 0)) {
+                            item.subtasksEdit.pop();
+                        }
+                        
+                        if (0 === $scope.revolverTasks.length) {
+                            $scope.revolverSimple = true;
+                        }
+                    }
+// add revolver form ends
+// check last/next revolver subtask being
+                    $scope.checkNext = function(item) {
+                        params = {"id": item.id, "day": $scope.day, "email": email};
+                        $http.post("index.php?route=complete-next", params)
+                                .then(function () {
+                                    $scope.fetch();
+                                });
+
+                        // reload page
+                    }
+                    $scope.uncheckLast = function(item) {
+                        params = {"id": item.id, "day": $scope.day, "email": email};
+                        $http.post("index.php?route=uncomplete-last", params)
+                                .then(function () {
+                                    $scope.fetch();
+                                });
+                    }
+// check last/next revolver subtask end
                     
                     $scope.day = 0;
 
@@ -148,13 +205,15 @@
                     $scope.add = function (text, type) {
                         
                         var dParams = new Object;
-                        // type = 0 - regular, 1 -daily, 2 - weekly, 3 - monthly
+                        // type = 0 - regular, 1 - daily, 2 - weekly, 3 - monthly
                         if (type > 1) {
                             dParams.day = $scope.dailyCheck;
                             dParams.month = $scope.monthlyCheck;
                             var week = [];
                             for(var i=1;i<8;i++) week[i] = $scope['weeklyCheck' + i];
                             dParams.week = week;
+                        } else {
+                            dParams.subtasks = $scope.subtasks;
                         }
                         
                         $scope.todos.push({name: text, done: false, type: type, params: dParams});
@@ -179,24 +238,27 @@
                     };
 
                     $scope.update = function (item) {
-                        var numbers = '', type = item.type;
+                        var numbers = '', type = item.type, subb = '';
                         
                         if (item.daily === true) {
                             type = 1;
-                        } else if (item.monthly !== "") {
+                        } else if (typeof(item.monthly) !== "undefined") {
                             type = 3;
                             numbers = item.monthly;
-                        } else {
+                        } else if (typeof(item.weekly) !== "undefined"){
+                            //weekly or normal
                             for (var i = 0; i < 7; i++) {
                                 if (item.weekly[i] === true) {
                                     type = 2;
                                     numbers += ''+i;
                                 }
                             }
+                        } else {
+                            subb = item.subtasksEdit;
                         }
                         
-                        params = {"name": item.name, "id": item.id,
-                            "email": email, "type": type, "numbers": numbers};
+                        params = {name: item.name, id: item.id, 
+                            email: email, type: type, numbers: numbers, subb: subb};
                         $http.post("index.php?route=update", params);
                     };
 

@@ -9,6 +9,8 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 - !!! BASE: add revolver tasks;
 
+- show RIP images for plain tasks outdated for a week, month, every next month, year
+
 - add tags
 
 - refactor: move "edit daily task" forms to separate template and processing code to separate controller
@@ -47,8 +49,6 @@ Thus any type of task will be processed similarly.
 
 - dynamically change legend in dependence from language selected
 
-- make user to be logged in for 1 day (not a few hours as it is now)
-
 - save language preference to cookies
 
 - force completed normal items to be disappear eventually next days after completion:
@@ -84,6 +84,8 @@ Etc.
 - fix pluralization for "day" in Russian
 
 =============== DONE ====================
+
+- make user to be logged in for 1 day (not a few hours as it is now). Even for months.
 
 - !!! BASE: add weekly and monthly tasks;
 

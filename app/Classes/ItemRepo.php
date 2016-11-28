@@ -17,6 +17,15 @@ class ItemRepo extends DbAssist
         
         $query = "SELECT i.*, "
                 . "GROUP_CONCAT(rr.number) as numbers, "
+                . "GROUP_CONCAT(s.name SEPARATOR '###') as subitems, "
+                . "(SELECT ss.name FROM subitem ss "
+                . "WHERE ss.completed_at = '0000-00-00' "
+                . "AND ss.item_id = i.id "
+                . "ORDER BY ss.id ASC LIMIT 1) as next_subitem,"
+                . "(SELECT ss.name FROM subitem ss "
+                . "WHERE ss.completed_at <> '0000-00-00' "
+                . "AND ss.item_id = i.id "
+                . "ORDER BY ss.id DESC LIMIT 1) as last_completed_subitem,"
                 . "rr.interval_type AS interval_type, "
                 . "DATEDIFF(i.todo_at, NOW()) AS time_left, "
                 . "DATEDIFF(NOW(), (SELECT d.completed_at FROM completed AS d "
@@ -28,6 +37,7 @@ class ItemRepo extends DbAssist
                 . "LEFT JOIN user u ON i.user_id = u.id "
                 . "LEFT JOIN repeats r ON i.id = r.item_id "
                 . "LEFT JOIN repeats rr ON i.id = rr.item_id "
+                . "LEFT JOIN subitem s ON i.id = s.item_id "
                 . "WHERE i.created_at <= '$date' AND "
                 . "(i.archived_at = '0000-00-00' OR i.archived_at > '$date') "
                 . "AND u.email = '$emailP' "
@@ -35,6 +45,7 @@ class ItemRepo extends DbAssist
                 . "OR (i.type = '2' AND WEEKDAY('$date') = r.number) "
                 . "OR (i.type = '3' AND DAYOFMONTH('$date') = r.number) ) "
                 . "GROUP BY i.id "
+                . "ORDER BY s.id ASC "
                 ;
         
 //        echo $query;
@@ -93,17 +104,28 @@ class ItemRepo extends DbAssist
         return $this->query($query)[0]['id'];
     }
 
-    public function create($name, $email, $parentId, $type, $params)
+    public function create($name, $email, $type, $params)
     {
         $userId = $this->getUserIdByEmail($email);
         $query  = sprintf(
-                'INSERT INTO item (name, user_id, done, parent_id, type, '
+                'INSERT INTO item (name, user_id, done, type, '
                 . 'created_at, todo_at, completed_at, archived_at) '
-                . 'VALUES ("%s", "%s", "0", "%s", "%s", NOW(), NOW(), '
-                . '"0000-00-00", "0000-00-00")', $this->safe($name), $userId, $parentId, $type
+                . 'VALUES ("%s", "%s", "0", "%s", NOW(), NOW(), '
+                . '"0000-00-00", "0000-00-00")', $this->safe($name), $userId, $type
         );
         
         $this->query($query);
+        
+        if(!empty($params['subtasks'])) {
+            $last = $this->query("SELECT @last := LAST_INSERT_ID()");
+            $last = $last[0]['@last := LAST_INSERT_ID()'];
+            foreach ($params['subtasks'] as $key => $task) {
+                $task = $this->safe($task);
+                $this->createSubtask($last, $task);
+            }
+
+            return;
+        }
 
         if (in_array($type, [ItemType::Normal, ItemType::Daily])) {
             return;
@@ -134,6 +156,12 @@ class ItemRepo extends DbAssist
             $this->createRepeats(--$key, 'w', $last);
         }
     }
+    
+    public function createSubtask($last, $name)
+    {
+        $query = 'INSERT INTO subitem (item_id, name) VALUES ("%s", "%s")';
+        $this->query(sprintf($query, $last, $name));
+    }
 
     /**
      * 
@@ -156,14 +184,30 @@ class ItemRepo extends DbAssist
         $this->query("DELETE FROM repeats WHERE item_id = '$id'");
     }
 
-    public function update($id, $text, $type, $numbers)
+    public function removeItemFromSubitem($id)
+    {
+        $this->query("DELETE FROM subitem WHERE item_id = '$id'");
+    }
+
+    public function update($id, $text, $type, $numbers, $sub)
     {
         $id    = $this->safe($id);
         $text  = $this->safe($text);
         $type  = $this->safe($type);
+
         $query = "UPDATE item SET name='$text', type='$type' WHERE id='$id'";
         $this->query($query);
         
+        // revolver
+        if (!empty($sub)) {
+            $this->removeItemFromSubitem($id);
+            foreach($sub as $subitem) {
+                $this->createSubtask($id, $this->safe($subitem));
+            }
+            
+            return;
+        }
+
         //1 daily 2 weekly 3 monthly
         $this->removeItemFromRepeats($id);
 
@@ -188,6 +232,54 @@ class ItemRepo extends DbAssist
         
         $query = "UPDATE item SET done='1', completed_at='$date' WHERE id='$id'";
 
+        return $this->query($query);
+    }
+    
+    public function completeNext($id, $date)
+    {
+        $id = $this->safe($id);
+
+        $query = "UPDATE subitem 
+            SET completed_at = NOW()
+            WHERE completed_at = '0000-00-00'
+            AND item_id = '$id'
+            ORDER BY id ASC LIMIT 1";
+
+        $this->query($query);
+        
+        // if there are no "next" subtask left - mark parent task as completed
+        $next = $this->findNextSubtask($id);
+        if(empty($next)){
+            $this->complete($id, ItemType::Normal, $date);
+        }
+    }
+    
+    public function uncompleteLast($id, $date)
+    {
+        $id = $this->safe($id);
+
+        $query = "UPDATE subitem 
+            SET completed_at = '0000-00-00'
+            WHERE completed_at <> '0000-00-00' 
+            AND item_id = '$id'
+            ORDER BY id DESC LIMIT 1";
+
+        $this->query($query);
+
+        // if there are "next" subtask(s) left - mark parent task as uncompleted
+        $next = $this->findNextSubtask($id);
+        if (!empty($next)) {
+            $this->uncomplete($id, ItemType::Normal, $date);
+        }
+    }
+
+    public function findNextSubtask($id)
+    {
+        $id = $this->safe($id);
+        $query = "SELECT ss.name FROM subitem ss "
+                . "WHERE ss.completed_at = '0000-00-00' "
+                . "AND ss.item_id = '$id' "
+                . "ORDER BY ss.id ASC LIMIT 1";
         return $this->query($query);
     }
 
@@ -270,13 +362,16 @@ class ItemRepo extends DbAssist
 
     public function remove($id)
     {
-        $id         = $this->safe($id);
-        $query      = "DELETE from item where id='$id'";
-        $queryDaily = "DELETE from completed WHERE item_id='$id'";
-        $queryRepeats = "DELETE from repeats WHERE item_id='$id'";
+        $id           = $this->safe($id);
+
+        $this->removeItemFromRepeats($id);
+        $this->removeItemFromSubitem($id);
+
+        $query        = "DELETE from item where id='$id'";
+        $queryDaily   = "DELETE from completed WHERE item_id='$id'";
 
         $this->query($queryDaily);
-        $this->query($queryRepeats);
+        $this->query($querySub);
         return $this->query($query);
     }
 

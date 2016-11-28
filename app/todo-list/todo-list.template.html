@@ -79,12 +79,29 @@
         <span><button ng-disabled="0 == day" ng-click="today()" >{{'TODAY'|translate}}</button></span>
     </div>
 
-
     <fieldset>
         <legend class="legend-regular-{{language}}">{{'REGULAR'|translate}}</legend>
 
-        <form id="todo-form" ng-submit="add(newTodo, 0)">
-            <input id="new-todo" class="" type="text" placeholder="{{'ADD_TODO_ITEM'|translate}}" ng-model="newTodo" ng-disabled="saving" autofocus required>
+        <form id="todo-form" ng-submit="add(newTodo, 0);addRevolver=false" >
+            <input id="new-todo" ng-focus="addRevolver = true" class="" type="text" placeholder="{{'ADD_TODO_ITEM'|translate}}" ng-model="newTodo" ng-disabled="saving" autofocus >
+            <span ng-show="addRevolver"><button ng-click="addRevolver = false">Close</button></span>
+            <div ng-show="addRevolver" class="revolver-form">
+                <strong>Simple:</strong><br/>
+                No subtasks
+                <input type="checkbox" name="revolver-simple" ng-model="revolverSimple" ng-click="closeRevolverTasks()" checked /><br/>
+                <strong>Revolver, has subtasks:</strong><br/>
+                
+                <div id="container">
+                    <div ng-repeat="task in revolverTasks">
+                        <input type="text" name="{{task}}" ng-model="subtasks[$index]" placeholder="Add subtask" ng-click="deselectSimple()" />
+                    </div>
+                </div>
+                
+                <button type="button" ng-click="addRevolverTask({})" ng-disabled="revolverTasks.length > 10">Add more subtasks</button>
+                <button type="button" ng-click="removeRevolverTask({})" ng-disabled="revolverTasks.length == 0">Remove subtask</button>
+                <br/>
+                <input type="submit" value="Submit"/>
+            </div>
         </form>
 
         <div class="row marg">
@@ -99,8 +116,16 @@
                 <div ng-if="todo.type == 0">
                     <div class="row">
                         <div class="span8">
-                            <input ng-hide="editing" type="checkbox" ng-model="todo.done" ng-click="switch (todo)">
-                            <label ng-hide="editing" class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label>
+                            <input ng-hide="editing || (todo.next_subitem || todo.last_completed_subitem)" type="checkbox" ng-model="todo.done" ng-click="switch (todo)">
+                            <label ng-hide="editing" class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true; subtasks = []"></label>
+                            <label ng-hide="editing || !(todo.next_subitem||todo.last_completed_subitem)" class="italic done-{{todo.done}}" >
+                                (
+                                <input ng-hide="editing || !todo.last_completed_subitem" type="checkbox" checked ng-click="uncheckLast(todo)">
+                                <span ng-bind="todo.last_completed_subitem"></span>
+                                <input ng-hide="editing || !todo.next_subitem" type="checkbox" ng-click="checkNext(todo)">
+                                <span ng-bind="todo.next_subitem"></span>
+                                )
+                            </label>
                         </div>
                         <span class="inline-table color{{todo.time_left}}">{{todo.todo_at|date}}</span>
 
@@ -109,7 +134,7 @@
                                 class="btn btn-default inline-table" 
                                 ng-click="open($index)"
                                 ng-model="todo.todo_at" 
-                                ng-change="change(todo.id, todo.todo_at, $index)"
+                                ng-change="change(todo.id, todo.todo_at, $index)"\\
                                 show-button-bar="false"
                                 is-open="popup[$index].opened" 
                                 datepicker-options="dateOptions">
@@ -123,8 +148,14 @@
                         <form ng-show="editing" ng-submit="editing = false">
                             <input type="text" class="editing" ng-model="todo.name" placeholder="todo.name" ng-required/>
                             <button class="btn" type="submit" ng-click="update(todo)">{{'SAVE'|translate}}</button>
-                        </form>
+                            <any ng-init="todo.subtasksEdit = todo.subitems.split('###')"></any>
+                            <div ng-repeat="subitem in todo.subtasksEdit" >
+                                <input type="text" ng-model="todo.subtasksEdit[$index]" />
+                            </div>
+                            <button type="button" ng-click="addRevolverTask(todo)" ng-disabled="item.subtasksEdit.length > 10">Add more subtasks</button>
+                            <button type="button" ng-click="removeRevolverTask(todo)" ng-disabled="item.subtasksEdit.length == 0">Remove subtask</button>
 
+                        </form>
                     </div>
                 </div>
             </li>

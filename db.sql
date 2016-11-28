@@ -46,7 +46,6 @@ CREATE TABLE IF NOT EXISTS `item` (
   `name` varchar(256) NOT NULL,
   `user_id` int(11) NOT NULL,
   `done` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0 - not done, 1 - done',
-  `parent_id` int(11) DEFAULT NULL,
   `type` tinyint(4) NOT NULL DEFAULT '1' COMMENT '0 - normal, 1 - daily, 2 - weekly, 3 - monthly, 4 - revolver',
   `created_at` date NOT NULL,
   `todo_at` datetime NOT NULL,
@@ -91,3 +90,12 @@ CREATE TABLE IF NOT EXISTS `user` (
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+CREATE TABLE IF NOT EXISTS `subitem` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `item_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `subitem` ADD  `completed_at` DATE NOT NULL DEFAULT  '0000-00-00'
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
