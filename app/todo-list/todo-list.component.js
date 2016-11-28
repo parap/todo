@@ -119,15 +119,22 @@
                         $scope.subtasks=[];
                     }
                     
-                    $scope.addRevolverTask = function() {
+                    $scope.addRevolverTask = function(item) {
                         var name = 'subtask'+$scope.revolverTasks.length;
                         $scope.revolverTasks.push(name);
                         $scope.revolverSimple = false;
+                        if (typeof(item.subtasksEdit) !== "undefined") {
+                            item.subtasksEdit.push('');
+                        }
                     }
                     
-                    $scope.removeRevolverTask = function() {
+                    $scope.removeRevolverTask = function(item) {
                         if ($scope.revolverTasks.length > 0) {
                             $scope.revolverTasks.pop();
+                        }
+                        
+                        if ((typeof(item.subtasksEdit) !== "undefined" && item.subtasksEdit.length > 0)) {
+                            item.subtasksEdit.pop();
                         }
                         
                         if (0 === $scope.revolverTasks.length) {

@@ -97,8 +97,8 @@
                     </div>
                 </div>
                 
-                <button type="button" ng-click="addRevolverTask()" ng-disabled="revolverTasks.length > 10">Add more subtasks</button>
-                <button type="button" ng-click="removeRevolverTask()" ng-disabled="revolverTasks.length == 0">Remove subtask</button>
+                <button type="button" ng-click="addRevolverTask({})" ng-disabled="revolverTasks.length > 10">Add more subtasks</button>
+                <button type="button" ng-click="removeRevolverTask({})" ng-disabled="revolverTasks.length == 0">Remove subtask</button>
                 <br/>
                 <input type="submit" value="Submit"/>
             </div>
@@ -134,7 +134,7 @@
                                 class="btn btn-default inline-table" 
                                 ng-click="open($index)"
                                 ng-model="todo.todo_at" 
-                                ng-change="change(todo.id, todo.todo_at, $index)"
+                                ng-change="change(todo.id, todo.todo_at, $index)"\\
                                 show-button-bar="false"
                                 is-open="popup[$index].opened" 
                                 datepicker-options="dateOptions">
@@ -148,11 +148,13 @@
                         <form ng-show="editing" ng-submit="editing = false">
                             <input type="text" class="editing" ng-model="todo.name" placeholder="todo.name" ng-required/>
                             <button class="btn" type="submit" ng-click="update(todo)">{{'SAVE'|translate}}</button>
-                            <any ng-init="todo.subtasksEdit = []"></any>
-                            <div ng-repeat="subitem in todo.subitems.split('###')" >
-                                <any ng-init="todo.subtasksEdit[$index] = subitem"></any>
+                            <any ng-init="todo.subtasksEdit = todo.subitems.split('###')"></any>
+                            <div ng-repeat="subitem in todo.subtasksEdit" >
                                 <input type="text" ng-model="todo.subtasksEdit[$index]" />
                             </div>
+                            <button type="button" ng-click="addRevolverTask(todo)" ng-disabled="item.subtasksEdit.length > 10">Add more subtasks</button>
+                            <button type="button" ng-click="removeRevolverTask(todo)" ng-disabled="item.subtasksEdit.length == 0">Remove subtask</button>
+
                         </form>
                     </div>
                 </div>
