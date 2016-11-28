@@ -6,17 +6,23 @@ Deployed at http://dom4logs.com/todo
 The list includes daily, weekly, normal tasks.
 Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
-=============== FIX BUGS =================
+=========== TODO now ============
 
-- FIX ucking login let user to stay online for a long!
+- fix: when removing last subtask - it doesn't save
+
+- FIX fucking login let user to stay online for a long!
+
+- add "weekly tasks only" mode - display all weekly tasks
+
+- add "monthly tasks only" mode - display all monthly tasks
+
+=============== FIX BUGS =================
 
 - dynamically change legend in dependence from language selected
 
 - fix pluralization for "day" in Russian
 
 - save language preference to cookies
-
-- when removing last subtask - it doesn't save
 
 =============== TODO refactor ==============
 
@@ -71,9 +77,6 @@ Download working sample to check how Johnpapa did it.
 - allow deletion of weekly&monthly tasks in archive
 - add comments to tasks to add on-fly. Like Trello has.
 
-- add "weekly tasks only" mode - display all weekly tasks
-
-- add "monthly tasks only" mode - display all monthly tasks
 
 =============== TODO new functionalities ===========
 
