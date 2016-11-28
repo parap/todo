@@ -45,7 +45,7 @@ class ItemRepo extends DbAssist
                 . "OR (i.type = '2' AND WEEKDAY('$date') = r.number) "
                 . "OR (i.type = '3' AND DAYOFMONTH('$date') = r.number) ) "
                 . "GROUP BY i.id "
-                . "ORDER BY s.id ASC "
+                . "ORDER BY i.id ASC, s.id ASC "
                 ;
         
 //        echo $query;
