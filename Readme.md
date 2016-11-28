@@ -1,67 +1,56 @@
-It is project to learn Angular and to create convenient to-do list.
+Convenient to-do list of daily tasks.
+Statistics of the tasks done.
 
 Deployed at http://dom4logs.com/todo
 
 The list includes daily, weekly, normal tasks.
 Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
-=============== TO DO ================
+=============== FIX BUGS =================
 
-- add balls (value) for daily tasks. So that there could be more and less important tasks.
+- FIX ucking login let user to stay online for a long!
 
-- show RIP images for plain tasks outdated for a week, month, every next month, year
+- dynamically change legend in dependence from language selected
 
-- add tags to be able to fetch tasks of some tag only;
+- fix pluralization for "day" in Russian
 
-- refactor: move "edit daily task" forms to separate template and processing code to separate controller
-to make todo-list template and component simpler
+- save language preference to cookies
 
-- let user to add annotation for tasks to be displayed on mouse hover
+- when removing last subtask - it doesn't save
 
-- add comments to tasks to add on-fly. Like Trello has.
-
-- add "weekly tasks only" mode - display all weekly tasks
-
-- add "monthly tasks only" mode - display all monthly tasks
-
-- by default display approaching weekly&monthly tasks. For instance in closest 2 days.
-
-- refactor. remove completed_at field from item table.
-Thus any type of task will be processed similarly.
-
-- add to login page auto-link to test account;
-
-- add description of the project page;
-
-- show monthly and weekly tasks that are uncompleted even if last date passed!
-
-- add calendar button to select date to "Next day" and "Previous day" buttons
-
-- allow deletion of weekly&monthly tasks in archive
+=============== TODO refactor ==============
 
 - migrate to Doctrine;
 
 - use Postgres to train it;
 
-- sort items according to month statistic (move rarely completed-popular up, often completed-popular down)
+- refactor. remove completed_at field from item table.
+Thus any type of task will be processed similarly.
 
-- allow to add annotation when creating item. Display annotation as title (standard HTML popup) on item hover
+- refactor: move "edit daily task" forms to separate template and processing code to separate controller
+to make todo-list template and component simpler
 
-- dynamically change legend in dependence from language selected
+=============== TODO cosmetics and User Interface =============
 
-- save language preference to cookies
-
-- force completed normal items to be disappear eventually next days after completion:
-make font smaller and thinner.
-
-- translate current date month to Russian
-
-- create FlashService to indicate that login was successful or not. 
-Download working sample to check how Johnpapa did it.
+- translate the rest of site current date month to Russian.
 
 - allow Google Accounts login.
 
-- add graphs. Like weight site.
+- by default display approaching weekly&monthly tasks. For instance in closest 2 days.
+
+- show monthly and weekly tasks that are uncompleted even if last date passed!
+
+- allow to add annotation when creating item. Display annotation as title (standard HTML popup) on item hover
+
+- let user to add annotation for tasks to be displayed on mouse hover
+
+- add to login page auto-link to test account;
+
+- add description of the project page;
+
+- show RIP images for plain tasks outdated for a week, month, every next month, year
+
+- add tags to be able to fetch tasks of some tag only;
 
 - allow items drag & n & drop;
 
@@ -69,9 +58,28 @@ Download working sample to check how Johnpapa did it.
 
 - allow hide & display panels;
 
-- allow setting statistic range: calendar months/weeks or any other defined time interval.
-
 - on edit click - focus edit field, select it's content. On 'escape' click close it without save.
+
+- force completed normal items to be disappear eventually next days after completion:
+make font smaller and thinner.
+
+- create FlashService to indicate that login was successful or not. 
+Download working sample to check how Johnpapa did it.
+
+- add calendar button to select date to "Next day" and "Previous day" buttons
+
+- allow deletion of weekly&monthly tasks in archive
+- add comments to tasks to add on-fly. Like Trello has.
+
+- add "weekly tasks only" mode - display all weekly tasks
+
+- add "monthly tasks only" mode - display all monthly tasks
+
+=============== TODO new functionalities ===========
+
+- add balls (value) for daily tasks. So that there could be more and less important tasks.
+
+- add graphs. Like weight site.
 
 - add bonus prize system, earning coins:
 Did all everyday tasks for one day? Earn a silver coin.
@@ -81,11 +89,11 @@ Did a plain task? Earn copper coin.
 Did one kind of a tasks for a whole week? Earn a copper coin.
 Etc.
 
-- fix pluralization for "day" in Russian
-
-
 =============== TODO statistic ===========
 
+- allow setting statistic range: calendar months/weeks or any other defined time interval.
+
+- sort items according to month statistic (move rarely completed-popular up, often completed-popular down)
 
 
 =============== DONE ====================
@@ -133,10 +141,6 @@ Etc.
 - add history (access to archive) for 'normal' tasks;
 - allow to recover or to irreversibly delete archived tasks;
 
-
- - add statistics. Separate page.:
- 
+- add statistics. Separate page.:
 - monthly & weekly completion % of every daily task;
 - monthly & weekly completion % of all daily/normal tasks;
-
-
