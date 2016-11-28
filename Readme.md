@@ -7,8 +7,6 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 =============== TO DO ================
 
-- !!! BASE: add revolver tasks;
-
 - show RIP images for plain tasks outdated for a week, month, every next month, year
 
 - add tags
@@ -84,6 +82,9 @@ Etc.
 - fix pluralization for "day" in Russian
 
 =============== DONE ====================
+
+
+- !!! BASE: add revolver tasks;
 
 - make user to be logged in for 1 day (not a few hours as it is now). Even for months.
 
