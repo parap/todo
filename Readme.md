@@ -18,6 +18,10 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 - add "monthly tasks only" mode - display all monthly tasks
 
+- when adding new subitem, move focus there
+
+- add placeholders for subitem fields
+
 =============== FIX BUGS =================
 
 - dynamically change legend in dependence from language selected
