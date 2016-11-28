@@ -8,6 +8,8 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 =========== TODO now ============
 
+- fix: when saving item with several subtasks - subtasks shuffle
+
 - fix: when removing last subtask - it doesn't save
 
 - FIX fucking login let user to stay online for a long!
