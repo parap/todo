@@ -79,7 +79,8 @@ class IndexController
         $id      = $request->postM['id'];
         $type    = $request->postM['type'];
         $numbers = $request->postM['numbers'];
-        $this->repo->update($id, $name, $type, $numbers);
+        $sub     = $request->postM['subb'];
+        $this->repo->update($id, $name, $type, $numbers, $sub);
     }
 
     //FIXME: check email

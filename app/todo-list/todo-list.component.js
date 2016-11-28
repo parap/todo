@@ -231,26 +231,27 @@
                     };
 
                     $scope.update = function (item) {
-                        var numbers = '', type = item.type;
+                        var numbers = '', type = item.type, subb = '';
                         
                         if (item.daily === true) {
                             type = 1;
-                        } else if (item.monthly !== "") {
+                        } else if (typeof(item.monthly) !== "undefined") {
                             type = 3;
                             numbers = item.monthly;
-                        } else {
+                        } else if (typeof(item.weekly) !== "undefined"){
                             //weekly or normal
-                            
                             for (var i = 0; i < 7; i++) {
                                 if (item.weekly[i] === true) {
                                     type = 2;
                                     numbers += ''+i;
                                 }
                             }
+                        } else {
+                            subb = item.subtasksEdit;
                         }
                         
-                        params = {"name": item.name, "id": item.id,
-                            "email": email, "type": type, "numbers": numbers};
+                        params = {name: item.name, id: item.id, 
+                            email: email, type: type, numbers: numbers, subb: subb};
                         $http.post("index.php?route=update", params);
                     };
 

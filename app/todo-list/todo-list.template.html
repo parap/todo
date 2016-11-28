@@ -79,7 +79,6 @@
         <span><button ng-disabled="0 == day" ng-click="today()" >{{'TODAY'|translate}}</button></span>
     </div>
 
-
     <fieldset>
         <legend class="legend-regular-{{language}}">{{'REGULAR'|translate}}</legend>
 
@@ -149,9 +148,10 @@
                         <form ng-show="editing" ng-submit="editing = false">
                             <input type="text" class="editing" ng-model="todo.name" placeholder="todo.name" ng-required/>
                             <button class="btn" type="submit" ng-click="update(todo)">{{'SAVE'|translate}}</button>
+                            <any ng-init="todo.subtasksEdit = []"></any>
                             <div ng-repeat="subitem in todo.subitems.split('###')" >
-                                <any ng-init="subtasksEdit[$index] = subitem"></any>
-                                <input type="text" ng-model="subtasksEdit[$index]" />
+                                <any ng-init="todo.subtasksEdit[$index] = subitem"></any>
+                                <input type="text" ng-model="todo.subtasksEdit[$index]" />
                             </div>
                         </form>
                     </div>
