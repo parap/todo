@@ -8,7 +8,7 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 =========== TODO now ============
 
-- fix: when saving item with several subtasks - subtasks shuffle
+- fix: when saving item with several subtasks - subtasks shuffle. 1-2-3 => 3-1-2 => 2-3-1 => 1-2-3
 
 - fix: when removing last subtask - it doesn't save
 
@@ -21,6 +21,8 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 - when adding new subitem, move focus there
 
 - add placeholders for subitem fields
+
+- add 'close' button for 'edit item' field
 
 =============== FIX BUGS =================
 
