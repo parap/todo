@@ -82,7 +82,9 @@ Download working sample to check how Johnpapa did it.
 
 =============== TODO new functionalities ===========
 
-- add balls (value) for daily tasks. So that there could be more and less important tasks.
+- add yearly tasks.
+
+- add scores, values for daily tasks. So there could be more and less important tasks.
 
 - add graphs. Like weight site.
 
