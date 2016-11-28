@@ -123,6 +123,12 @@
                         var name = 'subtask'+$scope.revolverTasks.length;
                         $scope.revolverTasks.push(name);
                         $scope.revolverSimple = false;
+                        
+                        // plain not revolver existing task
+                        if (typeof(item.subtasksEdit) === "undefined" && null === item.subitems) {
+                            item.subtasksEdit = [];
+                        }
+
                         if (typeof(item.subtasksEdit) !== "undefined") {
                             item.subtasksEdit.push('');
                         }
@@ -260,6 +266,7 @@
                         params = {name: item.name, id: item.id, 
                             email: email, type: type, numbers: numbers, subb: subb};
                         $http.post("index.php?route=update", params);
+                        $scope.fetch();
                     };
 
                     $scope.increaseDay = function () {
