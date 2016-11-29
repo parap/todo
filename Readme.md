@@ -104,6 +104,8 @@ Did a plain task? Earn copper coin.
 Did one kind of a tasks for a whole week? Earn a copper coin.
 Etc.
 
+- let user PAUSE daily tasks
+
 =============== TODO statistic ===========
 
 - allow setting statistic range: calendar months/weeks or any other defined time interval.
