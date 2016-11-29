@@ -8,13 +8,15 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 =========== TODO now ============
 
+- FIX fucking login let user to stay online for a long! Cookie disappears for some mysterious reason
+
 - setup Google Analytics
+
+- fix known bugs and make advertisement campaign to attract users
 
 - fix: when saving item with several subtasks - subtasks shuffle. 1-2-3 => 3-1-2 => 2-3-1 => 1-2-3
 
 - fix: when removing last subtask - it doesn't save
-
-- FIX fucking login let user to stay online for a long!
 
 - add "weekly tasks only" mode - display all weekly tasks
 
@@ -105,6 +107,9 @@ Did one kind of a tasks for a whole week? Earn a copper coin.
 Etc.
 
 - let user PAUSE daily tasks
+
+- let user to mark tasks as NOT DONE. Thus we can distinct unfilled tasks from UNDONE tasks.
+let user have some minor points for such marking.
 
 =============== TODO statistic ===========
 
