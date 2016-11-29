@@ -8,6 +8,8 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 =========== TODO now ============
 
+- setup Google Analytics
+
 - fix: when saving item with several subtasks - subtasks shuffle. 1-2-3 => 3-1-2 => 2-3-1 => 1-2-3
 
 - fix: when removing last subtask - it doesn't save
