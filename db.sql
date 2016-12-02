@@ -99,3 +99,5 @@ CREATE TABLE IF NOT EXISTS `subitem` (
   `subitem` ADD  `completed_at` DATE NOT NULL DEFAULT  '0000-00-00'
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+ALTER TABLE  `item` CHANGE  `name`  `name` VARCHAR( 1024 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ;
