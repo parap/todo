@@ -4,7 +4,7 @@
     <fieldset>
         <legend class="legend-daily-{{language}}">{{'DAILY'|translate}}</legend>
         <form id="daily-form" ng-submit="add(newDaily, currentType); addPeriod = false">
-            <input ng-focus="addPeriod = true" id="new-daily" class="" type="text" placeholder="{{'ADD_DAILY_ITEM'|translate}}" ng-model="newDaily" ng-disabled="saving" autofocus />
+            <input ng-focus="addPeriod = true" id="new-daily" class="" type="text" placeholder="{{'ADD_DAILY_ITEM'|translate}}" ng-model="newDaily" ng-disabled="saving" />
             <span ng-show="addPeriod"><button ng-click="addPeriod = false">Close</button></span>
             <div ng-show="addPeriod" class="daily-form">
                 <strong>Daily:</strong><br/>
@@ -83,7 +83,7 @@
         <legend class="legend-regular-{{language}}">{{'REGULAR'|translate}}</legend>
 
         <form id="todo-form" ng-submit="add(newTodo, 0);addRevolver=false" >
-            <input id="new-todo" ng-focus="addRevolver = true" class="" type="text" placeholder="{{'ADD_TODO_ITEM'|translate}}" ng-model="newTodo" ng-disabled="saving" autofocus >
+            <input id="new-todo" ng-focus="addRevolver = true" class="" type="text" placeholder="{{'ADD_TODO_ITEM'|translate}}" ng-model="newTodo" ng-disabled="saving">
             <span ng-show="addRevolver"><button ng-click="addRevolver = false">Close</button></span>
             <div ng-show="addRevolver" class="revolver-form">
                 <strong>Simple:</strong><br/>
