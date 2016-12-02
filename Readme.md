@@ -113,6 +113,10 @@ Etc.
 - let user to mark tasks as NOT DONE. Thus we can distinct unfilled tasks from UNDONE tasks.
 let user have some minor points for such marking.
 
+- add buttons to calendar 'in a week', 'in a month'
+
+- add tags
+
 =============== TODO statistic ===========
 
 - allow setting statistic range: calendar months/weeks or any other defined time interval.
