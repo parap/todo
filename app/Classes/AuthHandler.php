@@ -24,8 +24,7 @@ class AuthHandler
 
         $username = $request->getM('email') ? : $request->postM['email'];
 
-        if (!empty($_SESSION['logged-email']) &&
-                $_SESSION['logged-email'] === $username) {
+        if (!empty($_COOKIE['logged-email']) && $_COOKIE['logged-email'] === $username) {
             return;
         }
 

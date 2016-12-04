@@ -23,7 +23,8 @@ class UserController
     
     public function logout(Request $request)
     {
-        unset($_SESSION['logged-email']);
+        unset($_COOKIE['logged-email']);
+        setcookie('logged-email', '', time() - 3600);
     }
 
     public function login(Request $request)
@@ -31,7 +32,7 @@ class UserController
         $result = $this->repo->login($this->post['email'], $this->post['ps']);
         
         if ($result) {
-            $_SESSION['logged-email'] = $this->post['email'];
+            setcookie('logged-email', $this->post['email'], time() + 3600 * 24 * 30 * 2);
         }
         
         $params = ['success'=> false, 'message'=> 'wrong login'];
