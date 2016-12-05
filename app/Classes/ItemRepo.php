@@ -198,9 +198,9 @@ class ItemRepo extends DbAssist
         $query = "UPDATE item SET name='$text', type='$type' WHERE id='$id'";
         $this->query($query);
         
+        $this->removeItemFromSubitem($id);
         // revolver
         if (!empty($sub)) {
-            $this->removeItemFromSubitem($id);
             foreach($sub as $subitem) {
                 $this->createSubtask($id, $this->safe($subitem));
             }
