@@ -253,7 +253,7 @@
                         } else if (+item.monthly > 0) {
                             type = 3;
                             numbers = item.monthly;
-                        }  else if (item.weekly.length > 0){
+                        }  else if (typeof(item.weekly) !== 'undefined' && item.weekly.length > 0){
                             //weekly or normal
                             for (var i = 0; i < 7; i++) {
                                 if (item.weekly[i] === true) {
