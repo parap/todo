@@ -8,8 +8,6 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 =========== TODO now ============
 
-- FIX fucking login let user to stay online for a long! Cookie disappears for some mysterious reason
-
 - fix bug for 12th month statistic? month's % can't be 0 while week's % > 0
 
 - setup Google Analytics
@@ -126,6 +124,7 @@ let user have some minor points for such marking.
 
 =============== DONE ====================
 
+- FIX fucking login let user to stay online for a long! Cookie disappears for some mysterious reason
 
 - !!! BASE: add revolver tasks;
 
