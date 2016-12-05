@@ -8,16 +8,6 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 =========== TODO now ============
 
-- fix bug for 12th month statistic? month's % can't be 0 while week's % > 0
-
-- setup Google Analytics
-
-- fix known bugs and make advertisement campaign to attract users
-
-- fix: when saving item with several subtasks - subtasks shuffle. 1-2-3 => 3-1-2 => 2-3-1 => 1-2-3
-
-- fix: when removing last subtask - it doesn't save
-
 - add "weekly tasks only" mode - display all weekly tasks
 
 - add "monthly tasks only" mode - display all monthly tasks
@@ -27,6 +17,12 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 - add placeholders for subitem fields
 
 - add 'close' button for 'edit item' field
+
+- fix bug for 12th month statistic? month's % can't be 0 while week's % > 0
+
+- setup Google Analytics
+
+- fix known bugs and make advertisement campaign to attract users
 
 =============== FIX BUGS =================
 
@@ -121,8 +117,11 @@ let user have some minor points for such marking.
 
 - sort items according to month statistic (move rarely completed-popular up, often completed-popular down)
 
-
 =============== DONE ====================
+
+- fix: when removing last subtask - it doesn't save
+
+- fix: when saving item with several subtasks - subtasks shuffle. 1-2-3 => 3-1-2 => 2-3-1 => 1-2-3
 
 - FIX fucking login let user to stay online for a long! Cookie disappears for some mysterious reason
 
