@@ -16,7 +16,7 @@ class ItemRepo extends DbAssist
         // to create correct delay
         
         $query = "SELECT i.*, "
-                . "GROUP_CONCAT(rr.number) as numbers, "
+                . "GROUP_CONCAT(DISTINCT rr.number ORDER BY rr.number ASC) as numbers, "
                 . "GROUP_CONCAT(s.name ORDER BY s.id ASC SEPARATOR '###') as subitems, "
                 . "(SELECT ss.name FROM subitem ss "
                 . "WHERE ss.completed_at = '0000-00-00' "
@@ -35,15 +35,11 @@ class ItemRepo extends DbAssist
                 . "LIMIT 1)) AS delay "
                 . "FROM item i "
                 . "LEFT JOIN user u ON i.user_id = u.id "
-                . "LEFT JOIN repeats r ON i.id = r.item_id "
                 . "LEFT JOIN repeats rr ON i.id = rr.item_id "
                 . "LEFT JOIN subitem s ON i.id = s.item_id "
                 . "WHERE i.created_at <= '$date' AND "
                 . "(i.archived_at = '0000-00-00' OR i.archived_at > '$date') "
                 . "AND u.email = '$emailP' "
-                . "AND (i.type = '0' OR i.type = '1' "
-                . "OR (i.type = '2' AND WEEKDAY('$date') = r.number) "
-                . "OR (i.type = '3' AND DAYOFMONTH('$date') = r.number) ) "
                 . "GROUP BY i.id "
                 . "ORDER BY i.id ASC, s.id ASC "
                 ;
