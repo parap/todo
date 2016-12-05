@@ -8,10 +8,6 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 =========== TODO now ============
 
-- add "weekly tasks only" mode - display all weekly tasks
-
-- add "monthly tasks only" mode - display all monthly tasks
-
 - when adding new subitem, move focus there
 
 - add placeholders for subitem fields
@@ -118,6 +114,10 @@ let user have some minor points for such marking.
 - sort items according to month statistic (move rarely completed-popular up, often completed-popular down)
 
 =============== DONE ====================
+
+- add "weekly tasks only" mode - display all weekly tasks
+
+- add "monthly tasks only" mode - display all monthly tasks
 
 - fix: when removing last subtask - it doesn't save
 
