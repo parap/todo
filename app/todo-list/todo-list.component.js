@@ -300,25 +300,48 @@
                         }
                         
                         return "DAYS_PASSED_3";
-                    }
+                    };
                     
-//                    $scope.mode = 'weekly';
-//                    $scope.mode = 'monthly';
-//                    $scope.mode = 'regular';
-//                    
-//                    $scope.showItem = function (item) {
-//                        if (item.type === '0') return false;
-//                        if (item.type === '2' && $scope.mode === 'weekly') return true;
-//                        if (item.type === '3' && $scope.mode === 'monthly') return true;
-//                        
-//                        
-//                        
-//                    }
-//                    
-//                    var x = new Date();
-//                    alert(x.getDate()); //month date
-//                    alert(x.getDay()); // week day
+                    $scope.mode = 'regular';
+                    
+                    $scope.showRegular = function () {
+                        $scope.mode = 'regular';
+                        $scope.todos = [];
+                        $scope.fetch();
+                    };
+                    
+                    $scope.showWeekly = function () {
+                        $scope.mode = 'weekly';
+                        $scope.todos = [];
+                        $scope.fetch();
+                    };
+                    
+                    $scope.showMonthly = function () {
+                        $scope.mode = 'monthly';
+                        $scope.todos = [];
+                        $scope.fetch();
+                    };
+                    
+                    $scope.showItem = function (item) {
+                        var dat = new Date();
+                        var monthday = dat.getDate();
+                        var weekday = dat.getDay() - 1;
+                        if (-1 === weekday) weekday = 7;
+                        
+                        if (item.type === '0') return false;
+                        if (item.type === '1' && $scope.mode === 'regular') return true;
+                        if (item.type === '2' && $scope.mode === 'weekly') return true;
+                        if (item.type === '3' && $scope.mode === 'monthly') return true;
+                        if (item.type === '2' && $scope.mode === 'regular' && item.numbers.indexOf(weekday) > -1) {
+                            return true;
+                        }
 
+                        if (item.type === '3' && $scope.mode === 'regular' && item.numbers === '' + monthday) 
+                            return true;
+                        
+                        return false;
+                    };
+                    
                     $scope.fetch();
                 }
             });

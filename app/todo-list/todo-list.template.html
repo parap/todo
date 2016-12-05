@@ -4,7 +4,16 @@
     <fieldset>
         <legend class="legend-daily-{{language}}">{{'DAILY'|translate}}</legend>
         <form id="daily-form" ng-submit="add(newDaily, currentType); addPeriod = false">
+            <div>
+                
             <input ng-focus="addPeriod = true" id="new-daily" class="" type="text" placeholder="{{'ADD_DAILY_ITEM'|translate}}" ng-model="newDaily" ng-disabled="saving" />
+            <div style="float:right; margin-right: 20px">
+                <button type="button" ng-click="showRegular()">all</button>
+                <button type="button" ng-click="showWeekly()">weekly</button>
+                <button type="button" ng-click="showMonthly()">monthly</button>
+            </div>
+            </div>
+            
             <span ng-show="addPeriod"><button ng-click="addPeriod = false">Close</button></span>
             <div ng-show="addPeriod" class="daily-form">
                 <strong>Daily:</strong><br/>
@@ -34,7 +43,7 @@
 
         <ul id="daily-list" ng-hide="addPeriod">
             <li ng-repeat="todo in todos" ng-init="todo.delay = todo.delay > 8 ? 8 : todo.delay">
-                <div ng-if="todo.type > 0">
+                <div ng-if="showItem(todo)">
                     <div class="row">    
                         <div class="span8">
                             <input ng-hide="editing" type="checkbox" ng-model="todo.done"  ng-click="switch (todo)">
