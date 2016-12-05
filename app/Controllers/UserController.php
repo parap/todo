@@ -32,7 +32,7 @@ class UserController
         $result = $this->repo->login($this->post['email'], $this->post['ps']);
         
         if ($result) {
-            setcookie('logged-email', $this->post['email'], time() + 3600 * 24 * 30 * 2);
+            setcookie('logged-email', $this->post['email'], time() + 3600 * 24 * 30 * 2, '/');
         }
         
         $params = ['success'=> false, 'message'=> 'wrong login'];
