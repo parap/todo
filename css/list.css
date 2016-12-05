@@ -225,3 +225,10 @@ A2EE00
 .italic {
     font-style: italic;
 }
+
+ /*todo-list form*/
+ 
+ .right-buttons {
+     float:right; 
+     margin-right: 20px
+ }
