@@ -176,12 +176,14 @@
                     };
                     
                     $scope.initEditItemForm = function (item) {
-                        item.daily = (item.type === '1');
                         item.weekly = [];
-                        for (var i = 0; i < 7; i++) {
-                            item.weekly[i] = (item.type === '2' && item.numbers.indexOf(i) > -1);
+                        if (item.type === '1') item.daily = true;
+                        if (item.type === '2') {
+                            for (var i = 0; i < 7; i++) {
+                                item.weekly[i] = item.numbers.indexOf(i) > -1;
+                            }
                         }
-                        
+
                         item.monthly = (item.type === '3' ? item.numbers : false);
                     }
                     
@@ -248,10 +250,10 @@
                         
                         if (item.daily === true) {
                             type = 1;
-                        } else if (typeof(item.monthly) !== "undefined") {
+                        } else if (+item.monthly > 0) {
                             type = 3;
                             numbers = item.monthly;
-                        } else if (typeof(item.weekly) !== "undefined"){
+                        }  else if (item.weekly.length > 0){
                             //weekly or normal
                             for (var i = 0; i < 7; i++) {
                                 if (item.weekly[i] === true) {
@@ -299,6 +301,23 @@
                         
                         return "DAYS_PASSED_3";
                     }
+                    
+//                    $scope.mode = 'weekly';
+//                    $scope.mode = 'monthly';
+//                    $scope.mode = 'regular';
+//                    
+//                    $scope.showItem = function (item) {
+//                        if (item.type === '0') return false;
+//                        if (item.type === '2' && $scope.mode === 'weekly') return true;
+//                        if (item.type === '3' && $scope.mode === 'monthly') return true;
+//                        
+//                        
+//                        
+//                    }
+//                    
+//                    var x = new Date();
+//                    alert(x.getDate()); //month date
+//                    alert(x.getDay()); // week day
 
                     $scope.fetch();
                 }
