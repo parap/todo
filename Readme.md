@@ -38,6 +38,9 @@ to make todo-list template and component simpler
 
 =============== TODO cosmetics and User Interface =============
 
+- separate plain tasks and completed tasks. 
+Move completed tasks with completion period > 2 days to "completed" tab
+
 - translate the rest of site current date month to Russian.
 
 - allow Google Accounts login.
