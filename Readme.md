@@ -8,12 +8,6 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 =========== TODO now ============
 
-- when adding new subitem, move focus there
-
-- add placeholders for subitem fields
-
-- add 'close' button for 'edit item' field
-
 - fix bug for 12th month statistic? month's % can't be 0 while week's % > 0
 
 - setup Google Analytics
@@ -27,6 +21,8 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 - fix pluralization for "day" in Russian
 
 - save language preference to cookies
+
+- when adding new subitem, move focus there
 
 =============== TODO refactor ==============
 
@@ -78,9 +74,9 @@ Download working sample to check how Johnpapa did it.
 
 - add calendar button to select date to "Next day" and "Previous day" buttons
 
-- allow deletion of weekly&monthly tasks in archive
-- add comments to tasks to add on-fly. Like Trello has.
+- allow deletion of weekly&monthly tasks in archive. Display them in archive.
 
+- add comments to tasks to add on-fly. Like Trello has.
 
 =============== TODO new functionalities ===========
 
@@ -114,6 +110,10 @@ let user have some minor points for such marking.
 - sort items according to month statistic (move rarely completed-popular up, often completed-popular down)
 
 =============== DONE ====================
+
+- add 'close' button for 'edit item' field
+
+- add placeholders for subitem fields
 
 - add "weekly tasks only" mode - display all weekly tasks
 
