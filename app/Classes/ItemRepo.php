@@ -17,7 +17,7 @@ class ItemRepo extends DbAssist
         
         $query = "SELECT i.*, "
                 . "GROUP_CONCAT(rr.number) as numbers, "
-                . "GROUP_CONCAT(s.name SEPARATOR '###') as subitems, "
+                . "GROUP_CONCAT(s.name ORDER BY s.id ASC SEPARATOR '###') as subitems, "
                 . "(SELECT ss.name FROM subitem ss "
                 . "WHERE ss.completed_at = '0000-00-00' "
                 . "AND ss.item_id = i.id "
