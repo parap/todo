@@ -371,7 +371,6 @@ class ItemRepo extends DbAssist
         $queryDaily   = "DELETE from completed WHERE item_id='$id'";
 
         $this->query($queryDaily);
-        $this->query($querySub);
         return $this->query($query);
     }
 
