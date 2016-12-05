@@ -306,20 +306,14 @@
                     
                     $scope.showRegular = function () {
                         $scope.mode = 'regular';
-                        $scope.todos = [];
-                        $scope.fetch();
                     };
                     
                     $scope.showWeekly = function () {
                         $scope.mode = 'weekly';
-                        $scope.todos = [];
-                        $scope.fetch();
                     };
                     
                     $scope.showMonthly = function () {
                         $scope.mode = 'monthly';
-                        $scope.todos = [];
-                        $scope.fetch();
                     };
                     
                     $scope.showItem = function (item) {
