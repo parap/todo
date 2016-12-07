@@ -10,8 +10,6 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 - fix bug for 12th month statistic? month's % can't be 0 while week's % > 0
 
-- setup Google Analytics
-
 - fix known bugs and make advertisement campaign to attract users
 
 =============== FIX BUGS =================
@@ -113,6 +111,8 @@ let user have some minor points for such marking.
 - sort items according to month statistic (move rarely completed-popular up, often completed-popular down)
 
 =============== DONE ====================
+
+- setup Google Analytics
 
 - add 'close' button for 'edit item' field
 
