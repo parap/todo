@@ -14,7 +14,7 @@ class ItemRepo extends DbAssist
         // subquery included in DATEDIFF 
         // seeks the most recent item completion date in the past 
         // to create correct delay
-        
+
         $query = "SELECT i.*, "
                 . "GROUP_CONCAT(DISTINCT rr.number ORDER BY rr.number ASC) as numbers, "
                 . "GROUP_CONCAT(s.name ORDER BY s.id ASC SEPARATOR '###') as subitems, "
@@ -42,8 +42,8 @@ class ItemRepo extends DbAssist
                 . "AND u.email = '$emailP' "
                 . "GROUP BY i.id "
                 . "ORDER BY i.id ASC, s.id ASC "
-                ;
-        
+        ;
+
         $results    = $this->query($query);
         $doneDailys = $this->fetchCompletedDaily($date);
 
@@ -58,10 +58,10 @@ class ItemRepo extends DbAssist
 
     public function fetchArchived($date, $email)
     {
-        $emailP = $this->safe($email);      
-        $query = "SELECT i.* "
+        $emailP = $this->safe($email);
+        $query  = "SELECT i.* "
                 . "FROM item i "
-                . "LEFT JOIN user u ON i.user_id = u.id "                
+                . "LEFT JOIN user u ON i.user_id = u.id "
                 . "WHERE i.created_at <= '$date' AND i.archived_at > '0000-00-00' "
                 . "AND i.archived_at <= '$date' AND u.email='$emailP'";
 
@@ -83,7 +83,7 @@ class ItemRepo extends DbAssist
     {
         $template = 'SELECT item_id FROM completed '
                 . 'WHERE completed_at = "%s"'
-                ;
+        ;
         $query    = sprintf($template, $date);
 
         return array_map(function($x) {
@@ -106,10 +106,10 @@ class ItemRepo extends DbAssist
                 . 'VALUES ("%s", "%s", "0", "%s", NOW(), NOW(), '
                 . '"0000-00-00", "0000-00-00")', $this->safe($name), $userId, $type
         );
-        
+
         $this->query($query);
-        
-        if(!empty($params['subtasks'])) {
+
+        if (!empty($params['subtasks'])) {
             $last = $this->query("SELECT @last := LAST_INSERT_ID()");
             $last = $last[0]['@last := LAST_INSERT_ID()'];
             foreach ($params['subtasks'] as $key => $task) {
@@ -124,32 +124,32 @@ class ItemRepo extends DbAssist
             return;
         }
 
-        if(!empty($params['day'])) {
+        if (!empty($params['day'])) {
             return;
             // plain completed task, do nothing
         }
-        
+
         $last = $this->query("SELECT @last := LAST_INSERT_ID()");
         $last = $last[0]['@last := LAST_INSERT_ID()'];
-        
+
         if (!empty($params['month'])) {
             $this->createRepeats($params['month'], 'm', $last);
             return;
         }
-        
+
         if (empty($params['week'])) {
-            return; 
+            return;
         }
-        
+
         foreach ($params['week'] as $key => $value) {
             if (!$value) {
                 continue;
             }
 
-            $this->createRepeats(--$key, 'w', $last);
+            $this->createRepeats( --$key, 'w', $last);
         }
     }
-    
+
     public function createSubtask($last, $name)
     {
         $query = 'INSERT INTO subitem (item_id, name) VALUES ("%s", "%s")';
@@ -164,14 +164,14 @@ class ItemRepo extends DbAssist
     public function createRepeats($number, $intervalType, $last)
     {
         $number       = $this->safe($number);
-        $last       = $this->safe($last);
+        $last         = $this->safe($last);
         $intervalType = $this->safe($intervalType);
         $query        = 'INSERT INTO repeats (item_id, number, interval_type, '
                 . 'created_at, archived_at, repeatt) '
                 . 'VALUES ("%s", "%s", "%s", NOW(), "0000-00-00", "1")';
         $this->query(sprintf($query, $last, $number, $intervalType));
     }
-    
+
     public function removeItemFromRepeats($id)
     {
         $this->query("DELETE FROM repeats WHERE item_id = '$id'");
@@ -184,20 +184,20 @@ class ItemRepo extends DbAssist
 
     public function update($id, $text, $type, $numbers, $sub)
     {
-        $id    = $this->safe($id);
-        $text  = $this->safe($text);
-        $type  = $this->safe($type);
+        $id   = $this->safe($id);
+        $text = $this->safe($text);
+        $type = $this->safe($type);
 
         $query = "UPDATE item SET name='$text', type='$type' WHERE id='$id'";
         $this->query($query);
-        
+
         $this->removeItemFromSubitem($id);
         // revolver
         if (!empty($sub)) {
-            foreach($sub as $subitem) {
+            foreach ($sub as $subitem) {
                 $this->createSubtask($id, $this->safe($subitem));
             }
-            
+
             return;
         }
 
@@ -205,13 +205,13 @@ class ItemRepo extends DbAssist
         $this->removeItemFromRepeats($id);
 
         if ('2' === $type) {
-            for($i = 0;$i < strlen($numbers);$i++) {
+            for ($i = 0; $i < strlen($numbers); $i++) {
                 $this->createRepeats($numbers[$i], 'w', $id);
             }
-        } elseif('3' === $type) {
+        } elseif ('3' === $type) {
             $this->createRepeats($numbers, 'm', $id);
         }
-        
+
         return;
     }
 
@@ -221,13 +221,13 @@ class ItemRepo extends DbAssist
             $this->completeDaily($id, $date);
         }
 
-        $id    = $this->safe($id);
-        
+        $id = $this->safe($id);
+
         $query = "UPDATE item SET done='1', completed_at='$date' WHERE id='$id'";
 
         return $this->query($query);
     }
-    
+
     public function completeNext($id, $date)
     {
         $id = $this->safe($id);
@@ -239,14 +239,14 @@ class ItemRepo extends DbAssist
             ORDER BY id ASC LIMIT 1";
 
         $this->query($query);
-        
+
         // if there are no "next" subtask left - mark parent task as completed
         $next = $this->findNextSubtask($id);
-        if(empty($next)){
+        if (empty($next)) {
             $this->complete($id, ItemType::Normal, $date);
         }
     }
-    
+
     public function uncompleteLast($id, $date)
     {
         $id = $this->safe($id);
@@ -268,7 +268,7 @@ class ItemRepo extends DbAssist
 
     public function findNextSubtask($id)
     {
-        $id = $this->safe($id);
+        $id    = $this->safe($id);
         $query = "SELECT ss.name FROM subitem ss "
                 . "WHERE ss.completed_at = '0000-00-00' "
                 . "AND ss.item_id = '$id' "
@@ -280,7 +280,7 @@ class ItemRepo extends DbAssist
     {
         $template = "INSERT INTO completed (item_id, completed_at) "
                 . "VALUES ('%s', '%s')";
-        $query = sprintf($template, $this->safe($id), $date);
+        $query    = sprintf($template, $this->safe($id), $date);
 
         return $this->query($query);
     }
@@ -307,7 +307,7 @@ class ItemRepo extends DbAssist
                 . "ORDER BY completed_at DESC "
                 . "LIMIT 1";
         $result = $this->query($query);
-        
+
         return isset($result[0]['completed_at']) ? $result[0]['completed_at'] : '';
     }
 
@@ -333,7 +333,7 @@ class ItemRepo extends DbAssist
     {
         $template = "DELETE FROM completed WHERE item_id='%s' "
                 . "AND completed_at = '%s'";
-        $query = sprintf($template, $this->safe($id), $date);
+        $query    = sprintf($template, $this->safe($id), $date);
 
         return $this->query($query);
     }
@@ -356,13 +356,13 @@ class ItemRepo extends DbAssist
 
     public function remove($id)
     {
-        $id           = $this->safe($id);
+        $id = $this->safe($id);
 
         $this->removeItemFromRepeats($id);
         $this->removeItemFromSubitem($id);
 
-        $query        = "DELETE from item where id='$id'";
-        $queryDaily   = "DELETE from completed WHERE item_id='$id'";
+        $query      = "DELETE from item where id='$id'";
+        $queryDaily = "DELETE from completed WHERE item_id='$id'";
 
         $this->query($queryDaily);
         return $this->query($query);
@@ -412,7 +412,7 @@ class ItemRepo extends DbAssist
     public function dailySingleFor($date, $index, $email)
     {
         $emailP = $this->safe($email);
-        $query = "SELECT i.name , COUNT( d.completed_at ) AS number_completion, DATEDIFF(NOW(), i.created_at)+1 AS life_length
+        $query  = "SELECT i.name , COUNT( d.completed_at ) AS number_completion, DATEDIFF(NOW(), i.created_at)+1 AS life_length
             FROM item i
 LEFT JOIN completed d ON ( i.id = d.item_id ) 
 LEFT JOIN user u ON u.id = i.user_id 
@@ -433,7 +433,7 @@ WHERE (d.completed_at >=  '$date' OR d.completed_at IS NULL) "
 
     public function totalStatistic($date, $index, $email)
     {
-        $emailP = $this->safe($email);
+        $emailP         = $this->safe($email);
         $query          = "SELECT COUNT(d.completed_at) as total_done "
                 . "FROM completed d "
                 . "LEFT JOIN item i ON i.id = d.item_id "
@@ -442,7 +442,7 @@ WHERE (d.completed_at >=  '$date' OR d.completed_at IS NULL) "
                 . "AND u.email='$emailP'";
         $totalCompleted = $this->query($query)[0]['total_done'];
 
-        $query1 = "SELECT SUM(DATEDIFF(NOW(), i.created_at)) AS life_length_after
+        $query1            = "SELECT SUM(DATEDIFF(NOW(), i.created_at)) AS life_length_after
 FROM item i
 LEFT JOIN completed d ON ( i.id = d.item_id ) 
 LEFT JOIN user u ON u.id = i.user_id 
@@ -453,17 +453,17 @@ WHERE i.created_at >=  '$date' AND i.type = '1' AND u.email='$emailP'";
 FROM item i
 LEFT JOIN user u ON u.id = i.user_id 
 WHERE i.created_at <= '$date' AND i.type = '1' AND u.email='$emailP'";
-        $items = $this->query($query2)[0]['total'];
+        $items  = $this->query($query2)[0]['total'];
 
         $query3 = "SELECT DATEDIFF(NOW(), '$date') + 1 as diff";
-        $days  = $this->query($query3)[0]['diff'];
+        $days   = $this->query($query3)[0]['diff'];
 
         $totalCreatedBefore = $items * $days;
 
-        return [$index => 
-                ['done' => (int) $totalCompleted, 
-                 'time' => (int) $totalCreatedAfter + (int) $totalCreatedBefore]
-               ];
+        return [$index =>
+            ['done' => (int) $totalCompleted,
+                'time' => (int) $totalCreatedAfter + (int) $totalCreatedBefore]
+        ];
     }
 
     public function setDate($id, $date)
@@ -473,7 +473,7 @@ WHERE i.created_at <= '$date' AND i.type = '1' AND u.email='$emailP'";
 
         return $this->query($query);
     }
-    
+
     public function findTimeLeft($id)
     {
         $id    = $this->safe($id);
@@ -482,4 +482,5 @@ WHERE i.created_at <= '$date' AND i.type = '1' AND u.email='$emailP'";
                 . "WHERE i.id = '$id' ";
         return $this->query($query)[0];
     }
+
 }
