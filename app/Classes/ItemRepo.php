@@ -217,10 +217,10 @@ class ItemRepo extends DbAssist
 
     public function complete($id, $type, $date)
     {
-        if ($type === ItemType::Daily) {
+        if ($type === ItemType::Daily || $type === ItemType::Weekly) {
             $this->completeDaily($id, $date);
         }
-
+        
         $id = $this->safe($id);
 
         $query = "UPDATE item SET done='1', completed_at='$date' WHERE id='$id'";
@@ -316,7 +316,7 @@ class ItemRepo extends DbAssist
         $latest = '';
         $id     = $this->safe($id);
 
-        if ($type === ItemType::Daily) {
+        if ($type === ItemType::Daily || $type === ItemType::Weekly) {
             $this->uncompleteDaily($id, $date);
             $latest = $this->findLatestCompletedAt($id);
         }
