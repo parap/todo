@@ -316,6 +316,28 @@
                         $scope.mode = 'monthly';
                     };
                     
+                    $scope.findDelay = function (item) {
+                        if (item.type === '1') return item.delay;
+                        if (item.type === '2') {
+
+                            var dat = new Date();
+                            var weekday = dat.getDay() - 1;
+                            var result = 0;
+                            var number = 0;
+                            var numbers = item.numbers.split(",");
+                            
+                            for (var i = 0; i < numbers.length; i++) {
+                                number = +numbers[i];
+                                var ir = item.delay - weekday + number;
+
+                                if (ir > 0 && ir > result) result = ir;
+                            }
+                            
+                            return result;
+                        }
+                        return '0';
+                    };
+                    
                     $scope.showItem = function (item) {
                         var dat = new Date();
                         var monthday = dat.getDate();
