@@ -278,9 +278,9 @@ class ItemRepo extends DbAssist
 
     public function completeDaily($id, $date)
     {
-        $query = sprintf(
-                "INSERT INTO completed (item_id, completed_at) VALUES ('%s', '%s')", $this->safe($id), $date
-        );
+        $template = "INSERT INTO completed (item_id, completed_at) "
+                . "VALUES ('%s', '%s')";
+        $query = sprintf($template, $this->safe($id), $date);
 
         return $this->query($query);
     }
@@ -307,7 +307,7 @@ class ItemRepo extends DbAssist
                 . "ORDER BY completed_at DESC "
                 . "LIMIT 1";
         $result = $this->query($query);
-
+        
         return isset($result[0]['completed_at']) ? $result[0]['completed_at'] : '';
     }
 
@@ -323,16 +323,17 @@ class ItemRepo extends DbAssist
 
         $completedAt = $latest ? : '0000-00-00';
 
-        $query = "UPDATE item SET done='0', completed_at='$completedAt' WHERE id='$id'";
+        $query = "UPDATE item SET done='0', completed_at='$completedAt' "
+                . "WHERE id='$id'";
 
         return $this->query($query);
     }
 
     public function uncompleteDaily($id, $date)
     {
-        $query = sprintf(
-                "DELETE FROM completed WHERE item_id='%s' AND completed_at = '%s'", $this->safe($id), $date
-        );
+        $template = "DELETE FROM completed WHERE item_id='%s' "
+                . "AND completed_at = '%s'";
+        $query = sprintf($template, $this->safe($id), $date);
 
         return $this->query($query);
     }
