@@ -441,25 +441,28 @@ WHERE (d.completed_at >=  '$date' OR d.completed_at IS NULL) "
                 . "AND u.email='$emailP'";
         $totalCompleted = $this->query($query)[0]['total_done'];
 
-        $query = "SELECT SUM(DATEDIFF(NOW(), i.created_at)) AS life_length_after
+        $query1 = "SELECT SUM(DATEDIFF(NOW(), i.created_at)) AS life_length_after
 FROM item i
 LEFT JOIN completed d ON ( i.id = d.item_id ) 
 LEFT JOIN user u ON u.id = i.user_id 
 WHERE i.created_at >=  '$date' AND i.type = '1' AND u.email='$emailP'";
-        $totalCreatedAfter = $this->query($query)[0]['life_length_after'];
+        $totalCreatedAfter = $this->query($query1)[0]['life_length_after'];
 
-        $query = "SELECT COUNT(i.id) as total
+        $query2 = "SELECT COUNT(i.id) as total
 FROM item i
 LEFT JOIN user u ON u.id = i.user_id 
 WHERE i.created_at <= '$date' AND i.type = '1' AND u.email='$emailP'";
-        $items = $this->query($query)[0]['total'];
+        $items = $this->query($query2)[0]['total'];
 
-        $query = "SELECT DATEDIFF(NOW(), '$date') + 1 as diff";
-        $days  = $this->query($query)[0]['diff'];
+        $query3 = "SELECT DATEDIFF(NOW(), '$date') + 1 as diff";
+        $days  = $this->query($query3)[0]['diff'];
 
         $totalCreatedBefore = $items * $days;
 
-        return [$index => ['done' => (int) $totalCompleted, 'time' => (int) $totalCreatedAfter + (int) $totalCreatedBefore]];
+        return [$index => 
+                ['done' => (int) $totalCompleted, 
+                 'time' => (int) $totalCreatedAfter + (int) $totalCreatedBefore]
+               ];
     }
 
     public function setDate($id, $date)
