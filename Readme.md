@@ -8,9 +8,21 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 
 =========== TODO now ============
 
-- fix bug for 12th month statistic? month's % can't be 0 while week's % > 0
+- show monthly and weekly tasks that are uncompleted 
+if they were not completed last time.
 
-- fix known bugs and make advertisement campaign to attract users
+- add tags (hypotheses tested, books read), let setup tags for main page.
+
+- add button "archive completed" to regular tasks
+
+- by default display approaching weekly&monthly tasks. For instance in closest 2 days.
+
+- add annotation when creating item. Display annotation 
+as title (standard HTML popup) on item hover
+
+- let user to add comments to item.
+
+- on edit regular field - hide it's time mark
 
 =============== FIX BUGS =================
 
@@ -21,6 +33,8 @@ Also it allows to create revolver tasks (tasks including ordered sub-tasks).
 - save language preference to cookies
 
 - when adding new subitem, move focus there
+
+- fix bug for 12th month statistic? month's % can't be 0 while week's % > 0
 
 =============== TODO refactor ==============
 
@@ -43,13 +57,7 @@ Move completed tasks with completion period > 2 days to "completed" tab
 
 - allow Google Accounts login.
 
-- by default display approaching weekly&monthly tasks. For instance in closest 2 days.
 
-- show monthly and weekly tasks that are uncompleted even if last date passed!
-
-- allow to add annotation when creating item. Display annotation as title (standard HTML popup) on item hover
-
-- let user to add annotation for tasks to be displayed on mouse hover
 
 - add to login page auto-link to test account;
 
@@ -80,6 +88,8 @@ Download working sample to check how Johnpapa did it.
 - add comments to tasks to add on-fly. Like Trello has.
 
 =============== TODO new functionalities ===========
+
+- make advertisement campaign to attract users
 
 - add yearly tasks.
 
