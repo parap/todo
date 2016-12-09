@@ -333,7 +333,7 @@
                                 if (ir > result && ir <= item.delay) result = ir;
                             }
                             
-                            return result;
+                            return ''+result;
                         }
                         return '0';
                     };
