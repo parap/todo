@@ -42,7 +42,7 @@
         </div>
 
         <ul id="daily-list" ng-hide="addPeriod">
-            <li ng-repeat="todo in todos" ng-init="todo.delay = todo.delay > 8 ? 8 : todo.delay">
+            <li ng-repeat="todo in todos">
                 <div ng-if="showItem(todo)">
                     <div class="row">    
                         <div class="span8">
@@ -50,8 +50,7 @@
                             <label ng-hide="editing" class="done-{{todo.done}}" ng-bind="todo.name" ng-click="editing = true"></label>
                         </div>
                         <div class="span5">
-                            <span ng-init="delay = findDelay(todo)"></span>
-                            <span ng-hide="editing" class="color{{delay}}">{{delay ? ("0" === delay ? ('DID_TODAY' | translate) : delay + ' ' + (russianDays(delay) | translate)) : ('NEVER_DID' | translate)}}</span>
+                            <span ng-hide="editing" class="color{{(todo.delay > 8 ? '8' : todo.delay)}}">{{todo.delay ? ("0" === todo.delay ? ('DID_TODAY' | translate) : todo.delay + ' ' + (russianDays(todo.delay) | translate)) : ('NEVER_DID' | translate)}}</span>
                         </div>
                         <button ng-hide="editing" class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="archive(todo)"></button>
                         <form ng-show="editing" ng-submit="editing = false">
