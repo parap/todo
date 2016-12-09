@@ -330,7 +330,7 @@
                                 number = +numbers[i];
                                 var ir = item.delay - weekday + number;
 
-                                if (ir > 0 && ir > result) result = ir;
+                                if (ir > result) result = ir;
                             }
                             
                             return result;
