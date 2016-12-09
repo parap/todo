@@ -44,8 +44,6 @@ class ItemRepo extends DbAssist
                 . "ORDER BY i.id ASC, s.id ASC "
                 ;
         
-//        echo $query;
-
         $results    = $this->query($query);
         $doneDailys = $this->fetchCompletedDaily($date);
 
@@ -85,7 +83,6 @@ class ItemRepo extends DbAssist
     {
         $template = 'SELECT item_id FROM completed '
                 . 'WHERE completed_at = "%s"'
-//                . 'AND completed_at <= NOW()'
                 ;
         $query    = sprintf($template, $date);
 
@@ -398,9 +395,6 @@ class ItemRepo extends DbAssist
         );
 
         return $res;
-        // 
-// total & monthly & weekly completion % of every completed task separately;
-// total & monthly & weekly completion % of all daily/normal tasks;
     }
 
     public function dailySingleStatistic($email)
