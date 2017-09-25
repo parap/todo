@@ -14,10 +14,11 @@ class StatisticController
 {
     protected $repo;
     protected $post;
-    
-    public function __construct()
+    protected $conn;
+
+    public function __construct($conn)
     {
-        $this->repo = new ItemRepo();
+        $this->repo = new ItemRepo($conn);
         
         // json_decode($request->getContent()) can be used alternately
         $this->post = json_decode(file_get_contents('php://input'),true);

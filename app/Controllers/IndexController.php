@@ -15,10 +15,11 @@ class IndexController
 {
 
     protected $repo;
+    protected $conn;
 
-    public function __construct()
+    public function __construct($conn)
     {
-        $this->repo = new ItemRepo();
+        $this->repo = new ItemRepo($conn);
     }
 
     public function fetch(RequestM $request)

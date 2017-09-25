@@ -3,6 +3,12 @@
 namespace Classes;
 
 class UserRepo extends DbAssist {
+    protected $conn;
+    public function __construct($conn)
+    {
+        $this->conn = $conn;
+    }
+
     public function login($name, $password)
     {
         $name = $this->safe($name);
@@ -11,10 +17,10 @@ class UserRepo extends DbAssist {
         if (!$this->nameExists($name)) {
             return false;
         }
-        
+
         $query = "SELECT id, salt, password FROM user WHERE email = '%s'";
         $res = $this->query(sprintf($query, $name))[0];
-        
+
         $pswToCheck = hash('sha512', sprintf('%s%s', $password, $res['salt']));
         
         return $res['password'] === $pswToCheck;

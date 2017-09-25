@@ -26,7 +26,7 @@
                                     
                                     $scope.items = response.data;
                                 });
-                    }
+                    };
 
                     $scope.fetch();
                 }

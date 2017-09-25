@@ -6,7 +6,7 @@ class DbAssist
 {
     protected function query($query)
     {
-        $res = mysql_query($query) or die(mysql_error());
+        $res = mysqli_query($this->conn, $query) or die(mysqli_error());
 
         if (!$res) {
             return [];
@@ -17,7 +17,7 @@ class DbAssist
         }
 
         $result = [];
-        while ($row = mysql_fetch_assoc($res)) {
+        while ($row = mysqli_fetch_assoc($res)) {
             $result[] = $row;
         }
 
@@ -27,6 +27,6 @@ class DbAssist
     {
         $arg = str_replace('\\"', '"', $arg);
 
-        return mysql_real_escape_string($arg);
+        return mysqli_real_escape_string($this->conn, $arg);
     }
 }

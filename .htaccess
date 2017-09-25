@@ -3,6 +3,9 @@ DirectoryIndex index.php
 RewriteEngine on
 
 RewriteCond %{REQUEST_URI} !^/index.php
+RewriteCond %{REQUEST_URI} !^/test.php
+RewriteCond %{REQUEST_URI} !^/*.png
+RewriteCond %{REQUEST_URI} !^/*.jpg
 RewriteCond %{REQUEST_URI} !^/language
 RewriteCond %{REQUEST_URI} !^/node_modules
 RewriteCond %{REQUEST_URI} !^/css

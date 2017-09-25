@@ -10,7 +10,8 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 session_start();
 
-new Db($user, $password, $host, $db);
+$db = new Db($user, $password, $host, $db);
+$conn = $db->getConnection();
 
 $request = RequestM::createFromGlobals();
 $routing = new Routing($request, $routes);
@@ -27,4 +28,4 @@ try {
     $action = 'showLogout';
 }
 
-echo (new $controller)->$action($request);
+echo (new $controller($conn))->$action($request);

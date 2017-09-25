@@ -240,7 +240,14 @@
                             "type": item.type, "day": $scope.day, "email": email};
                         $http.post("index.php?route=complete", params)
                                 .then(function (response) {
-                                    item.delay = response.data;
+                                    
+                                    if (item.type === "2") {
+                                        item.delay = response.data;
+                                        item.delay = $scope.findDelay(item);
+                                    } else {
+                                        item.delay = response.data;
+                                    }
+                            
                                     item.time_left = $scope.convertTimeLeft(item.time_left, item.done);
                                 });
                     };
@@ -325,12 +332,15 @@
                             var result = 0;
                             var number = 0;
                             var numbers = item.numbers.split(",");
+//alert(item.delay);
                             
                             for (var i = 0; i < numbers.length; i++) {
                                 number = +numbers[i];
                                 var ir = item.delay - weekday + number;
 
                                 if (ir > result && ir <= item.delay) result = ir;
+                                
+
                             }
                             
                             return ''+result;

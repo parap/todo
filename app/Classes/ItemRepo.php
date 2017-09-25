@@ -6,6 +6,11 @@ use Classes\ItemType;
 
 class ItemRepo extends DbAssist
 {
+    protected $conn;
+    public function __construct($conn)
+    {
+        $this->conn = $conn;
+    }
 
     public function fetch($date, $email)
     {
@@ -31,7 +36,7 @@ class ItemRepo extends DbAssist
                 . "DATEDIFF(NOW(), (SELECT d.completed_at FROM completed AS d "
                 . "WHERE d.item_id = i.id "
                 . "AND d.completed_at <= NOW() "
-                . "ORDER BY completed_at DESC "
+                . "ORDER BY d.completed_at DESC "
                 . "LIMIT 1)) AS delay "
                 . "FROM item i "
                 . "LEFT JOIN user u ON i.user_id = u.id "

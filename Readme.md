@@ -24,6 +24,8 @@ as title (standard HTML popup) on item hover
 
 - on edit regular field - hide it's time mark
 
+- add titles to all managing elements of the site to make them easier to understand
+
 =============== FIX BUGS =================
 
 - dynamically change legend in dependence from language selected

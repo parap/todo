@@ -9,10 +9,12 @@ class UserController
 {
     protected $repo;
     protected $post;
+    protected $conn;
 
-    public function __construct() 
+    public function __construct($conn)
     {
-        $this->repo = new UserRepo();
+        $this->conn = $conn;
+        $this->repo = new UserRepo($conn);
         $this->post = json_decode(file_get_contents('php://input'),true);
     }
     
